@@ -9,6 +9,12 @@ repositories {
     mavenCentral()
 }
 
+subprojects {
+    repositories {
+        mavenCentral()
+    }
+}
+
 dependencies {
     testImplementation(kotlin("test"))
 }
