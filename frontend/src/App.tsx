@@ -1,15 +1,9 @@
-import { useState } from 'react';
 import reactLogo from './assets/react.svg';
 import viteLogo from '/vite.svg';
-import {InputText} from "primereact/inputtext";
-import {Button} from "primereact/button";
-import 'primereact/resources/themes/soho-dark/theme.css'
-import 'primereact/resources/primereact.min.css'
-import 'primeicons/primeicons.css'
 import './App.css'
+import {FileUpload} from "primereact/fileupload";
 
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
     <>
@@ -31,15 +25,8 @@ function App() {
                 </p>
             </div>
             <div className="card">
-                <InputText
-                    disabled={true}
-                    value={count.toString()}
+                <FileUpload
                 />
-                <Button
-                    icon="pi pi-plus"
-                    label="Increment"
-                    onClick={() => setCount((count) => count + 1)}
-                ></Button>
                 <p>
                     Edit <code>src/App.tsx</code> and save to test PrimeReact
                 </p>
