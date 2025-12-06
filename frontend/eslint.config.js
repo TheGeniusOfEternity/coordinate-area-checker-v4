@@ -10,14 +10,33 @@ export default defineConfig([
   {
     files: ['**/*.{ts,tsx}'],
     extends: [
-      js.configs.recommended,
-      tseslint.configs.recommended,
+      js.configs.all,
+      tseslint.configs.eslintRecommended,
       reactHooks.configs.flat.recommended,
       reactRefresh.configs.vite,
     ],
     languageOptions: {
       ecmaVersion: 2020,
+      sourceType: 'module',
       globals: globals.browser,
+      parser: tseslint.parser,
+      parserOptions: {
+        projectService: true,
+        tsconfigRootDir: import.meta.dirname,
+      },
     },
+    plugins: {
+      '@typescript-eslint': tseslint.plugin,
+      'react-hooks': reactHooks,
+    },
+    rules: {
+      "one-var": "off",
+      "id-length": "off",
+      "no-ternary": "off",
+      "max-lines-per-function": "off",
+      "max-statements": "off",
+      "no-magic-numbers": "off",
+      "semi": "error"
+    }
   },
 ])
