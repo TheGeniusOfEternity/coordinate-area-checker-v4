@@ -1,15 +1,16 @@
 import {
   setIsSwitching,
   setOverlayGrowthPosition,
-  setTheme,
 } from "../store/slices/themeSlice";
+import { useDispatch, useSelector } from "react-redux";
 import { Button } from "primereact/button";
-import { useDispatch } from "react-redux";
+import type { RootState } from "../store";
 import { useRef } from "react";
 
 const Welcome = () => {
   const dispatch = useDispatch();
   const buttonRef = useRef<HTMLDivElement>(null);
+  const isSwitching = useSelector((state: RootState) => state.theme.isSwitching);
 
   const changeTheme = () => {
     if (buttonRef.current === null) { return; }
@@ -17,15 +18,9 @@ const Welcome = () => {
     const rect = buttonRef.current.getBoundingClientRect();
     const x = rect.left + rect.width / 2;
     const y = rect.top + rect.height / 2;
-    const btn = (buttonRef.current.children[0] as HTMLButtonElement);
 
-    btn.disabled = true;
     dispatch(setOverlayGrowthPosition({ x, y }));
     dispatch(setIsSwitching(true));
-    setTimeout(() => {
-      dispatch(setTheme());
-      btn.disabled = false;
-    }, 500);
   };
 
   return (
@@ -35,6 +30,7 @@ const Welcome = () => {
           <Button
             label="Сменить тему"
             onClick={changeTheme}
+            disabled={isSwitching}
           />
         </div>
       </div>

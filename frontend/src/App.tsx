@@ -2,17 +2,16 @@ import "./App.css";
 import * as React from "react";
 import { BrowserRouter, Route, Routes } from "react-router";
 import { useContext, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { PrimeReactContext } from "primereact/api";
 import type { RootState } from "./store";
 import Welcome from "./pages/Welcome.tsx";
-import { setIsSwitching } from "./store/slices/themeSlice.ts";
+import { useSelector } from "react-redux";
+
 
 let previousTheme = "";
 
 const App = ()=> {
   const { changeTheme } = useContext(PrimeReactContext);
-  const dispatch = useDispatch();
   const isSwitching = useSelector((state: RootState) => state.theme.isSwitching);
   const growthPosition = useSelector((state: RootState) => state.theme.overlayGrowthPosition);
   const { currentTheme } = useSelector((state: RootState) => state.theme);
@@ -21,11 +20,8 @@ const App = ()=> {
     if (changeTheme) {
       previousTheme = currentTheme === 'dark' ? 'light' : 'dark';
       changeTheme(previousTheme, currentTheme, 'theme-link');
-      setTimeout(() => {
-        dispatch(setIsSwitching(false));
-      }, 100);
     }
-  }, [changeTheme, currentTheme, dispatch]);
+  }, [currentTheme, changeTheme]);
 
   return (
       <>
