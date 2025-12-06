@@ -1,12 +1,16 @@
 import "../App.css";
 import * as React from "react";
 import { useContext, useRef, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Button } from "primereact/button";
 import { PrimeReactContext } from "primereact/api";
+import type { RootState } from "../store";
+import { setCurrentTheme } from "../store/slices/themeSlice.ts";
 
 const Welcome = () => {
   const { changeTheme } = useContext(PrimeReactContext);
-  const [currentTheme, setCurrentTheme] = useState("dark");
+  const dispatch = useDispatch();
+  const currentTheme = useSelector((state: RootState) => state.theme.currentTheme);
   const buttonRef = useRef<HTMLDivElement>(null);
   const [isGrowing, setIsGrowing] = useState(false);
   const [growthPosition, setGrowthPosition] = useState({ x: 0, y: 0 });
@@ -29,7 +33,7 @@ const Welcome = () => {
     const nextTheme = currentTheme === "dark" ? "light" : "dark";
     setTimeout(() => {
       changeTheme(currentTheme, nextTheme, "theme-link");
-      setCurrentTheme(nextTheme);
+      dispatch(setCurrentTheme(nextTheme));
       setIsSwitching(false);
       setIsGrowing(false);
       btn.disabled = false;
