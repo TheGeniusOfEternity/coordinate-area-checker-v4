@@ -1,16 +1,16 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import App from './App.tsx'
-import {addLocale, PrimeReactProvider} from "primereact/api";
-import 'primereact/resources/primereact.css'
-import 'primeicons/primeicons.css'
-import { ru } from 'primelocale/js/ru.js'
+import 'primeicons/primeicons.css';
+import 'primereact/resources/primereact.css';
+import {PrimeReactProvider, addLocale} from "primereact/api";
+import App from './App.tsx';
+import { StrictMode } from 'react';
+import { createRoot } from 'react-dom/client';
+import { ru } from 'primelocale/js/ru.js';
 
-addLocale('ru', ru)
+addLocale('ru', ru);
 
 const value = {
   locale: 'ru'
-}
+};
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
@@ -18,4 +18,4 @@ createRoot(document.getElementById('root')!).render(
           <App />
       </PrimeReactProvider>
   </StrictMode>,
-)
+);

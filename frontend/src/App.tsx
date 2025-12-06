@@ -1,42 +1,41 @@
+import * as React from "react";
+import { useContext, useRef, useState } from "react";
+import { Button } from "primereact/button";
+import { PrimeReactContext } from "primereact/api";
 import reactLogo from './assets/react.svg';
 import viteLogo from '/vite.svg';
-import './App.css'
-import {Button} from "primereact/button";
-import {useContext, useRef, useState} from "react";
-import {PrimeReactContext} from "primereact/api";
-import * as React from "react";
 
-function App() {
+const App = ()=> {
   const { changeTheme } = useContext(PrimeReactContext);
   const [currentTheme, setCurrentTheme] = useState("dark");
   const buttonRef = useRef<HTMLDivElement>(null);
   const [isGrowing, setIsGrowing] = useState(false);
   const [growthPosition, setGrowthPosition] = useState({ x: 0, y: 0 });
-  const [isSwitching, setIsSwitching] = useState(false)
+  const [isSwitching, setIsSwitching] = useState(false);
 
   const switchTheme = () => {
-    if (!changeTheme || !buttonRef.current) return;
+    if (!changeTheme || !buttonRef.current) { return; }
 
     const rect = buttonRef.current.getBoundingClientRect();
     const x = rect.left + rect.width / 2;
     const y = rect.top + rect.height / 2;
 
-    const btn = (buttonRef.current.children[0] as HTMLButtonElement)
-    btn.disabled = true
+    const btn = (buttonRef.current.children[0] as HTMLButtonElement);
+    btn.disabled = true;
 
     setGrowthPosition({x, y});
     setIsGrowing(true);
-    setIsSwitching(true)
+    setIsSwitching(true);
 
     const nextTheme = currentTheme === "dark" ? "light" : "dark";
     setTimeout(() => {
       changeTheme(currentTheme, nextTheme, "theme-link");
       setCurrentTheme(nextTheme);
-      setIsSwitching(false)
+      setIsSwitching(false);
       setIsGrowing(false);
-      btn.disabled = false
+      btn.disabled = false;
     }, 800);
-  }
+  };
 
   return (
       <>
@@ -83,6 +82,6 @@ function App() {
         </div>
       </>
   );
-}
+};
 
-export default App
+export default App;
