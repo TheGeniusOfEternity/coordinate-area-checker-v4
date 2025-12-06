@@ -1,10 +1,10 @@
 import reactLogo from './assets/react.svg';
 import viteLogo from '/vite.svg';
 import './App.css'
-import {FileUpload} from "primereact/fileupload";
 import {Button} from "primereact/button";
 import {useContext, useRef, useState} from "react";
 import {PrimeReactContext} from "primereact/api";
+import * as React from "react";
 
 function App() {
   const { changeTheme } = useContext(PrimeReactContext);
@@ -21,18 +21,21 @@ function App() {
     const x = rect.left + rect.width / 2;
     const y = rect.top + rect.height / 2;
 
+    const btn = (buttonRef.current.children[0] as HTMLButtonElement)
+    btn.disabled = true
+
     setGrowthPosition({x, y});
     setIsGrowing(true);
     setIsSwitching(true)
 
     const nextTheme = currentTheme === "dark" ? "light" : "dark";
-
     setTimeout(() => {
       changeTheme(currentTheme, nextTheme, "theme-link");
       setCurrentTheme(nextTheme);
       setIsSwitching(false)
       setIsGrowing(false);
-    }, 200);
+      btn.disabled = false
+    }, 800);
   }
 
   return (
@@ -70,7 +73,6 @@ function App() {
                   onClick={switchTheme}
               />
             </div>
-            <FileUpload />
             <p>
               Edit <code>src/App.tsx</code> and save to test PrimeReact
             </p>
