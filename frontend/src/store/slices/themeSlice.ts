@@ -1,20 +1,27 @@
-import { type PayloadAction, createSlice } from '@reduxjs/toolkit';
+import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 
 export const themeSlice = createSlice({
   name: 'theme',
   initialState: {
     currentTheme: "dark",
-    isSwitching: false
+    isSwitching: false,
+    overlayGrowthPosition: {
+      x: 0,
+      y: 0,
+    }
   },
   reducers: {
-    setCurrentTheme: (state, action: PayloadAction<string>) => {
-      state.currentTheme = action.payload;
-    },
     setIsSwitching: (state, action: PayloadAction<boolean>) => {
       state.isSwitching = action.payload;
+    },
+    setOverlayGrowthPosition: (state, action: PayloadAction<{x: number, y: number}>) => {
+      state.overlayGrowthPosition = { ...action.payload };
+    },
+    setTheme: (state) => {
+      state.currentTheme = state.currentTheme === "dark" ? "light" : "dark";
     }
   },
 });
 
-export const { setCurrentTheme, setIsSwitching } = themeSlice.actions;
+export const { setTheme, setIsSwitching, setOverlayGrowthPosition } = themeSlice.actions;
 export default themeSlice.reducer;
