@@ -20,6 +20,7 @@ const App = ()=> {
     if (changeTheme) {
       previousTheme = currentTheme === 'dark' ? 'light' : 'dark';
       changeTheme(previousTheme, currentTheme, 'theme-link');
+      localStorage.setItem("theme-mode", currentTheme);
     }
   }, [currentTheme, changeTheme]);
 

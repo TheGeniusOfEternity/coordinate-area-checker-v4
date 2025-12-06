@@ -1,9 +1,20 @@
 import { type PayloadAction, createSlice } from "@reduxjs/toolkit";
 
+const getPreferredTheme = (): "light" | "dark" => {
+  const themeMode = localStorage.getItem("theme-mode");
+  if (themeMode === "light" || themeMode === "dark") { return themeMode; }
+  if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    return 'dark';
+  }
+  return 'light';
+};
+
+const initialTheme = getPreferredTheme();
+
 export const themeSlice = createSlice({
   name: 'theme',
   initialState: {
-    currentTheme: "dark",
+    currentTheme: initialTheme,
     isSwitching: false,
     overlayGrowthPosition: {
       x: 0,
