@@ -164,11 +164,10 @@ const Welcome = () => {
 
   return (
     <div className="auth-container">
-      <Card className="auth-card">
-        <h2 className="auth-title">
-          {t(`welcome.`)}
-        </h2>
-
+      <Card
+        title={t(`page.welcome.title.${mode}`)}
+        className="auth-card"
+      >
         {error && (
           <Message
             severity="error"
@@ -188,13 +187,13 @@ const Welcome = () => {
           <form className="form-group">
             <div className="p-field">
               <label htmlFor="login-email" className="form-label">
-                Email
+                {t("page.welcome.form.email.label")}
               </label>
               <InputText
                 id="login-email"
                 value={loginForm.email}
                 onChange={(e) => handleLoginChange("email", e.target.value)}
-                placeholder="Enter your email"
+                placeholder={t("page.welcome.form.email.placeholder")}
                 className="w-full"
                 autoComplete="email"
               />
@@ -202,13 +201,13 @@ const Welcome = () => {
 
             <div className="p-field">
               <label htmlFor="login-password" className="form-label">
-                Password
+                {t("page.welcome.form.password.label")}
               </label>
               <Password
                 inputId="login-password"
                 value={loginForm.password}
                 onChange={(e) => handleLoginChange("password", e.target.value)}
-                placeholder="Enter your password"
+                placeholder={t("page.welcome.form.password.placeholder.login")}
                 toggleMask
                 className="w-full"
                 inputClassName="w-full"
@@ -217,104 +216,114 @@ const Welcome = () => {
             </div>
 
             <Button
-              label="Login"
+              label={t(`page.welcome.form.submit.login`)}
               onClick={handleLoginSubmit}
               loading={loading}
               className="w-full submit-button"
             />
 
             <p className="auth-switch">
-              Don&apos;t have an account?{" "}
+              {t("page.welcome.redirect.login.text")}
               <button
                 onClick={switchToRegister}
                 className="switch-link"
                 type="button"
               >
-                Register here
+                {t("page.welcome.redirect.login.link")}
               </button>
             </p>
           </form>
         ) : (
           <form className="form-group">
             <div className="p-field">
+              <label htmlFor="login-password" className="form-label">
+                {t("page.welcome.form.password.label")}
+              </label>
+              <Password
+                inputId="login-password"
+                value={loginForm.password}
+                onChange={(e) => handleLoginChange("password", e.target.value)}
+                placeholder={t("page.welcome.form.password.placeholder.login")}
+                toggleMask
+                className="w-full"
+                inputClassName="w-full"
+                autoComplete="current-password"
+              />
+            </div>
+            <div className="p-field">
               <label htmlFor="register-email" className="form-label">
-                Email
+                {t('page.welcome.form.email.label')}
               </label>
               <InputText
                 id="register-email"
                 value={registerForm.email}
                 onChange={(e) => handleRegisterChange("email", e.target.value)}
-                placeholder="Enter your email"
+                placeholder={t("page.welcome.form.email.placeholder")}
                 className="w-full"
               />
             </div>
 
-            <div className="form-row">
-              <div className="p-field">
-                <label htmlFor="register-name" className="form-label">
-                  Name
-                </label>
-                <InputText
-                  id="register-name"
-                  value={registerForm.name}
-                  onChange={(e) => handleRegisterChange("name", e.target.value)}
-                  placeholder="First name"
-                  className="w-full"
-                />
-              </div>
-
-              <div className="p-field">
-                <label htmlFor="register-surname" className="form-label">
-                  Surname
-                </label>
-                <InputText
-                  id="register-surname"
-                  value={registerForm.surname}
-                  onChange={(e) =>
-                    handleRegisterChange("surname", e.target.value)
-                  }
-                  placeholder="Last name"
-                  className="w-full"
-                />
-              </div>
-            </div>
-
-            <div className="form-row">
-              <div className="p-field">
-                <label htmlFor="register-patronymic" className="form-label">
-                  Patronymic
-                </label>
-                <InputText
-                  id="register-patronymic"
-                  value={registerForm.patronymic}
-                  onChange={(e) =>
-                    handleRegisterChange("patronymic", e.target.value)
-                  }
-                  placeholder="Father's name"
-                  className="w-full"
-                />
-              </div>
-
-              <div className="p-field">
-                <label htmlFor="register-group" className="form-label">
-                  Group Number
-                </label>
-                <InputText
-                  id="register-group"
-                  value={registerForm.groupNumber}
-                  onChange={(e) =>
-                    handleRegisterChange("groupNumber", e.target.value)
-                  }
-                  placeholder="e.g., P1234"
-                  className="w-full"
-                  autoComplete="student-group"
-                />
-              </div>
+            <div className="p-field">
+              <label htmlFor="register-name" className="form-label">
+                {t('page.welcome.form.name.label')}
+              </label>
+              <InputText
+                id="register-name"
+                value={registerForm.name}
+                onChange={(e) => handleRegisterChange("name", e.target.value)}
+                placeholder={t('page.welcome.form.name.placeholder')}
+                className="w-full"
+              />
             </div>
 
             <div className="p-field">
+              <label htmlFor="register-surname" className="form-label">
+                {t('page.welcome.form.surname.label')}
+              </label>
+              <InputText
+                id="register-surname"
+                value={registerForm.surname}
+                onChange={(e) =>
+                  handleRegisterChange("surname", e.target.value)
+                }
+                placeholder={t('page.welcome.form.surname.placeholder')}
+                className="w-full"
+              />
+            </div>
+
+            <div className="p-field">
+              <label htmlFor="register-patronymic" className="form-label">
+                {t('page.welcome.form.patronymic.label')}
+              </label>
+              <InputText
+                id="register-patronymic"
+                value={registerForm.patronymic}
+                onChange={(e) =>
+                  handleRegisterChange("patronymic", e.target.value)
+                }
+                placeholder={t('page.welcome.form.patronymic.placeholder')}
+                className="w-full"
+              />
+            </div>
+
+            <div className="p-field">
+              <label htmlFor="register-group" className="form-label">
+                {t('page.welcome.form.group.label')}
+              </label>
+              <InputText
+                id="register-group"
+                value={registerForm.groupNumber}
+                onChange={(e) =>
+                  handleRegisterChange("groupNumber", e.target.value)
+                }
+                placeholder={t('page.welcome.form.group.placeholder')}
+                className="w-full"
+                autoComplete="student-group"
+              />
+            </div>
+            <div className="p-field">
               <label htmlFor="register-password" className="form-label">
-                Password
+                {t('page.welcome.form.password.label')}
               </label>
               <Password
                 autoComplete="new-password"
@@ -323,7 +332,7 @@ const Welcome = () => {
                 onChange={(e) =>
                   handleRegisterChange("password", e.target.value)
                 }
-                placeholder="Enter password"
+                placeholder={t('page.welcome.form.password.placeholder.register')}
                 toggleMask
                 className="w-full"
                 inputClassName="w-full"
@@ -332,7 +341,7 @@ const Welcome = () => {
 
             <div className="p-field">
               <label htmlFor="register-confirm-password" className="form-label">
-                Confirm Password
+                {t('page.welcome.form.passwordConfirm.label')}
               </label>
               <Password
                 autoComplete="new-password confirm"
@@ -341,7 +350,7 @@ const Welcome = () => {
                 onChange={(e) =>
                   handleRegisterChange("confirmPassword", e.target.value)
                 }
-                placeholder="Confirm password"
+                placeholder={t('page.welcome.form.passwordConfirm.placeholder')}
                 toggleMask
                 feedback={false}
                 className="w-full"
@@ -350,20 +359,20 @@ const Welcome = () => {
             </div>
 
             <Button
-              label="Зарегистрироваться"
+              label={t('page.welcome.form.submit.register')}
               onClick={handleRegisterSubmit}
               loading={loading}
               className="w-full submit-button"
             />
 
             <p className="auth-switch">
-              Уже есть аккаунт?{" "}
+              {t('page.welcome.redirect.register.text')}
               <button
                 onClick={switchToLogin}
                 className="switch-link"
                 type="button"
               >
-                Войти
+                {t('page.welcome.redirect.register.link')}
               </button>
             </p>
           </form>

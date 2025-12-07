@@ -4,6 +4,53 @@
       "title": {
         "register": "Создать аккаунт",
         "login": "Войти"
+      },
+      "form": {
+        "email": {
+          "label": "Email",
+          "placeholder": "Введите свой адрес электронной почты"
+        },
+        "group": {
+          "label": "№ группы",
+          "placeholder": "Номер Вашей группы, например, P3223"
+        },
+        "password": {
+          "label": "Пароль",
+          "placeholder": {
+            "register": "Придумайте Ваш пароль",
+            "login": "Введите Ваш пароль"
+          }
+        },
+        "passwordConfirm": {
+          "label": "Подтверждение пароля",
+          "placeholder": "Введите Ваш пароль еще раз"
+        },
+        "name": {
+          "label": "Имя",
+          "placeholder": "Введите Ваше имя"
+        },
+        "surname": {
+          "label": "Фамилия",
+          "placeholder": "Введите Вашу фамилию"
+        },
+        "patronymic": {
+          "label": "Отчество",
+          "placeholder": "Введите Ваше отчество"
+        },
+        "submit": {
+          "register": "Зарегистрироваться",
+          "login": "Войти"
+        }
+      },
+      "redirect": {
+        "register": {
+          "text": "Уже есть аккаунт?",
+          "link": "Войти"
+        },
+        "login": {
+          "text": "Нет аккаунта?",
+          "link": "Зарегистрироваться"
+        }
       }
     }
   }

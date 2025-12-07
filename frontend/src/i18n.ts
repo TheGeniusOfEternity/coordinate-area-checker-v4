@@ -12,9 +12,14 @@ i18n
   .init({
     resources,
     fallbackLng: 'en',
+    supportedLngs: ['en', 'ru'],
     debug: true, // set to false in production
     interpolation: {
       escapeValue: false, // React escapes values by default
+    },
+    detection: {
+      order: ['localStorage', 'navigator'],
+      caches: ['localStorage'],
     },
     react: {
       useSuspense: false,

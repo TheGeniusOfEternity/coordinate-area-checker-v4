@@ -4,6 +4,53 @@
       "title": {
         "register": "Create an account",
         "login": "Sign In"
+      },
+      "form": {
+        "email": {
+          "label": "Email",
+          "placeholder": "Enter your email address"
+        },
+        "group": {
+          "label": "Group ID",
+          "placeholder": "ID of your group, i.e. P3223"
+        },
+        "password": {
+          "label": "Password",
+          "placeholder": {
+            "register": "Create your password",
+            "login": "Enter your password"
+          }
+        },
+        "passwordConfirm": {
+          "label": "Password Confirm",
+          "placeholder": "Enter your password again"
+        },
+        "name": {
+          "label": "Name",
+          "placeholder": "Enter your first name"
+        },
+        "surname": {
+          "label": "Surname",
+          "placeholder": "Enter your last name"
+        },
+        "patronymic": {
+          "label": "Patronymic",
+          "placeholder": "Enter your father's name"
+        },
+        "submit": {
+          "register": "Sign up",
+          "login": "Sign in"
+        }
+      },
+      "redirect": {
+        "register": {
+          "text": "Already have an account?",
+          "link": "Sign in"
+        },
+        "login": {
+          "text": "Don't have an account?",
+          "link": "Create one"
+        }
       }
     }
   }
