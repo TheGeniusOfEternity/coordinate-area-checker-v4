@@ -5,8 +5,10 @@ import { InputText } from "primereact/inputtext";
 import { Message } from "primereact/message";
 import { Password } from "primereact/password";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 
 const Welcome = () => {
+  const { t } = useTranslation();
 
   const [mode, setMode] = useState<'login' | 'register'>('login');
   const [loading, setLoading] = useState(false);
@@ -164,18 +166,26 @@ const Welcome = () => {
     <div className="auth-container">
       <Card className="auth-card">
         <h2 className="auth-title">
-          {mode === 'login' ? 'Авторизация' : 'Регистрация'}
+          {t(`welcome-page.title.${mode}`)}
         </h2>
 
         {error && (
-          <Message severity="error" text={error} style={{ width: '100%', marginBottom: '1rem' }} />
+          <Message
+            severity="error"
+            text={error}
+            style={{ width: "100%", marginBottom: "1rem" }}
+          />
         )}
         {success && (
-          <Message severity="success" text={success} style={{ width: '100%', marginBottom: '1rem' }} />
+          <Message
+            severity="success"
+            text={success}
+            style={{ width: "100%", marginBottom: "1rem" }}
+          />
         )}
 
-        {mode === 'login' ? (
-          <div className="form-group">
+        {mode === "login" ? (
+          <form className="form-group">
             <div className="p-field">
               <label htmlFor="login-email" className="form-label">
                 Email
@@ -183,9 +193,10 @@ const Welcome = () => {
               <InputText
                 id="login-email"
                 value={loginForm.email}
-                onChange={(e) => handleLoginChange('email', e.target.value)}
+                onChange={(e) => handleLoginChange("email", e.target.value)}
                 placeholder="Enter your email"
                 className="w-full"
+                autoComplete="email"
               />
             </div>
 
@@ -196,11 +207,12 @@ const Welcome = () => {
               <Password
                 inputId="login-password"
                 value={loginForm.password}
-                onChange={(e) => handleLoginChange('password', e.target.value)}
+                onChange={(e) => handleLoginChange("password", e.target.value)}
                 placeholder="Enter your password"
                 toggleMask
                 className="w-full"
                 inputClassName="w-full"
+                autoComplete="current-password"
               />
             </div>
 
@@ -212,7 +224,7 @@ const Welcome = () => {
             />
 
             <p className="auth-switch">
-              Don&apos;t have an account?{' '}
+              Don&apos;t have an account?{" "}
               <button
                 onClick={switchToRegister}
                 className="switch-link"
@@ -221,9 +233,9 @@ const Welcome = () => {
                 Register here
               </button>
             </p>
-          </div>
+          </form>
         ) : (
-          <div className="form-group">
+          <form className="form-group">
             <div className="p-field">
               <label htmlFor="register-email" className="form-label">
                 Email
@@ -231,7 +243,7 @@ const Welcome = () => {
               <InputText
                 id="register-email"
                 value={registerForm.email}
-                onChange={(e) => handleRegisterChange('email', e.target.value)}
+                onChange={(e) => handleRegisterChange("email", e.target.value)}
                 placeholder="Enter your email"
                 className="w-full"
               />
@@ -245,7 +257,7 @@ const Welcome = () => {
                 <InputText
                   id="register-name"
                   value={registerForm.name}
-                  onChange={(e) => handleRegisterChange('name', e.target.value)}
+                  onChange={(e) => handleRegisterChange("name", e.target.value)}
                   placeholder="First name"
                   className="w-full"
                 />
@@ -258,7 +270,9 @@ const Welcome = () => {
                 <InputText
                   id="register-surname"
                   value={registerForm.surname}
-                  onChange={(e) => handleRegisterChange('surname', e.target.value)}
+                  onChange={(e) =>
+                    handleRegisterChange("surname", e.target.value)
+                  }
                   placeholder="Last name"
                   className="w-full"
                 />
@@ -273,7 +287,9 @@ const Welcome = () => {
                 <InputText
                   id="register-patronymic"
                   value={registerForm.patronymic}
-                  onChange={(e) => handleRegisterChange('patronymic', e.target.value)}
+                  onChange={(e) =>
+                    handleRegisterChange("patronymic", e.target.value)
+                  }
                   placeholder="Father's name"
                   className="w-full"
                 />
@@ -286,9 +302,12 @@ const Welcome = () => {
                 <InputText
                   id="register-group"
                   value={registerForm.groupNumber}
-                  onChange={(e) => handleRegisterChange('groupNumber', e.target.value)}
-                  placeholder="e.g., БПМ-21"
+                  onChange={(e) =>
+                    handleRegisterChange("groupNumber", e.target.value)
+                  }
+                  placeholder="e.g., P1234"
                   className="w-full"
+                  autoComplete="student-group"
                 />
               </div>
             </div>
@@ -298,9 +317,12 @@ const Welcome = () => {
                 Password
               </label>
               <Password
+                autoComplete="new-password"
                 inputId="register-password"
                 value={registerForm.password}
-                onChange={(e) => handleRegisterChange('password', e.target.value)}
+                onChange={(e) =>
+                  handleRegisterChange("password", e.target.value)
+                }
                 placeholder="Enter password"
                 toggleMask
                 className="w-full"
@@ -313,9 +335,12 @@ const Welcome = () => {
                 Confirm Password
               </label>
               <Password
+                autoComplete="new-password confirm"
                 inputId="register-confirm-password"
                 value={registerForm.confirmPassword}
-                onChange={(e) => handleRegisterChange('confirmPassword', e.target.value)}
+                onChange={(e) =>
+                  handleRegisterChange("confirmPassword", e.target.value)
+                }
                 placeholder="Confirm password"
                 toggleMask
                 feedback={false}
@@ -332,7 +357,7 @@ const Welcome = () => {
             />
 
             <p className="auth-switch">
-              Уже есть аккаунт?{' '}
+              Уже есть аккаунт?{" "}
               <button
                 onClick={switchToLogin}
                 className="switch-link"
@@ -341,7 +366,7 @@ const Welcome = () => {
                 Войти
               </button>
             </p>
-          </div>
+          </form>
         )}
       </Card>
     </div>
