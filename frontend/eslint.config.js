@@ -36,7 +36,8 @@ export default defineConfig([
       "max-lines-per-function": "off",
       "max-statements": "off",
       "no-magic-numbers": "off",
-      "semi": "error"
+      "semi": "error",
+      "sort-keys": "off"
     }
   },
 ])
