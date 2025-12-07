@@ -2,10 +2,10 @@ import "./App.css";
 import * as React from "react";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router";
 import { useContext, useEffect } from "react";
-import Main from "./pages/Main.tsx";
+import Home from "./pages/home/Home.tsx";
 import { PrimeReactContext } from "primereact/api";
 import type { RootState } from "./store";
-import Welcome from "./pages/Welcome.tsx";
+import Welcome from "./pages/welcome/Welcome.tsx";
 import { useSelector } from "react-redux";
 
 
@@ -40,7 +40,7 @@ const App = ()=> {
           <BrowserRouter>
             <Routes>
               <Route path="/static/auth" element={<Welcome />}/>
-              <Route path="/static/" element={<Main />}/>
+              <Route path="/static/" element={<Home />}/>
               <Route path="*" element={<Navigate to="/static/" replace />} />
             </Routes>
           </BrowserRouter>

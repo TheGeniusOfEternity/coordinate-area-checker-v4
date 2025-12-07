@@ -12,7 +12,6 @@ body {
   display: flex;
   justify-content: flex-end;
   height: 100vh;
-  padding: 2rem;
   position: relative;
   transition: opacity 0.3s ease-in-out;
 }

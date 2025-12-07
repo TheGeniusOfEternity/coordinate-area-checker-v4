@@ -1,13 +1,13 @@
 import {
   setIsSwitching,
   setOverlayGrowthPosition,
-} from "../store/slices/themeSlice";
+} from "../../store/slices/themeSlice.ts";
 import { useDispatch, useSelector } from "react-redux";
 import { Button } from "primereact/button";
-import type { RootState } from "../store";
+import type { RootState } from "../../store";
 import { useRef } from "react";
 
-const Main = () => {
+const Home = () => {
   const dispatch = useDispatch();
   const buttonRef = useRef<HTMLDivElement>(null);
   const isSwitching = useSelector((state: RootState) => state.theme.isSwitching);
@@ -38,4 +38,4 @@ const Main = () => {
   );
 };
 
-export default Main;
+export default Home;
