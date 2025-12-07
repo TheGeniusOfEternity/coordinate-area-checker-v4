@@ -3,17 +3,7 @@ import { initReactI18next } from 'react-i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
 import HttpBackend from 'i18next-http-backend';
 
-import enTranslation from './locales/en/translation.json';
-import ruTranslation from './locales/ru/translation.json';
-
-const resources = {
-  en: {
-    translation: enTranslation,
-  },
-  ru: {
-    translation: ruTranslation,
-  },
-};
+import resources from './i18n/resources';
 
 i18n
   .use(HttpBackend)

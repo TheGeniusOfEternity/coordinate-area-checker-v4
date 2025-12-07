@@ -1,8 +1,10 @@
 {
-  "welcome-page": {
-    "title": {
-      "register": "Create an account",
-      "login": "Sign In"
+  "page": {
+    "welcome": {
+      "title": {
+        "register": "Create an account",
+        "login": "Sign In"
+      }
     }
   }
 }

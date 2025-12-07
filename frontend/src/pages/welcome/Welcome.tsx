@@ -166,7 +166,7 @@ const Welcome = () => {
     <div className="auth-container">
       <Card className="auth-card">
         <h2 className="auth-title">
-          {t(`welcome-page.title.${mode}`)}
+          {t(`welcome.`)}
         </h2>
 
         {error && (
