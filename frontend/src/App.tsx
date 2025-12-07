@@ -1,7 +1,8 @@
 import "./App.css";
 import * as React from "react";
-import { BrowserRouter, Route, Routes } from "react-router";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router";
 import { useContext, useEffect } from "react";
+import Main from "./pages/Main.tsx";
 import { PrimeReactContext } from "primereact/api";
 import type { RootState } from "./store";
 import Welcome from "./pages/Welcome.tsx";
@@ -38,7 +39,9 @@ const App = ()=> {
         <div className={`App ${isSwitching ? "theme-transition" : ""} ${currentTheme}`}>
           <BrowserRouter>
             <Routes>
-              <Route path="/static/" element={<Welcome />}/>
+              <Route path="/static/auth" element={<Welcome />}/>
+              <Route path="/static/" element={<Main />}/>
+              <Route path="*" element={<Navigate to="/static/" replace />} />
             </Routes>
           </BrowserRouter>
         </div>
