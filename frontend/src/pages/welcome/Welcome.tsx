@@ -6,6 +6,7 @@ import { Message } from "primereact/message";
 import { Password } from "primereact/password";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
+import LoginForm from "@/components/forms/LoginForm";
 
 const Welcome = () => {
   const { t } = useTranslation();
@@ -14,11 +15,6 @@ const Welcome = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState<string | null>(null);
-
-  const [loginForm, setLoginForm] = useState<LoginFormData>({
-    email: '',
-    password: '',
-  });
 
   const [registerForm, setRegisterForm] = useState<RegisterFormData>({
     email: '',
@@ -30,32 +26,10 @@ const Welcome = () => {
     confirmPassword: '',
   });
 
-  const handleLoginChange = (field: keyof LoginFormData, value: string) => {
-    setLoginForm((prev) => ({ ...prev, [field]: value }));
-    setError(null);
-    setSuccess(null);
-  };
-
   const handleRegisterChange = (field: keyof RegisterFormData, value: string) => {
     setRegisterForm((prev) => ({ ...prev, [field]: value }));
     setError(null);
     setSuccess(null);
-  };
-
-  const validateLoginForm = (): boolean => {
-    if (!loginForm.email.trim()) {
-      setError('Email is required');
-      return false;
-    }
-    if (!loginForm.password.trim()) {
-      setError('Password is required');
-      return false;
-    }
-    if (!loginForm.email.includes('@')) {
-      setError('Please enter a valid email');
-      return false;
-    }
-    return true;
   };
 
   const validateRegisterForm = (): boolean => {
@@ -184,72 +158,14 @@ const Welcome = () => {
         )}
 
         {mode === "login" ? (
-          <form className="form-group">
-            <div className="p-field">
-              <label htmlFor="login-email" className="form-label">
-                {t("page.welcome.form.email.label")}
-              </label>
-              <InputText
-                id="login-email"
-                value={loginForm.email}
-                onChange={(e) => handleLoginChange("email", e.target.value)}
-                placeholder={t("page.welcome.form.email.placeholder")}
-                className="w-full"
-                autoComplete="email"
-              />
-            </div>
-
-            <div className="p-field">
-              <label htmlFor="login-password" className="form-label">
-                {t("page.welcome.form.password.label")}
-              </label>
-              <Password
-                inputId="login-password"
-                value={loginForm.password}
-                onChange={(e) => handleLoginChange("password", e.target.value)}
-                placeholder={t("page.welcome.form.password.placeholder.login")}
-                toggleMask
-                className="w-full"
-                inputClassName="w-full"
-                autoComplete="current-password"
-              />
-            </div>
-
-            <Button
-              label={t(`page.welcome.form.submit.login`)}
-              onClick={handleLoginSubmit}
-              loading={loading}
-              className="w-full submit-button"
-            />
-
-            <p className="auth-switch">
-              {t("page.welcome.redirect.login.text")}
-              <button
-                onClick={switchToRegister}
-                className="switch-link"
-                type="button"
-              >
-                {t("page.welcome.redirect.login.link")}
-              </button>
-            </p>
-          </form>
+          <LoginForm
+            className="form"
+            onSubmit={handleLoginSubmit}
+            onSwitchToRegister={switchToRegister}
+            loading={loading}
+          />
         ) : (
           <form className="form-group">
-            <div className="p-field">
-              <label htmlFor="login-password" className="form-label">
-                {t("page.welcome.form.password.label")}
-              </label>
-              <Password
-                inputId="login-password"
-                value={loginForm.password}
-                onChange={(e) => handleLoginChange("password", e.target.value)}
-                placeholder={t("page.welcome.form.password.placeholder.login")}
-                toggleMask
-                className="w-full"
-                inputClassName="w-full"
-                autoComplete="current-password"
-              />
-            </div>
             <div className="p-field">
               <label htmlFor="register-email" className="form-label">
                 {t('page.welcome.form.email.label')}

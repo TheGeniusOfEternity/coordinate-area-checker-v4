@@ -1,8 +1,3 @@
-interface LoginFormData {
-  email: string;
-  password: string;
-}
-
 interface RegisterFormData {
   email: string;
   name: string;

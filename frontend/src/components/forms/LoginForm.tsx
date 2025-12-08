@@ -1,0 +1,113 @@
+import './Form.css';
+import { InputText } from "primereact/inputtext";
+import { Password } from "primereact/password";
+import { Button } from "primereact/button";
+import { useTranslation } from "react-i18next";
+import { useState } from "react";
+
+interface LoginFormData {
+  email: string;
+  password: string;
+}
+
+interface LoginFormProps {
+  // eslint-disable-next-line no-unused-vars
+  onSubmit: (data: LoginFormData) => Promise<void>;
+  onSwitchToRegister: () => void;
+  loading: boolean;
+}
+
+const LoginForm = ({
+  onSubmit,
+  onSwitchToRegister,
+  loading
+}: LoginFormProps) => {
+  const { t } = useTranslation();
+  const [errors, setErrors] = useState<Partial<LoginFormData>>({});
+  const [form, setForm] = useState<LoginFormData>({
+    email: '',
+    password: ''
+  });
+
+  const handleLoginChange = (field: keyof LoginFormData, value: string) => {
+    setForm((prev) => ({ ...prev, [field]: value }));
+    setErrors((prev) => ({...prev, [field]: null}));
+  };
+
+  const validate = (): boolean => {
+    const newErrors: Partial<LoginFormData> = {};
+
+    if (!form.email.trim()) {
+      newErrors.email = 'Email is required';
+    } else if (!form.email.includes('@')) {
+      newErrors.email = 'Please enter a valid email';
+    }
+
+    if (!form.password.trim()) {
+      newErrors.password = 'Password is required';
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
+  const handleSubmit = async () => {
+    if (!validate()) { return; }
+    await onSubmit(form);
+  };
+
+  return (
+    <form className="form">
+      <div className="p-field">
+        <label htmlFor="login-email" className="form-label">
+          {t("page.welcome.form.email.label")}
+        </label>
+        <InputText
+          id="login-email"
+          value={form.email}
+          onChange={(e) => handleLoginChange("email", e.target.value)}
+          placeholder={t("page.welcome.form.email.placeholder")}
+          className="w-full"
+          autoComplete="email"
+        />
+        {errors.email && <small className="p-error">{errors.email}</small>}
+      </div>
+
+      <div className="p-field">
+        <label htmlFor="login-password" className="form-label">
+          {t("page.welcome.form.password.label")}
+        </label>
+        <Password
+          inputId="login-password"
+          value={form.password}
+          onChange={(e) => handleLoginChange("password", e.target.value)}
+          placeholder={t("page.welcome.form.password.placeholder.login")}
+          autoComplete="current-password"
+          toggleMask
+          inputClassName="password"
+        />
+        {errors.password && <small className="p-error">{errors.password}</small>}
+      </div>
+
+      <Button
+        label={t(`page.welcome.form.submit.login`)}
+        onClick={handleSubmit}
+        loading={loading}
+        className="submit-button"
+      />
+
+      <p className="auth-switch">
+        {t("page.welcome.redirect.login.text")}
+        <button
+          onClick={onSwitchToRegister}
+          className="switch-link"
+          type="button"
+        >
+          {t("page.welcome.redirect.login.link")}
+        </button>
+      </p>
+    </form>
+  );
+};
+
+export default LoginForm;
