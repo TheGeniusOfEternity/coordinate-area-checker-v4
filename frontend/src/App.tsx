@@ -1,4 +1,5 @@
 import "./App.css";
+import "./assets/css/variables.css";
 import * as React from "react";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router";
 import { useContext, useEffect } from "react";

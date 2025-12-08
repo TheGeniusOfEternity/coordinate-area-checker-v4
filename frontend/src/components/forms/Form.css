@@ -35,7 +35,6 @@ form .auth-switch button {
   padding: 0;
   position: relative;
   min-height: 0;
-  flex: 1;
 }
 
 .fields {
@@ -81,4 +80,11 @@ form .submit-button,
 .p-icon-field,
 .p-field .password {
   width: 100%
+}
+
+@media screen and (min-width: 790px) and (max-width: 1250px) {
+  form .submit-block {
+    padding: 0 0.5rem;
+    margin-top: 2rem;
+  }
 }
