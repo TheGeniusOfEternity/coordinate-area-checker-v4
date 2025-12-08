@@ -4,6 +4,7 @@ import { Password } from "primereact/password";
 import { Button } from "primereact/button";
 import { useTranslation } from "react-i18next";
 import "./Form.css";
+import * as React from "react";
 
 interface RegisterFormData {
   email: string;
@@ -78,13 +79,14 @@ const RegisterForm = ({
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
     if (!validate()) { return; }
     await onSubmit(form);
   };
   
   return (
-    <form className="form-group">
+    <form className="form-group" onSubmit={handleSubmit}>
       <div className="fields-wrapper">
         <div className="fields">
           <div className="p-field">
@@ -202,7 +204,6 @@ const RegisterForm = ({
       <div className="submit-block">
         <Button
           label={t('page.welcome.form.submit.register')}
-          onClick={handleSubmit}
           loading={loading}
           className="submit-button"
         />

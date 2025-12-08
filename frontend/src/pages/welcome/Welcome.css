@@ -6,6 +6,10 @@
   align-items: center;
 }
 
+.wrapper {
+  display: none;
+}
+
 .auth-card {
   max-width: 90%;
   min-width: 90%;
@@ -26,17 +30,23 @@
   margin: 0;
   display: flex;
   align-items: center;
-  height: 5%;
-  padding: 0.5rem 0.5rem 0 0.5rem;
+  max-height: 10%;
+  min-height: 5%;
+  padding: 0.5rem;
 }
 
 .auth-card form {
-  height: 95%;
+  max-height: 95%;
+  min-height: 90%;
   display: flex;
   flex-direction: column;
 }
 
 @media screen and (min-width: 790px) and (max-width: 1251px) {
+  .wrapper {
+    display: none;
+  }
+
   .auth-card {
     min-width: 55%;
     border-radius: 10px;
@@ -45,5 +55,54 @@
   .auth-card.register {
     height: auto;
     min-width: 75%;
+  }
+
+  .auth-card h3 {
+    margin-top: 0.5rem;
+    padding-top: 0;
+  }
+
+  .auth-card.register .submit-block {
+    padding: 0 0.5rem 1.5rem 0.5rem;
+    margin-top: 2rem;
+  }
+}
+
+@media screen and (min-width: 1251px) {
+  .wrapper {
+    display: flex;
+    background: var(--primary-500);
+    height: 65vh;
+    width: 35vw;
+    border-radius: 15px;
+  }
+
+  .wrapper.login {
+    margin-right: -5vw;
+  }
+
+  .wrapper.register {
+    margin-left: -5vw;
+  }
+
+  .auth-container .auth-card {
+    position: relative;
+    height: 65vh;
+    min-width: 30vw;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    padding: var(--auth-card-padding);
+  }
+
+  .auth-container .auth-card.register {
+    order: -1;
+  }
+
+  .auth-container .auth-card.login {
+    border-radius: 0 10px 10px 0;
+  }
+
+  .auth-container .auth-card.register {
+    border-radius: 10px 0 0 10px;
   }
 }

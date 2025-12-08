@@ -4,6 +4,7 @@ import { Password } from "primereact/password";
 import { Button } from "primereact/button";
 import { useTranslation } from "react-i18next";
 import { useState } from "react";
+import * as React from "react";
 
 interface LoginFormData {
   email: string;
@@ -51,13 +52,14 @@ const LoginForm = ({
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
     if (!validate()) { return; }
     await onSubmit(form);
   };
 
   return (
-    <form className="form">
+    <form className="form" onSubmit={handleSubmit}>
       <div className="fields">
         <div className="p-field">
           <label htmlFor="login-email" className="form-label">
@@ -93,7 +95,6 @@ const LoginForm = ({
       <div className="submit-block">
         <Button
           label={t(`page.welcome.form.submit.login`)}
-          onClick={handleSubmit}
           loading={loading}
           className="submit-button"
         />

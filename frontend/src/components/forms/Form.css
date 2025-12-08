@@ -43,7 +43,7 @@ form .auth-switch button {
   overflow-y: auto;
   gap: 1rem;
   height: 100%;
-  padding: 1.2rem 0.5rem;
+  padding: var(--auth-card-padding) 0.5rem;
 }
 
 .fields-wrapper::before,
@@ -52,7 +52,7 @@ form .auth-switch button {
   position: absolute;
   right: 0;
   left: 0;
-  height: 1.5rem;
+  height: var(--auth-card-padding);
   background: linear-gradient(
       to bottom,
       transparent 0%,
@@ -85,6 +85,6 @@ form .submit-button,
 @media screen and (min-width: 790px) and (max-width: 1250px) {
   form .submit-block {
     padding: 0 0.5rem;
-    margin-top: 2rem;
+    margin-top: 1.5rem;
   }
 }
