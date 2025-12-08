@@ -8,11 +8,11 @@
       "form": {
         "email": {
           "label": "Email",
-          "placeholder": "Введите свой адрес электронной почты"
+          "placeholder": "Введите Ваш адрес электронной почты"
         },
         "group": {
           "label": "№ группы",
-          "placeholder": "Номер Вашей группы, например, P3223"
+          "placeholder": "Например, P3223"
         },
         "password": {
           "label": "Пароль",

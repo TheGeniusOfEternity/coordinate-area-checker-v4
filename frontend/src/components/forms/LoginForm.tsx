@@ -29,7 +29,7 @@ const LoginForm = ({
     password: ''
   });
 
-  const handleLoginChange = (field: keyof LoginFormData, value: string) => {
+  const handleFormChange = (field: keyof LoginFormData, value: string) => {
     setForm((prev) => ({ ...prev, [field]: value }));
     setErrors((prev) => ({...prev, [field]: null}));
   };
@@ -58,54 +58,57 @@ const LoginForm = ({
 
   return (
     <form className="form">
-      <div className="p-field">
-        <label htmlFor="login-email" className="form-label">
-          {t("page.welcome.form.email.label")}
-        </label>
-        <InputText
-          id="login-email"
-          value={form.email}
-          onChange={(e) => handleLoginChange("email", e.target.value)}
-          placeholder={t("page.welcome.form.email.placeholder")}
-          className="w-full"
-          autoComplete="email"
-        />
-        {errors.email && <small className="p-error">{errors.email}</small>}
+      <div className="fields">
+        <div className="p-field">
+          <label htmlFor="login-email" className="form-label">
+            {t("page.welcome.form.email.label")}
+          </label>
+          <InputText
+            id="login-email"
+            value={form.email}
+            onChange={(e) => handleFormChange("email", e.target.value)}
+            placeholder={t("page.welcome.form.email.placeholder")}
+            autoComplete="email"
+          />
+          {errors.email && <small className="p-error">{errors.email}</small>}
+        </div>
+
+        <div className="p-field">
+          <label htmlFor="login-password" className="form-label">
+            {t("page.welcome.form.password.label")}
+          </label>
+          <Password
+            inputId="login-password"
+            value={form.password}
+            onChange={(e) => handleFormChange("password", e.target.value)}
+            placeholder={t("page.welcome.form.password.placeholder.login")}
+            autoComplete="current-password"
+            toggleMask
+            inputClassName="password"
+          />
+          {errors.password && <small className="p-error">{errors.password}</small>}
+        </div>
       </div>
 
-      <div className="p-field">
-        <label htmlFor="login-password" className="form-label">
-          {t("page.welcome.form.password.label")}
-        </label>
-        <Password
-          inputId="login-password"
-          value={form.password}
-          onChange={(e) => handleLoginChange("password", e.target.value)}
-          placeholder={t("page.welcome.form.password.placeholder.login")}
-          autoComplete="current-password"
-          toggleMask
-          inputClassName="password"
+      <div className="submit-block">
+        <Button
+          label={t(`page.welcome.form.submit.login`)}
+          onClick={handleSubmit}
+          loading={loading}
+          className="submit-button"
         />
-        {errors.password && <small className="p-error">{errors.password}</small>}
+
+        <p className="auth-switch">
+          {t("page.welcome.redirect.login.text")}
+          <button
+            onClick={onSwitchToRegister}
+            className="switch-link"
+            type="button"
+          >
+            {t("page.welcome.redirect.login.link")}
+          </button>
+        </p>
       </div>
-
-      <Button
-        label={t(`page.welcome.form.submit.login`)}
-        onClick={handleSubmit}
-        loading={loading}
-        className="submit-button"
-      />
-
-      <p className="auth-switch">
-        {t("page.welcome.redirect.login.text")}
-        <button
-          onClick={onSwitchToRegister}
-          className="switch-link"
-          type="button"
-        >
-          {t("page.welcome.redirect.login.link")}
-        </button>
-      </p>
     </form>
   );
 };
