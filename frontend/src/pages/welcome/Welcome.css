@@ -7,23 +7,30 @@
 }
 
 .wrapper {
-  display: none;
-}
-
-.auth-card {
   max-width: 90%;
   min-width: 90%;
   background: #282936;
-  padding: var(--auth-card-padding);
   border-radius: 5px;
   display: flex;
   flex-direction: column;
 }
 
-.auth-card.register {
+.wrapper.register {
   height: 95vh;
+}
+
+.auth-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.wrapper .auth-card {
+  padding: var(--auth-card-padding);
+}
+
+.wrapper.register .auth-card {
   padding: 1rem 1rem 0.5rem 1rem;
-  position: relative;
 }
 
 .auth-card h3 {
@@ -44,15 +51,11 @@
 
 @media screen and (min-width: 790px) and (max-width: 1251px) {
   .wrapper {
-    display: none;
-  }
-
-  .auth-card {
     min-width: 55%;
     border-radius: 10px;
   }
 
-  .auth-card.register {
+  .wrapper.register {
     height: auto;
     min-width: 75%;
   }
@@ -72,30 +75,40 @@
   .wrapper {
     display: flex;
     background: var(--primary-500);
-    height: 65vh;
-    width: 35vw;
+    max-height: 65vh;
+    min-height: 65vh;
+    max-width: 80vw;
+    min-width: 65vw;
     border-radius: 15px;
-  }
-
-  .wrapper.login {
-    margin-right: -5vw;
-  }
-
-  .wrapper.register {
-    margin-left: -5vw;
+    position: relative;
   }
 
   .auth-container .auth-card {
-    position: relative;
-    height: 65vh;
-    min-width: 30vw;
+    position: absolute;
+    right: 0;
+    width: 50%;
+    background: #282936;
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
     padding: var(--auth-card-padding);
+    transition: transform 0.4s ease, opacity 0.4s ease, scale 0.4s ease;
   }
 
-  .auth-container .auth-card.register {
-    order: -1;
+  .auth-card.register {
+    transform: translateX(-100%);
+  }
+
+  .auth-card:not(.register) {
+    transform: translateX(0);
+  }
+
+  .auth-card h3 {
+    padding: 0 0.5rem;
+  }
+
+  .auth-card form {
+    max-height: 95%;
+    min-height: 95%;
   }
 
   .auth-container .auth-card.login {
@@ -104,5 +117,6 @@
 
   .auth-container .auth-card.register {
     border-radius: 10px 0 0 10px;
+    padding: var(--auth-card-padding);
   }
 }

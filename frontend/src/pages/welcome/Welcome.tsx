@@ -4,7 +4,6 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import LoginForm from "@/components/forms/LoginForm";
 import RegisterForm from "@/components/forms/RegisterForm";
-import { Card } from "primereact/card";
 
 const Welcome = () => {
   const { t } = useTranslation();
@@ -58,40 +57,41 @@ const Welcome = () => {
 
   return (
     <div className="auth-container">
-      <Card className={`wrapper ${mode}`} />
-      <div className={`auth-card ${mode}`}>
-        <h3>{t(`page.welcome.title.${mode}`)}</h3>
-        {error && (
-          <Message
-            severity="error"
-            text={error}
-            style={{ width: "100%", marginBottom: "1rem" }}
-          />
-        )}
-        {success && (
-          <Message
-            severity="success"
-            text={success}
-            style={{ width: "100%", marginBottom: "1rem" }}
-          />
-        )}
+      <div className={`wrapper ${mode}`}>
+        <div className={`auth-card ${mode}`}>
+          <h3>{t(`page.welcome.title.${mode}`)}</h3>
+          {error && (
+            <Message
+              severity="error"
+              text={error}
+              style={{ width: "100%", marginBottom: "1rem" }}
+            />
+          )}
+          {success && (
+            <Message
+              severity="success"
+              text={success}
+              style={{ width: "100%", marginBottom: "1rem" }}
+            />
+          )}
 
-        {
-          mode === "login"
-            ? (
-              <LoginForm
-                onSubmit={handleLoginSubmit}
-                onSwitchToRegister={switchToRegister}
-                loading={loading}
-              />
-            ) : (
-              <RegisterForm
-                onSubmit={handleRegisterSubmit}
-                onLoginSwitch={switchToLogin}
-                loading={loading}
-              />
-            )
-        }
+          {
+            mode === "login"
+              ? (
+                <LoginForm
+                  onSubmit={handleLoginSubmit}
+                  onSwitchToRegister={switchToRegister}
+                  loading={loading}
+                />
+              ) : (
+                <RegisterForm
+                  onSubmit={handleRegisterSubmit}
+                  onLoginSwitch={switchToLogin}
+                  loading={loading}
+                />
+              )
+          }
+        </div>
       </div>
     </div>
   );
