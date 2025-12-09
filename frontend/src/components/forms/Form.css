@@ -48,7 +48,7 @@ form .auth-switch button {
   display: flex;
   flex-direction: column;
   overflow-y: auto;
-  gap: 1rem;
+  gap: 1.2rem;
   height: 100%;
   padding: var(--auth-card-padding) 0;
 }

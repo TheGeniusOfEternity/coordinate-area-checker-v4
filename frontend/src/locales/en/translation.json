@@ -8,34 +8,47 @@
       "form": {
         "email": {
           "label": "Email",
-          "placeholder": "Enter your email address"
+          "placeholder": "Enter your email address",
+          "errors": {
+            "empty": "Email is required",
+            "invalid": "Please enter a valid email"
+          }
         },
         "group": {
           "label": "Group ID",
-          "placeholder": "ID of your group, i.e. P3223"
+          "placeholder": "ID of your group, i.e. P3223",
+          "error": "Group number is required"
         },
         "password": {
           "label": "Password",
           "placeholder": {
             "register": "Create your password",
             "login": "Enter your password"
+          },
+          "errors": {
+            "empty": "Password is required",
+            "short": "Password must be at least 6 characters"
           }
         },
         "passwordConfirm": {
           "label": "Password Confirm",
-          "placeholder": "Enter your password again"
+          "placeholder": "Enter your password again",
+          "error": "Passwords do not match"
         },
         "name": {
           "label": "Name",
-          "placeholder": "Enter your first name"
+          "placeholder": "Enter your first name",
+          "error": "Name is required"
         },
         "surname": {
           "label": "Surname",
-          "placeholder": "Enter your last name"
+          "placeholder": "Enter your last name",
+          "error": "Surname is required"
         },
         "patronymic": {
           "label": "Patronymic",
-          "placeholder": "Enter your father's name"
+          "placeholder": "Enter your father's name",
+          "error": "Patronymic is required"
         },
         "submit": {
           "register": "Sign up",

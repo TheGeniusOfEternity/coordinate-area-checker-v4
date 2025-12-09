@@ -49,31 +49,29 @@ const RegisterForm = ({
     const newErrors: Partial<RegisterFormData> = {};
     
     if (!form.email.trim()) {
-      newErrors.email = 'Email is required';
-    }
-    if (!form.email.includes('@')) {
-      newErrors.email = 'Please enter a valid email';
+      newErrors.email = t('page.welcome.form.email.errors.empty');
+    } else if (!form.email.includes('@')) {
+      newErrors.email = t('page.welcome.form.email.errors.invalid');
     }
     if (!form.name.trim()) {
-      newErrors.name = 'Name is required';
+      newErrors.name = t('page.welcome.form.name.error');
     }
     if (!form.surname.trim()) {
-      newErrors.surname = 'Surname is required';
+      newErrors.surname = t('page.welcome.form.surname.error');
     }
     if (!form.patronymic.trim()) {
-      newErrors.patronymic = 'Patronymic is required';
+      newErrors.patronymic = t('page.welcome.form.patronymic.error');
     }
     if (!form.groupNumber.trim()) {
-      newErrors.groupNumber = 'Group number is required';
+      newErrors.groupNumber = t('page.welcome.form.group.error');
     }
     if (!form.password.trim()) {
-      newErrors.password = 'Password is required';
-    }
-    if (form.password.length < 6) {
-      newErrors.password = 'Password must be at least 6 characters';
+      newErrors.password = t('page.welcome.form.password.errors.empty');
+    } else if (form.password.length < 6) {
+      newErrors.password = t('page.welcome.form.password.errors.short');
     }
     if (form.password !== form.passwordConfirm) {
-      newErrors.passwordConfirm = 'Passwords do not match';
+      newErrors.passwordConfirm = t('page.welcome.form.passwordConfirm.error');
     }
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;

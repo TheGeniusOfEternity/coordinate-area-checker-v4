@@ -39,13 +39,13 @@ const LoginForm = ({
     const newErrors: Partial<LoginFormData> = {};
 
     if (!form.email.trim()) {
-      newErrors.email = 'Email is required';
+      newErrors.email = t('page.welcome.form.email.errors.empty');
     } else if (!form.email.includes('@')) {
-      newErrors.email = 'Please enter a valid email';
+      newErrors.email = t('page.welcome.form.email.errors.invalid');
     }
 
     if (!form.password.trim()) {
-      newErrors.password = 'Password is required';
+      newErrors.password = t('page.welcome.form.password.errors.empty');
     }
 
     setErrors(newErrors);

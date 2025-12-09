@@ -3,15 +3,11 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import LoginForm from "@/components/forms/LoginForm";
 import RegisterForm from "@/components/forms/RegisterForm";
-import { useDispatch, useSelector } from "react-redux";
-import type { RootState } from "@/store";
-import { setMode } from "@/store/slices/authFormSlice";
 
 const Welcome = () => {
   const { t } = useTranslation();
-  const dispatch = useDispatch();
 
-  const { mode, isAnimating } = useSelector((state: RootState) => state.auth);
+  const [ mode, setMode ] = useState<"login" | "register">("login");
   const [loading, setLoading] = useState(false);
 
   const handleLoginSubmit = async () => {
@@ -25,19 +21,18 @@ const Welcome = () => {
   };
 
   const switchToRegister = () => {
-    dispatch(setMode("register"));
+    setMode("register");
   };
 
   const switchToLogin = () => {
-    dispatch(setMode("login"));
+    setMode("login");
   };
 
   return (
     <div className="auth-container">
       <div className={`wrapper ${mode}`}>
         <div className={
-          `auth-card ${mode === 'login' ? '' : 'hidden'} 
-          ${isAnimating ? 'animating' : ''}`
+          `auth-card ${mode === 'login' ? '' : 'hidden'}`
         }>
           <h3>{t(`page.welcome.title.login`)}</h3>
           <LoginForm
@@ -47,9 +42,7 @@ const Welcome = () => {
           />
         </div>
         <div className={
-          `auth-card 
-          ${mode === 'register' ? '' : 'hidden'} 
-          ${isAnimating ? 'animating' : ''}`
+          `auth-card ${mode === 'register' ? '' : 'hidden'}`
         }>
           <h3>{t(`page.welcome.title.register`)}</h3>
           <RegisterForm
