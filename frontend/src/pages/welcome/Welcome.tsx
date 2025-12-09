@@ -4,13 +4,17 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import LoginForm from "@/components/forms/LoginForm";
 import RegisterForm from "@/components/forms/RegisterForm";
+import { useDispatch, useSelector } from "react-redux";
+import type { RootState } from "@/store";
+import { setMode } from "@/store/slices/authFormSlice";
 
 const Welcome = () => {
   const { t } = useTranslation();
-
-  const [mode, setMode] = useState<'login' | 'register'>('login');
-  const [loading, setLoading] = useState(false);
+  const dispatch = useDispatch();
   const [error, setError] = useState<string | null>(null);
+
+  const { mode, isAnimating, nextMode } = useSelector((state: RootState) => state.auth);
+  const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState<string | null>(null);
 
   const handleLoginSubmit = async () => {
@@ -33,7 +37,7 @@ const Welcome = () => {
     try {
       setSuccess('Registration successful! You can now log in.');
       setTimeout(() => {
-        setMode('login');
+        dispatch(setMode("login"));
         setSuccess(null);
       }, 2000);
     } catch (_: unknown) {
@@ -44,13 +48,13 @@ const Welcome = () => {
   };
 
   const switchToRegister = () => {
-    setMode('register');
+    dispatch(setMode("register"));
     setError(null);
     setSuccess(null);
   };
 
   const switchToLogin = () => {
-    setMode('login');
+    dispatch(setMode("login"));
     setError(null);
     setSuccess(null);
   };
@@ -58,7 +62,10 @@ const Welcome = () => {
   return (
     <div className="auth-container">
       <div className={`wrapper ${mode}`}>
-        <div className={`auth-card ${mode}`}>
+        <div className={
+          `auth-card ${mode === 'login' ? '' : 'hidden'} 
+          ${isAnimating ? 'animating' : ''}`
+        }>
           <h3>{t(`page.welcome.title.${mode}`)}</h3>
           {error && (
             <Message
@@ -74,23 +81,37 @@ const Welcome = () => {
               style={{ width: "100%", marginBottom: "1rem" }}
             />
           )}
-
-          {
-            mode === "login"
-              ? (
-                <LoginForm
-                  onSubmit={handleLoginSubmit}
-                  onSwitchToRegister={switchToRegister}
-                  loading={loading}
-                />
-              ) : (
-                <RegisterForm
-                  onSubmit={handleRegisterSubmit}
-                  onLoginSwitch={switchToLogin}
-                  loading={loading}
-                />
-              )
-          }
+          <LoginForm
+            onSubmit={handleLoginSubmit}
+            onSwitchToRegister={switchToRegister}
+            loading={loading}
+          />
+        </div>
+        <div className={
+          `auth-card 
+          ${mode === 'register' ? '' : 'hidden'} 
+          ${isAnimating ? 'animating' : ''}`
+        }>
+          <h3>{t(`page.welcome.title.${mode}`)}</h3>
+          {error && (
+            <Message
+              severity="error"
+              text={error}
+              style={{ width: "100%", marginBottom: "1rem" }}
+            />
+          )}
+          {success && (
+            <Message
+              severity="success"
+              text={success}
+              style={{ width: "100%", marginBottom: "1rem" }}
+            />
+          )}
+          <RegisterForm
+            onSubmit={handleRegisterSubmit}
+            onLoginSwitch={switchToLogin}
+            loading={loading}
+          />
         </div>
       </div>
     </div>

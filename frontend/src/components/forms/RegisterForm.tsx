@@ -86,7 +86,7 @@ const RegisterForm = ({
   };
   
   return (
-    <form className="form-group" onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit}>
       <div className="fields-wrapper">
         <div className="fields">
           <div className="p-field">
