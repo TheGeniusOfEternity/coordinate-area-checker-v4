@@ -1,0 +1,15 @@
+#root {
+  --auth-card-padding: 1rem;
+}
+
+@media screen and (min-width: 790px) and (max-width: 1250px) {
+  #root {
+    --auth-card-padding: 1.5rem;
+  }
+}
+
+@media screen and (min-width: 1251px) {
+  #root {
+    --auth-card-padding: 2rem;
+  }
+}

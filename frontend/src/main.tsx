@@ -7,6 +7,7 @@ import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { ru } from 'primelocale/js/ru.js';
 import { store } from "./store";
+import './i18n.ts';
 
 addLocale('ru', ru);
 

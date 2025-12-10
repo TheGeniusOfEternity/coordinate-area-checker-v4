@@ -1,0 +1,97 @@
+form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  flex: 1;
+  min-height: 0;
+}
+
+form .p-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+form .submit-block {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: var(--auth-card-padding);
+}
+
+form .auth-switch {
+  display: flex;
+  justify-content: center;
+  font-size: 14px;
+  margin: 0;
+}
+
+form .auth-switch button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-decoration: underline;
+  padding: 0;
+  margin-left: 0.25rem;
+  font-weight: 500;
+  font-size: inherit;
+}
+
+.fields-wrapper {
+  padding: 0;
+  position: relative;
+  max-height: 85%;
+}
+
+.fields {
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  gap: 1.2rem;
+  height: 100%;
+  padding: var(--auth-card-padding) 0;
+}
+
+.fields-wrapper::before,
+.fields-wrapper::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  left: 0;
+  height: var(--auth-card-padding);
+  background: linear-gradient(
+      to bottom,
+      transparent 0%,
+      var(--surface-card) 50%
+  );
+  pointer-events: none;
+  z-index: 1;
+  display: block;
+}
+
+.fields-wrapper::before {
+  top: 0;
+  background: linear-gradient(
+      to top,
+      transparent 0%,
+      var(--surface-card) 50%
+  );
+}
+
+.fields-wrapper::after {
+  bottom: 0;
+}
+
+form .submit-button,
+.p-icon-field,
+.p-field .password {
+  width: 100%
+}
+
+@media screen and (min-width: 790px) and (max-width: 1250px) {
+  form .submit-block {
+    padding: 0 0.5rem;
+    margin-top: 1.5rem;
+  }
+}
