@@ -3,14 +3,14 @@ import { useSelector } from "react-redux";
 import type { RootState } from "@/store";
 import { Navigate } from "react-router";
 
-export const ProtectedRoute = ({
-  children,
+export const PublicRoute = ({
+  children
 }: {
   children: ReactNode
 }) => {
   const isAuth = useSelector((state: RootState) => state.auth.accessToken !== null);
-  if (!isAuth) {
-    return <Navigate to="/auth" replace />;
+  if (isAuth) {
+    return <Navigate to="/" replace />;
   }
   return children;
 };

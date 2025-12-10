@@ -11,7 +11,8 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   initializeSessionRestore,
 } from "@/store/slices/authSlice";
-import ProtectedRoute from "@/components/routes/ProtectedRoute";
+import { ProtectedRoute } from "@/components/routes/ProtectedRoute";
+import { PublicRoute } from "@/components/routes/PublicRoute";
 
 const BASE = import.meta.env.BASE_URL;
 
@@ -21,7 +22,6 @@ const App = ()=> {
   const dispatch = useDispatch();
   const { changeTheme } = useContext(PrimeReactContext);
   const isSwitching = useSelector((state: RootState) => state.theme.isSwitching);
-  const isAuthed = useSelector((state: RootState) => state.auth.accessToken !== null);
   const growthPosition = useSelector((state: RootState) => state.theme.overlayGrowthPosition);
   const { currentTheme } = useSelector((state: RootState) => state.theme);
 
@@ -55,22 +55,22 @@ const App = ()=> {
           <BrowserRouter basename={BASE}>
             <Routes>
               <Route
-                path="/static/auth"
+                path="/auth"
                 element={
-                  isAuthed
-                    ? <Navigate to="/" replace />
-                    : <Welcome />
+                  <PublicRoute>
+                    <Welcome />
+                  </PublicRoute>
                 }
               />
               <Route
-                path="/static/"
+                path="/"
                 element={
                   <ProtectedRoute>
                     <Home />
                   </ProtectedRoute>
                 }
               />
-              <Route path="*" element={<Navigate to="/static/" replace />} />
+              <Route path="*" element={<Navigate to="/" replace />} />
             </Routes>
           </BrowserRouter>
         </div>
