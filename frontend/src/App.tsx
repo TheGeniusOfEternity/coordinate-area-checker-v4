@@ -7,14 +7,19 @@ import Home from "./pages/home/Home.tsx";
 import { PrimeReactContext } from "primereact/api";
 import type { RootState } from "./store";
 import Welcome from "./pages/welcome/Welcome.tsx";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  initializeSessionRestore,
+} from "@/store/slices/authSlice";
 
 
 let previousTheme = "";
 
 const App = ()=> {
+  const dispatch = useDispatch();
   const { changeTheme } = useContext(PrimeReactContext);
   const isSwitching = useSelector((state: RootState) => state.theme.isSwitching);
+  const isAuthed = useSelector((state: RootState) => state.auth.accessToken !== null);
   const growthPosition = useSelector((state: RootState) => state.theme.overlayGrowthPosition);
   const { currentTheme } = useSelector((state: RootState) => state.theme);
 
@@ -25,6 +30,13 @@ const App = ()=> {
       localStorage.setItem("theme-mode", currentTheme);
     }
   }, [currentTheme, changeTheme]);
+
+  useEffect(() => {
+    const token = sessionStorage.getItem('accessToken');
+    if (token !== null) {
+      dispatch(initializeSessionRestore(token));
+    }
+  }, [dispatch]);
 
   return (
       <>
@@ -40,8 +52,18 @@ const App = ()=> {
         <div className={`App ${isSwitching ? "theme-transition" : ""} ${currentTheme}`}>
           <BrowserRouter>
             <Routes>
-              <Route path="/static/auth" element={<Welcome />}/>
-              <Route path="/static/" element={<Home />}/>
+              <Route
+                path="/static/auth"
+                element={<Welcome />}
+              />
+              <Route
+                path="/static/"
+                element={
+                  isAuthed
+                    ? <Home />
+                    : <Navigate to="/static/auth" replace />
+                }
+              />
               <Route path="*" element={<Navigate to="/static/" replace />} />
             </Routes>
           </BrowserRouter>

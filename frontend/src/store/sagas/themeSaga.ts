@@ -1,6 +1,7 @@
 import { delay, put, takeEvery } from 'redux-saga/effects';
 import {
   finishThemeSwitch,
+  setIsSwitching,
   setTheme,
 } from "../slices/themeSlice";
 
@@ -12,5 +13,5 @@ const handleThemeSwitchSaga = function* handleThemeSwitchSaga() {
 };
 
 export const themeSaga = function* themeSaga() {
-  yield takeEvery('theme/setIsSwitching', handleThemeSwitchSaga);
+  yield takeEvery(setIsSwitching.type, handleThemeSwitchSaga);
 };
