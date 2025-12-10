@@ -5,6 +5,7 @@
 
 body {
   margin: 0;
+  background-color: var(--surface-ground);
 }
 
 .App {
@@ -32,10 +33,10 @@ body {
 }
 
 .light {
-  background-color: white;
+  background-color: #eff3f8;
 }
 .dark {
-  background-color: #1a1a1a;
+  background-color: #1d1e27;
 }
 
 

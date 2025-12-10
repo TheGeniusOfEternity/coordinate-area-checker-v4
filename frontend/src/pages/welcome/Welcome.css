@@ -33,6 +33,7 @@
   flex-direction: column;
   transition: all 0.6s ease;
   opacity: 1;
+  border-radius: 5px;
 }
 
 .auth-card.animating {

@@ -11,7 +11,9 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   initializeSessionRestore,
 } from "@/store/slices/authSlice";
+import ProtectedRoute from "@/components/routes/ProtectedRoute";
 
+const BASE = import.meta.env.BASE_URL;
 
 let previousTheme = "";
 
@@ -32,7 +34,7 @@ const App = ()=> {
   }, [currentTheme, changeTheme]);
 
   useEffect(() => {
-    const token = sessionStorage.getItem('accessToken');
+    const token = localStorage.getItem('access_token');
     if (token !== null) {
       dispatch(initializeSessionRestore(token));
     }
@@ -50,18 +52,22 @@ const App = ()=> {
           />
         )}
         <div className={`App ${isSwitching ? "theme-transition" : ""} ${currentTheme}`}>
-          <BrowserRouter>
+          <BrowserRouter basename={BASE}>
             <Routes>
               <Route
                 path="/static/auth"
-                element={<Welcome />}
+                element={
+                  isAuthed
+                    ? <Navigate to="/" replace />
+                    : <Welcome />
+                }
               />
               <Route
                 path="/static/"
                 element={
-                  isAuthed
-                    ? <Home />
-                    : <Navigate to="/static/auth" replace />
+                  <ProtectedRoute>
+                    <Home />
+                  </ProtectedRoute>
                 }
               />
               <Route path="*" element={<Navigate to="/static/" replace />} />

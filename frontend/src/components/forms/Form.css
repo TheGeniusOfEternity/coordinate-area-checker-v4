@@ -63,7 +63,7 @@ form .auth-switch button {
   background: linear-gradient(
       to bottom,
       transparent 0%,
-      #282936 50%
+      var(--surface-card) 50%
   );
   pointer-events: none;
   z-index: 1;
@@ -75,7 +75,7 @@ form .auth-switch button {
   background: linear-gradient(
       to top,
       transparent 0%,
-      #282936 50%
+      var(--surface-card) 50%
   );
 }
 
