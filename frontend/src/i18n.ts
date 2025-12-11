@@ -13,9 +13,9 @@ i18n
     resources,
     fallbackLng: 'en',
     supportedLngs: ['en', 'ru'],
-    debug: true, // set to false in production
+    debug: true,
     interpolation: {
-      escapeValue: false, // React escapes values by default
+      escapeValue: false,
     },
     detection: {
       order: ['localStorage', 'navigator'],
