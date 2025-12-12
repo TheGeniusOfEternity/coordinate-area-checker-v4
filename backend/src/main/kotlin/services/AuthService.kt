@@ -11,7 +11,9 @@ class AuthService {
     fun login(@Valid requestDTO: LoginRequestDTO): CommonResponseDTO<LoginResponseDTO> {
         return CommonResponseDTO(
             200,
-            LoginResponseDTO("success! creds are:\n ${requestDTO.email} | ${requestDTO.password}")
+            LoginResponseDTO(
+                "success! creds are:\n ${requestDTO.email} | ${requestDTO.password}"
+            )
         )
     }
 }
