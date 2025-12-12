@@ -7,14 +7,25 @@ plugins {
 }
 
 dependencies {
+    // Jakarta EE Web API (встроенный RESTEasy в WildFly)
     implementation("jakarta.platform:jakarta.jakartaee-web-api:10.0.0")
+
+    // CDI (WildFly имеет Weld встроенный)
+    implementation("jakarta.enterprise:jakarta.enterprise.cdi-api:4.0.1")
+
+    // Hibernate + PostgreSQL (ваши)
     implementation("org.hibernate.orm:hibernate-core:6.4.0.Final")
     implementation("org.postgresql:postgresql:42.7.7")
+
+    // Kotlin
     implementation("org.jetbrains.kotlin:kotlin-reflect:2.0.20")
+
+    // JSON для RESTEasy (если нужно)
+    implementation("org.jboss.resteasy:resteasy-jackson2-provider:6.2.10.Final")
 }
 
 kotlin {
-    jvmToolchain(21)
+    jvmToolchain(17)
 }
 
 val frontendBuild by tasks.registering(Exec::class) {

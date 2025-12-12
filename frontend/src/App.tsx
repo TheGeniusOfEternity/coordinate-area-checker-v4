@@ -15,6 +15,7 @@ import { ProtectedRoute } from "@/components/routes/ProtectedRoute";
 import { PublicRoute } from "@/components/routes/PublicRoute";
 
 const BASE = import.meta.env.BASE_URL;
+const basename = import.meta.env.DEV ? BASE : '';
 
 let previousTheme = "";
 
@@ -32,6 +33,10 @@ const App = ()=> {
       localStorage.setItem("theme-mode", currentTheme);
     }
   }, [currentTheme, changeTheme]);
+
+  useEffect(() => {
+    document.body.classList.add('hydrated');
+  }, []);
 
   useEffect(() => {
     const token = localStorage.getItem('access_token');
@@ -52,7 +57,7 @@ const App = ()=> {
           />
         )}
         <div className={`App ${isSwitching ? "theme-transition" : ""} ${currentTheme}`}>
-          <BrowserRouter basename={BASE}>
+          <BrowserRouter basename={basename}>
             <Routes>
               <Route
                 path="/auth"
