@@ -2,6 +2,7 @@ package resources
 
 import dto.auth.LoginRequestDTO
 import jakarta.inject.Inject
+import jakarta.validation.Valid
 import jakarta.ws.rs.Consumes
 import jakarta.ws.rs.POST
 import jakarta.ws.rs.Path
@@ -19,7 +20,7 @@ class AuthResource {
 
     @POST
     @Path("/login")
-    fun login(request: LoginRequestDTO): Response {
+    fun login(@Valid request: LoginRequestDTO): Response {
         val result = authService.login(request)
         return Response.ok(result).build()
     }
