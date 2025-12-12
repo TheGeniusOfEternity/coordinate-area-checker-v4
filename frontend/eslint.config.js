@@ -38,7 +38,8 @@ export default defineConfig([
       "no-magic-numbers": "off",
       "semi": "error",
       "sort-keys": "off",
-      "sort-imports": "off"
+      "sort-imports": "off",
+      "max-params": "off",
     }
   },
 ])

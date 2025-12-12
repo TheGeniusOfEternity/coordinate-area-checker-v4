@@ -4,6 +4,6 @@ interface JWTPayload {
   id: number;
 }
 
-export const JWTUtil = {
+export const JwtUtil = {
   decode: (token: string): JWTPayload => jwtDecode<JWTPayload>(token)
 };
