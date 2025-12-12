@@ -8,6 +8,20 @@ body {
   background-color: var(--surface-ground);
 }
 
+.p-button *,
+.p-inputtext,
+.p-password,
+.p-field {
+  transition: none !important;
+  transform: none !important;
+  animation: none !important;
+  animation-duration: 0s !important;
+}
+
+body.hydrated .p-button label {
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
 .App {
   box-sizing: border-box;
   display: flex;

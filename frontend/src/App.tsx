@@ -35,6 +35,10 @@ const App = ()=> {
   }, [currentTheme, changeTheme]);
 
   useEffect(() => {
+    document.body.classList.add('hydrated');
+  }, []);
+
+  useEffect(() => {
     const token = localStorage.getItem('access_token');
     if (token !== null) {
       dispatch(initializeSessionRestore(token));
