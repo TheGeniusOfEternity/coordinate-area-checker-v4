@@ -1,9 +1,18 @@
 import org.gradle.kotlin.dsl.register
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     kotlin("jvm") version "2.2.20"
+    kotlin("plugin.allopen") version "2.0.0"
     war
     id("org.jetbrains.kotlin.plugin.jpa") version "2.0.20"
+
+}
+
+allOpen {
+    annotation("jakarta.enterprise.context.ApplicationScoped")
+    annotation("jakarta.inject.Singleton")
+    annotation("jakarta.ws.rs.Path")
 }
 
 dependencies {
@@ -22,6 +31,7 @@ dependencies {
 
     // JSON для RESTEasy (если нужно)
     implementation("org.jboss.resteasy:resteasy-jackson2-provider:6.2.10.Final")
+    implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.16.0")
 }
 
 kotlin {
@@ -87,4 +97,8 @@ tasks.named<War>("war") {
         into("static")
     }
     webXml = file("src/main/webapp/WEB-INF/web.xml")
+}
+val compileKotlin: KotlinCompile by tasks
+compileKotlin.compilerOptions {
+    freeCompilerArgs.set(listOf("-Xannotation-default-target=param-property"))
 }
