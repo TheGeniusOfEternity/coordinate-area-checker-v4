@@ -1,6 +1,8 @@
 package resources
 
 import dto.auth.LoginRequestDTO
+import jakarta.ejb.EJB
+import jakarta.ejb.Singleton
 import jakarta.inject.Inject
 import jakarta.validation.Valid
 import jakarta.ws.rs.Consumes

@@ -1,6 +1,7 @@
-package exceptions
+package exceptions.mappers
 
 import dto.common.CommonResponseDTO
+import exceptions.BaseBusinessException
 import jakarta.ws.rs.core.Response
 import jakarta.ws.rs.ext.ExceptionMapper
 import jakarta.ws.rs.ext.Provider

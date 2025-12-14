@@ -1,11 +1,11 @@
 package repositories
 
 import entities.UserEntity
-import jakarta.enterprise.context.ApplicationScoped
+import jakarta.ejb.Stateless
 import jakarta.persistence.EntityManager
 import jakarta.persistence.PersistenceContext
 
-@ApplicationScoped
+@Stateless
 class UserRepository {
 
     @PersistenceContext

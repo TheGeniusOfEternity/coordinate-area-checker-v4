@@ -10,9 +10,10 @@ plugins {
 }
 
 allOpen {
-    annotation("jakarta.enterprise.context.ApplicationScoped")
-    annotation("jakarta.inject.Singleton")
     annotation("jakarta.ws.rs.Path")
+    annotation("jakarta.enterprise.context.ApplicationScoped")
+    annotation("jakarta.ejb.Singleton")
+    annotation("jakarta.ejb.Stateless")
 }
 
 dependencies {
@@ -32,6 +33,8 @@ dependencies {
     // JSON для RESTEasy (если нужно)
     implementation("org.jboss.resteasy:resteasy-jackson2-provider:6.2.10.Final")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.16.0")
+
+    implementation("org.mindrot:jbcrypt:0.4")
 }
 
 kotlin {
