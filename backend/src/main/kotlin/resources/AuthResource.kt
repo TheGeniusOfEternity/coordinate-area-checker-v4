@@ -15,13 +15,13 @@ import jakarta.ws.rs.core.Response
 import services.AuthService
 
 @Produces(MediaType.APPLICATION_JSON)
-@Consumes(MediaType.APPLICATION_JSON)
 @Path("/auth")
 class AuthResource {
     @Inject
     private lateinit var authService: AuthService
 
     @POST
+    @Consumes(MediaType.APPLICATION_JSON)
     @Path("/login")
     fun login(@Valid request: LoginRequestDTO): Response {
         val result = authService.login(request)
@@ -29,6 +29,7 @@ class AuthResource {
     }
 
     @POST
+    @Consumes(MediaType.APPLICATION_JSON)
     @Path("/register")
     fun register(@Valid request: RegisterRequestDTO): Response {
         val result = authService.register(request)

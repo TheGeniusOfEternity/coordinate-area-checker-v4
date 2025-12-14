@@ -38,14 +38,8 @@ export const useAuth = () => {
     setLoading(false);
   };
 
-  const logout = () => {
-    localStorage.removeItem("access_token");
-    window.location.href = "/auth";
-  };
-
   return {
     authorize,
-    logout,
     loading
   };
 };

@@ -1,11 +1,12 @@
 import {
   setIsSwitching,
   setOverlayGrowthPosition,
-} from "../../store/slices/themeSlice.ts";
+} from "@/store/slices/themeSlice.ts";
 import { useDispatch, useSelector } from "react-redux";
 import { Button } from "primereact/button";
-import type { RootState } from "../../store";
+import type { RootState } from "@/store";
 import { useRef } from "react";
+import { clearAuthToken } from "@/store/slices/authSlice.ts";
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -31,6 +32,10 @@ const Home = () => {
             label="Сменить тему"
             onClick={changeTheme}
             disabled={isSwitching}
+          />
+          <Button
+            label="Выйти"
+            onClick={() => dispatch(clearAuthToken())}
           />
         </div>
       </div>
