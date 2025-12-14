@@ -4,9 +4,13 @@ import type { LoginResponseDto } from "@/api/dto/auth/login-response.dto.ts";
 import { AuthResolver } from "@/api/resolvers/auth.resolver.ts";
 import type { RegisterFormData } from "@/components/forms/RegisterForm.tsx";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { initializeSessionRestore } from "@/store/slices/authSlice.ts";
 
 export const useAuth = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
   const [loading, setLoading] = useState(false);
   const authResolver = new AuthResolver();
 
@@ -19,13 +23,13 @@ export const useAuth = () => {
       ? await authResolver.login(data as LoginFormData)
       : await authResolver.register(data as RegisterFormData);
     switch(response.status) {
-      case 200:
-        localStorage.setItem(
-          "access_token",
-          (response.data as LoginResponseDto).jwtToken
-        );
+      case 200: {
+        const token = (response.data as LoginResponseDto).jwtToken;
+        localStorage.setItem("access_token", token);
+        dispatch(initializeSessionRestore(token));
         navigate("/");
         break;
+      }
       case 400:
         break;
       default:
