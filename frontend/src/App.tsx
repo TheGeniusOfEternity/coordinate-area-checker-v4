@@ -9,7 +9,7 @@ import type { RootState } from "./store";
 import Welcome from "./pages/welcome/Welcome.tsx";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  initializeSessionRestore,
+  setAuthToken,
 } from "@/store/slices/authSlice";
 import { ProtectedRoute } from "@/components/routes/ProtectedRoute";
 import { PublicRoute } from "@/components/routes/PublicRoute";
@@ -41,7 +41,7 @@ const App = ()=> {
   useEffect(() => {
     const token = localStorage.getItem('access_token');
     if (token !== null) {
-      dispatch(initializeSessionRestore(token));
+      dispatch(setAuthToken(token));
     }
   }, [dispatch]);
 

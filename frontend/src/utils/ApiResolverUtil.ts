@@ -16,10 +16,10 @@ class ApiResolverUtil {
     url: string,
     method: string,
     data?: U,
-    jwt?: string,
     responseType?: AxiosResponse["request"]["responseType"],
   ): Promise<S> {
     const fullUrl = `${apiConf.endpoint}/${this.endpoint}/${url}`;
+    const jwt = localStorage.getItem("access_token");
 
     const config: RequestConfig<U> = {
       url: fullUrl,

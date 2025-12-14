@@ -1,11 +1,11 @@
 import { useNavigate } from "react-router-dom";
 import type { LoginFormData } from "@/components/forms/LoginForm.tsx";
-import type { LoginResponseDto } from "@/api/dto/auth/login-response.dto.ts";
+import type { AuthResponseDto } from "@/api/dto/auth/auth-response.dto.ts";
 import { AuthResolver } from "@/api/resolvers/auth.resolver.ts";
 import type { RegisterFormData } from "@/components/forms/RegisterForm.tsx";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { initializeSessionRestore } from "@/store/slices/authSlice.ts";
+import { setAuthToken } from "@/store/slices/authSlice.ts";
 
 export const useAuth = () => {
   const navigate = useNavigate();
@@ -24,9 +24,9 @@ export const useAuth = () => {
       : await authResolver.register(data as RegisterFormData);
     switch(response.status) {
       case 200: {
-        const token = (response.data as LoginResponseDto).jwtToken;
+        const token = (response.data as AuthResponseDto).jwtToken;
         localStorage.setItem("access_token", token);
-        dispatch(initializeSessionRestore(token));
+        dispatch(setAuthToken(token));
         navigate("/");
         break;
       }
@@ -38,8 +38,14 @@ export const useAuth = () => {
     setLoading(false);
   };
 
+  const logout = () => {
+    localStorage.removeItem("access_token");
+    window.location.href = "/auth";
+  };
+
   return {
     authorize,
+    logout,
     loading
   };
 };

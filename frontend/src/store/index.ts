@@ -1,8 +1,8 @@
 import { configureStore } from '@reduxjs/toolkit';
 import createSagaMiddleware from 'redux-saga';
-import { themeSaga } from "./sagas/themeSaga.ts";
 import { themeSlice } from "./slices/themeSlice.ts";
 import { authSlice } from "@/store/slices/authSlice";
+import { rootSaga } from "@/store/sagas/rootSage.ts";
 
 const sagaMiddleware = createSagaMiddleware();
 
@@ -15,7 +15,7 @@ export const store = configureStore({
     getDefaultMiddleware().concat(sagaMiddleware),
 });
 
-sagaMiddleware.run(themeSaga);
+sagaMiddleware.run(rootSaga);
 
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
