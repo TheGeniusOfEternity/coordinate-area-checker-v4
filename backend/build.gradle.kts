@@ -1,27 +1,42 @@
 import org.gradle.kotlin.dsl.register
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     kotlin("jvm") version "2.2.20"
+    kotlin("plugin.allopen") version "2.0.0"
     war
     id("org.jetbrains.kotlin.plugin.jpa") version "2.0.20"
+
+}
+
+allOpen {
+    annotation("jakarta.ws.rs.Path")
+    annotation("jakarta.enterprise.context.ApplicationScoped")
+    annotation("jakarta.ejb.Singleton")
+    annotation("jakarta.ejb.Stateless")
 }
 
 dependencies {
-    // Jakarta EE Web API (встроенный RESTEasy в WildFly)
+    //Jakarta EE
     implementation("jakarta.platform:jakarta.jakartaee-web-api:10.0.0")
-
-    // CDI (WildFly имеет Weld встроенный)
     implementation("jakarta.enterprise:jakarta.enterprise.cdi-api:4.0.1")
 
-    // Hibernate + PostgreSQL (ваши)
+    //Database
     implementation("org.hibernate.orm:hibernate-core:6.4.0.Final")
     implementation("org.postgresql:postgresql:42.7.7")
 
-    // Kotlin
+    //Kotlin
     implementation("org.jetbrains.kotlin:kotlin-reflect:2.0.20")
 
-    // JSON для RESTEasy (если нужно)
+    //JSON
     implementation("org.jboss.resteasy:resteasy-jackson2-provider:6.2.10.Final")
+    implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.16.0")
+
+    //Encryption
+    implementation("org.mindrot:jbcrypt:0.4")
+
+    //JWT
+    implementation("com.auth0:java-jwt:4.4.0")
 }
 
 kotlin {
@@ -87,4 +102,8 @@ tasks.named<War>("war") {
         into("static")
     }
     webXml = file("src/main/webapp/WEB-INF/web.xml")
+}
+val compileKotlin: KotlinCompile by tasks
+compileKotlin.compilerOptions {
+    freeCompilerArgs.set(listOf("-Xannotation-default-target=param-property"))
 }

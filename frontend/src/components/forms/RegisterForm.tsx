@@ -6,12 +6,12 @@ import { useTranslation } from "react-i18next";
 import "./Form.css";
 import * as React from "react";
 
-interface RegisterFormData {
+export interface RegisterFormData {
   email: string;
   name: string;
   surname: string;
   patronymic: string;
-  groupNumber: string;
+  studyGroup: string;
   password: string;
   passwordConfirm: string;
 }
@@ -35,7 +35,7 @@ const RegisterForm = ({
     name: "", 
     surname: "",
     patronymic: "",
-    groupNumber: "",
+    studyGroup: "",
     password: "",
     passwordConfirm: "",
   });
@@ -62,8 +62,8 @@ const RegisterForm = ({
     if (!form.patronymic.trim()) {
       newErrors.patronymic = t('page.welcome.form.patronymic.error');
     }
-    if (!form.groupNumber.trim()) {
-      newErrors.groupNumber = t('page.welcome.form.group.error');
+    if (!form.studyGroup.trim()) {
+      newErrors.studyGroup = t('page.welcome.form.group.error');
     }
     if (!form.password.trim()) {
       newErrors.password = t('page.welcome.form.password.errors.empty');
@@ -151,14 +151,14 @@ const RegisterForm = ({
             </label>
             <InputText
               id="register-group"
-              value={form.groupNumber}
+              value={form.studyGroup}
               onChange={(e) =>
-                handleFormChange("groupNumber", e.target.value)
+                handleFormChange("studyGroup", e.target.value)
               }
               placeholder={t('page.welcome.form.group.placeholder')}
               autoComplete="student-group"
             />
-            {errors.groupNumber && <small className="p-error">{errors.groupNumber}</small>}
+            {errors.studyGroup && <small className="p-error">{errors.studyGroup}</small>}
           </div>
           <div className="p-field">
             <label htmlFor="register-password" className="form-label">

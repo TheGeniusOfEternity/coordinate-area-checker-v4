@@ -7,14 +7,19 @@ export const authSlice = createSlice({
     isLoading: false,
   },
   reducers: {
-    initializeSessionRestore: (
+    setAuthToken: (
       state,
       action: PayloadAction<string>
     ) => {
       state.accessToken = action.payload;
     },
+    clearAuthToken: (
+      state
+    ) => {
+      state.accessToken = null;
+    }
   }
 });
 
-export const { initializeSessionRestore } = authSlice.actions;
+export const { setAuthToken, clearAuthToken } = authSlice.actions;
 export default authSlice.reducer;
