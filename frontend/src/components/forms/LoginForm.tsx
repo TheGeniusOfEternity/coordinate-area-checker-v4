@@ -85,7 +85,6 @@ const LoginForm = ({
             onChange={(e) => handleFormChange("password", e.target.value)}
             placeholder={t("page.welcome.form.password.placeholder.login")}
             autoComplete="current-password"
-            toggleMask
             inputClassName="password"
           />
           {errors.password && <small className="p-error">{errors.password}</small>}

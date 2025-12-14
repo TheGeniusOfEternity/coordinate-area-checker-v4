@@ -20,16 +20,18 @@ class AuthService {
     @Inject
     private lateinit var passwordService: PasswordService
 
+    @Inject
+    private lateinit var jwtService: JWTService
+
     fun login(requestDTO: LoginRequestDTO): CommonResponseDTO<LoginResponseDTO> {
         val user = userRepository.findByEmail(requestDTO.email)
             ?: throw UserNotFoundException(requestDTO.email)
         if (!passwordService.verifyPassword(requestDTO.password, user.passwordHash))
             throw IncorrectPasswordException()
+        val token = jwtService.generateToken(user.id!!)
         return CommonResponseDTO(
             200,
-            LoginResponseDTO(
-                "token"
-            )
+            LoginResponseDTO(token)
         )
     }
 
