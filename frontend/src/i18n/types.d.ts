@@ -3,7 +3,6 @@ export interface Translations {
     common: {
       error: {
         summary: string;
-        detail: string;
       }
     }
     login: {
