@@ -41,6 +41,11 @@ const scheduleTokenRefresh = function* scheduleTokenRefresh(): Generator<any, vo
       const newToken: string = response.data.jwtToken;
 
       localStorage.setItem("access_token", newToken);
+      yield put(setToastMessage({
+        severity: "success",
+        summary: "request.refreshJwt.success.summary",
+        detail: "request.refreshJwt.success.detail"
+      }));
       yield put(setAuthToken(newToken));
     } catch (e: any) {
       yield put(setToastMessage({
