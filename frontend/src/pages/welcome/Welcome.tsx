@@ -3,22 +3,13 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import LoginForm from "@/components/forms/LoginForm";
 import RegisterForm from "@/components/forms/RegisterForm";
+import { useAuth } from "@/hooks/useAuth.ts";
 
 const Welcome = () => {
   const { t } = useTranslation();
+  const { authorize, loading } = useAuth();
 
   const [ mode, setMode ] = useState<"login" | "register">("login");
-  const [loading, setLoading] = useState(false);
-
-  const handleLoginSubmit = async () => {
-    setLoading(true);
-    await new Promise(() => { setLoading(false); });
-  };
-
-  const handleRegisterSubmit = async () => {
-    setLoading(true);
-    await new Promise(() => { setLoading(false); });
-  };
 
   const switchToRegister = () => {
     setMode("register");
@@ -36,7 +27,7 @@ const Welcome = () => {
         }>
           <h3>{t(`page.welcome.title.login`)}</h3>
           <LoginForm
-            onSubmit={handleLoginSubmit}
+            onSubmit={(data) => authorize(data, mode)}
             onSwitchToRegister={switchToRegister}
             loading={loading}
           />
@@ -46,7 +37,7 @@ const Welcome = () => {
         }>
           <h3>{t(`page.welcome.title.register`)}</h3>
           <RegisterForm
-            onSubmit={handleRegisterSubmit}
+            onSubmit={(data) => authorize(data, mode)}
             onLoginSwitch={switchToLogin}
             loading={loading}
           />

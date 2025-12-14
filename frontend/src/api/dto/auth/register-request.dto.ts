@@ -1,4 +1,4 @@
-interface RegisterRequestDto {
+export interface RegisterRequestDto {
   email: string;
   name: string;
   surname: string;

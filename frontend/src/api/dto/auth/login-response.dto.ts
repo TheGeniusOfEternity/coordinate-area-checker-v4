@@ -1,3 +1,3 @@
-interface LoginResponseDto {
-  token: string;
+export interface LoginResponseDto {
+  jwtToken: string;
 }

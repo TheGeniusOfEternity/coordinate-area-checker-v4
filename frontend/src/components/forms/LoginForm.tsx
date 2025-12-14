@@ -6,7 +6,7 @@ import { useTranslation } from "react-i18next";
 import { useState } from "react";
 import * as React from "react";
 
-interface LoginFormData {
+export interface LoginFormData {
   email: string;
   password: string;
 }
@@ -86,6 +86,8 @@ const LoginForm = ({
             placeholder={t("page.welcome.form.password.placeholder.login")}
             autoComplete="current-password"
             inputClassName="password"
+            toggleMask
+            feedback={false}
           />
           {errors.password && <small className="p-error">{errors.password}</small>}
         </div>
