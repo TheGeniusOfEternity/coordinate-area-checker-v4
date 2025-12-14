@@ -1,6 +1,5 @@
 package services
 
-import jakarta.ejb.Stateless
 import jakarta.enterprise.context.ApplicationScoped
 import org.mindrot.jbcrypt.BCrypt
 

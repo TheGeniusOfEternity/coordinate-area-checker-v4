@@ -1,8 +1,7 @@
 package resources
 
 import dto.auth.LoginRequestDTO
-import jakarta.ejb.EJB
-import jakarta.ejb.Singleton
+import dto.auth.RegisterRequestDTO
 import jakarta.inject.Inject
 import jakarta.validation.Valid
 import jakarta.ws.rs.Consumes
@@ -24,6 +23,13 @@ class AuthResource {
     @Path("/login")
     fun login(@Valid request: LoginRequestDTO): Response {
         val result = authService.login(request)
+        return Response.ok(result).build()
+    }
+
+    @POST
+    @Path("/register")
+    fun register(@Valid request: RegisterRequestDTO): Response {
+        val result = authService.register(request)
         return Response.ok(result).build()
     }
 }

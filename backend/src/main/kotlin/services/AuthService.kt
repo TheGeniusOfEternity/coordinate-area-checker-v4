@@ -2,10 +2,12 @@ package services
 
 import dto.auth.LoginRequestDTO
 import dto.auth.LoginResponseDTO
+import dto.auth.RegisterRequestDTO
 import dto.common.CommonResponseDTO
+import entities.UserEntity
 import exceptions.IncorrectPasswordException
+import exceptions.UserAlreadyExistsException
 import exceptions.UserNotFoundException
-import jakarta.ejb.Stateless
 import jakarta.enterprise.context.ApplicationScoped
 import jakarta.inject.Inject
 import repositories.UserRepository
@@ -28,6 +30,25 @@ class AuthService {
             LoginResponseDTO(
                 "token"
             )
+        )
+    }
+
+    fun register(requestDTO: RegisterRequestDTO): CommonResponseDTO<LoginResponseDTO> {
+        if (userRepository.findByEmail(requestDTO.email) != null)
+            throw UserAlreadyExistsException()
+        val hash = passwordService.hashPassword(requestDTO.password)
+        userRepository.save(requestDTO.toEntity(hash))
+        return login(LoginRequestDTO(requestDTO.email, requestDTO.password))
+    }
+
+    private fun RegisterRequestDTO.toEntity(passwordHash: String): UserEntity {
+        return UserEntity(
+            email = email,
+            name = name,
+            surname = surname,
+            patronymic = patronymic,
+            studyGroup = studyGroup,
+            passwordHash = passwordHash,
         )
     }
 }
