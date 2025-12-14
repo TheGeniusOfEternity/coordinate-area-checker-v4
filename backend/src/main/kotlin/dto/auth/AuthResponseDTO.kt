@@ -1,5 +1,5 @@
 package dto.auth
 
-data class LoginResponseDTO(
+data class AuthResponseDTO(
     val jwtToken: String,
 )

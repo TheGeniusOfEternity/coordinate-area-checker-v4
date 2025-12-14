@@ -10,7 +10,7 @@ import java.util.Date
 @ApplicationScoped
 class JWTService {
     private val secret = "GOIDA_SECRET"
-    private val duration = Duration.ofMinutes(10)
+    private val duration = Duration.ofSeconds(30)
 
     private val algorithm = Algorithm.HMAC256(secret)
 
@@ -23,5 +23,14 @@ class JWTService {
             .withIssuedAt(Date.from(now ))
             .withExpiresAt(Date.from(expiresAt))
             .sign(algorithm)
+    }
+
+    fun verifyToken(token: String): Long? {
+        return runCatching {
+            val decoded = JWT.require(algorithm)
+                .build()
+                .verify(token)
+            decoded.subject.toLong()
+        }.getOrNull()
     }
 }
