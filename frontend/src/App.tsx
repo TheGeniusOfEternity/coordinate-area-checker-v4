@@ -1,7 +1,7 @@
 import "./App.css";
 import "./assets/css/variables.css";
 import * as React from "react";
-import { BrowserRouter, Navigate, Route, Routes } from "react-router";
+import { Navigate, Route, Routes } from "react-router";
 import { useContext, useEffect } from "react";
 import Home from "./pages/home/Home.tsx";
 import { PrimeReactContext } from "primereact/api";
@@ -13,13 +13,13 @@ import {
 } from "@/store/slices/authSlice";
 import { ProtectedRoute } from "@/components/routes/ProtectedRoute";
 import { PublicRoute } from "@/components/routes/PublicRoute";
-
-const BASE = import.meta.env.BASE_URL;
-const basename = import.meta.env.DEV ? BASE : '';
+import { useNavigate } from "react-router-dom";
+import { setNavigate } from "@/utils/NavigationUtil.ts";
 
 let previousTheme = "";
 
 const App = ()=> {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const { changeTheme } = useContext(PrimeReactContext);
   const isSwitching = useSelector((state: RootState) => state.theme.isSwitching);
@@ -37,6 +37,10 @@ const App = ()=> {
   useEffect(() => {
     document.body.classList.add('hydrated');
   }, []);
+
+  useEffect(() => {
+    setNavigate(navigate);
+  }, [navigate]);
 
   useEffect(() => {
     const token = localStorage.getItem('access_token');
@@ -57,27 +61,25 @@ const App = ()=> {
           />
         )}
         <div className={`App ${isSwitching ? "theme-transition" : ""} ${currentTheme}`}>
-          <BrowserRouter basename={basename}>
-            <Routes>
-              <Route
-                path="/auth"
-                element={
-                  <PublicRoute>
-                    <Welcome />
-                  </PublicRoute>
-                }
-              />
-              <Route
-                path="/"
-                element={
-                  <ProtectedRoute>
-                    <Home />
-                  </ProtectedRoute>
-                }
-              />
-              <Route path="*" element={<Navigate to="/" replace />} />
-            </Routes>
-          </BrowserRouter>
+          <Routes>
+            <Route
+              path="/auth"
+              element={
+                <PublicRoute>
+                  <Welcome />
+                </PublicRoute>
+              }
+            />
+            <Route
+              path="/"
+              element={
+                <ProtectedRoute>
+                  <Home />
+                </ProtectedRoute>
+              }
+            />
+            <Route path="*" element={<Navigate to="/" replace />} />
+          </Routes>
         </div>
       </>
   );

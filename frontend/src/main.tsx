@@ -8,6 +8,10 @@ import { createRoot } from 'react-dom/client';
 import { ru } from 'primelocale/js/ru.js';
 import { store } from "./store";
 import './i18n.ts';
+import { BrowserRouter } from "react-router";
+
+const BASE = import.meta.env.BASE_URL;
+const basename = import.meta.env.DEV ? BASE : '';
 
 addLocale('ru', ru);
 
@@ -19,7 +23,9 @@ createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <Provider store={store}>
       <PrimeReactProvider value={value}>
-        <App />
+        <BrowserRouter basename={basename}>
+          <App />
+        </BrowserRouter>
       </PrimeReactProvider>
     </Provider>
   </StrictMode>,
