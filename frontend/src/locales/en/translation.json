@@ -1,4 +1,32 @@
 {
+  "request": {
+    "common": {
+      "error": {
+        "summary": "Whoops! Error occurred"
+      }
+    },
+    "login": {
+      "success": {
+        "summary": "Welcome back!",
+        "detail": "Successful sign in"
+      },
+      "error": {
+        "summary": "Whoops! Error occurred"
+      }
+    },
+    "register": {
+      "success": {
+        "summary": "Greetings!",
+        "detail": "Successful sign up"
+      }
+    },
+    "refreshJwt": {
+      "success": {
+        "summary": "Success!",
+        "detail": "JWT Token updated"
+      }
+    }
+  },
   "page": {
     "welcome": {
       "title": {

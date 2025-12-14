@@ -3,6 +3,7 @@ import { clearAuthToken, setAuthToken } from "@/store/slices/authSlice";
 import { AuthResolver } from "@/api/resolvers/auth.resolver";
 import { jwtDecode } from "jwt-decode";
 import { redirectTo } from "@/utils/NavigationUtil.ts";
+import { setToastMessage } from "@/store/slices/toastSlice.ts";
 
 const SAFETY_GAP_MS = 15_000;
 const selectAuth = (state: any) => state.auth;
@@ -40,9 +41,18 @@ const scheduleTokenRefresh = function* scheduleTokenRefresh(): Generator<any, vo
       const newToken: string = response.data.jwtToken;
 
       localStorage.setItem("access_token", newToken);
+      yield put(setToastMessage({
+        severity: "success",
+        summary: "request.refreshJwt.success.summary",
+        detail: "request.refreshJwt.success.detail"
+      }));
       yield put(setAuthToken(newToken));
-    } catch (e) {
-      console.error(e);
+    } catch (e: any) {
+      yield put(setToastMessage({
+        severity: "error",
+        summary: "request.common.error.summary",
+        detail: e.message
+      }));
       yield put(clearAuthToken());
     }
   }

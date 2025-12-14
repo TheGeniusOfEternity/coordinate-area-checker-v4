@@ -6,6 +6,8 @@ import type { RegisterFormData } from "@/components/forms/RegisterForm.tsx";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { setAuthToken } from "@/store/slices/authSlice.ts";
+import { setToastMessage } from "@/store/slices/toastSlice.ts";
+import type { ValidationErrorResponseDto } from "@/api/dto/common/validation-error-response.dto.ts";
 
 export const useAuth = () => {
   const navigate = useNavigate();
@@ -28,12 +30,31 @@ export const useAuth = () => {
         localStorage.setItem("access_token", token);
         dispatch(setAuthToken(token));
         navigate("/");
+        dispatch(setToastMessage({
+          severity: "success",
+          summary: `request.${mode}.success.summary`,
+          detail: `request.${mode}.success.detail`
+        }));
         break;
       }
-      case 400:
+      case 400: {
+        (response.data as ValidationErrorResponseDto[]).forEach(error => {
+          dispatch(setToastMessage({
+            severity: "error",
+            summary: "request.common.error.summary",
+            detail: error.message
+          }));
+        });
         break;
-      default:
+      }
+      default: {
+        dispatch(setToastMessage({
+          severity: "error",
+          summary: "request.common.error.summary",
+          detail: response.data as string
+        }));
         break;
+      }
     }
     setLoading(false);
   };

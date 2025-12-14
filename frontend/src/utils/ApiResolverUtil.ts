@@ -1,4 +1,4 @@
-import axios, { type AxiosRequestConfig, type AxiosResponse } from "axios";
+import axios, { type AxiosRequestConfig, type AxiosResponse, isAxiosError } from "axios";
 import { apiConf } from "../api/api.conf.ts";
 
 interface RequestConfig<T> extends AxiosRequestConfig {
@@ -34,21 +34,22 @@ class ApiResolverUtil {
     try {
       const response: AxiosResponse<S> = await axios(config);
       return response.data;
-    } catch (error: unknown) {
-      if (axios.isAxiosError(error)) {
+    } catch (error: any) {
+      if (isAxiosError(error)) {
         return {
-          status: error.response?.status || error.response?.data?.status || 500,
-
-          message: error.response?.data?.message?.split?.(":")?.[1]
-            ? error.response.data.message.split(":")[1]
-            : error.response?.data?.message ||
-              error.message ||
-              "Ошибка сервера",
+          status: error.response?.data.status,
+          data: error.response?.data.data
+        } as S;
+      }
+      if (!error.response) {
+        return {
+          status: error.name,
+          data: error.message
         } as S;
       }
       return {
         status: 500,
-        message: "Неизвестная ошибка",
+        data: "Неизвестная ошибка",
       } as S;
     }
   }
