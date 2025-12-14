@@ -13,11 +13,13 @@ import {
 } from "@/store/slices/authSlice";
 import { ProtectedRoute } from "@/components/routes/ProtectedRoute";
 import { PublicRoute } from "@/components/routes/PublicRoute";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { setNavigate } from "@/utils/NavigationUtil.ts";
 import { Toast } from "primereact/toast";
 import { clearToastMessage } from "@/store/slices/toastSlice.ts";
 import { useTranslation } from "react-i18next";
+import { AnimatePresence } from "framer-motion";
+import { PageTransition } from "@/components/transitions/PageTransition.tsx";
 
 let previousTheme = "";
 
@@ -25,6 +27,7 @@ const App = ()=> {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { t } = useTranslation();
+  const location = useLocation();
 
   const toast = useRef<Toast>(null);
 
@@ -95,25 +98,31 @@ const App = ()=> {
           />
         )}
         <div className={`App ${isSwitching ? "theme-transition" : ""} ${currentTheme}`}>
-          <Routes>
-            <Route
-              path="/auth"
-              element={
-                <PublicRoute>
-                  <Welcome />
-                </PublicRoute>
-              }
-            />
-            <Route
-              path="/"
-              element={
-                <ProtectedRoute>
-                  <Home />
-                </ProtectedRoute>
-              }
-            />
-            <Route path="*" element={<Navigate to="/" replace />} />
-          </Routes>
+          <AnimatePresence mode="wait">
+            <Routes location={location} key={location.pathname}>
+              <Route
+                path="/auth"
+                element={
+                  <PublicRoute>
+                    <PageTransition>
+                      <Welcome />
+                    </PageTransition>
+                  </PublicRoute>
+                }
+              />
+              <Route
+                path="/"
+                element={
+                  <ProtectedRoute>
+                    <PageTransition>
+                      <Home />
+                    </PageTransition>
+                  </ProtectedRoute>
+                }
+              />
+              <Route path="*" element={<Navigate to="/" replace />} />
+            </Routes>
+          </AnimatePresence>
         </div>
       </>
   );
