@@ -2,7 +2,7 @@ import "./App.css";
 import "./assets/css/variables.css";
 import * as React from "react";
 import { Navigate, Route, Routes } from "react-router";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useRef } from "react";
 import Home from "./pages/home/Home.tsx";
 import { PrimeReactContext } from "primereact/api";
 import type { RootState } from "./store";
@@ -15,16 +15,46 @@ import { ProtectedRoute } from "@/components/routes/ProtectedRoute";
 import { PublicRoute } from "@/components/routes/PublicRoute";
 import { useNavigate } from "react-router-dom";
 import { setNavigate } from "@/utils/NavigationUtil.ts";
+import { Toast } from "primereact/toast";
+import { clearToastMessage } from "@/store/slices/toastSlice.ts";
+import { useTranslation } from "react-i18next";
 
 let previousTheme = "";
 
 const App = ()=> {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const { t } = useTranslation();
+
+  const toast = useRef<Toast>(null);
+
   const { changeTheme } = useContext(PrimeReactContext);
+
+  const toastMessage = useSelector((state: RootState) => state.toast.message);
   const isSwitching = useSelector((state: RootState) => state.theme.isSwitching);
   const growthPosition = useSelector((state: RootState) => state.theme.overlayGrowthPosition);
+
   const { currentTheme } = useSelector((state: RootState) => state.theme);
+
+  useEffect(() => {
+    const summary = toastMessage === null
+      ? null
+      : t(toastMessage.summary);
+    const detail = toastMessage === null
+      ? null
+      : toastMessage.severity === "error"
+        ? toastMessage.detail
+        : t(toastMessage.detail);
+
+    if (summary !== null && detail !== null) {
+      toast.current?.show({
+        ...toastMessage,
+        summary,
+        detail,
+        life: 3000
+      });
+    }
+  }, [toastMessage, dispatch, t]);
 
   useEffect(() => {
     if (changeTheme) {
@@ -51,6 +81,10 @@ const App = ()=> {
 
   return (
       <>
+        <Toast
+          ref={toast}
+          onHide={() => dispatch(clearToastMessage())}
+        />
         {isSwitching && (
           <div
             className={`theme-overlay ${previousTheme}`}

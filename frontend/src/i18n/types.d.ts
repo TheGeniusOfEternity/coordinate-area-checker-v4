@@ -1,4 +1,30 @@
 export interface Translations {
+  request: {
+    common: {
+      error: {
+        summary: string;
+        detail: string;
+      }
+    }
+    login: {
+      success: {
+        summary: string;
+        detail: string;
+      },
+    },
+    register: {
+      success: {
+        summary: string;
+        detail: string;
+      },
+    }
+    refreshJwt: {
+      success: {
+        summary: string;
+        detail: string;
+      },
+    }
+  },
   page: {
     welcome: {
       title: {

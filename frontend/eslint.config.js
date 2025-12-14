@@ -40,6 +40,7 @@ export default defineConfig([
       "sort-keys": "off",
       "sort-imports": "off",
       "max-params": "off",
+      "no-nested-ternary": "off"
     }
   },
 ])

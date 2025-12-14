@@ -1,4 +1,29 @@
 {
+  "request": {
+    "common": {
+      "error": {
+        "summary": "Упс! Возникла ошибка"
+      }
+    },
+    "login": {
+      "success": {
+        "summary": "С возвращением!",
+        "detail": "Авторизация успешна"
+      }
+    },
+    "register": {
+      "success": {
+        "summary": "Добро пожаловать!",
+        "detail": "Регистрация успешна"
+      }
+    },
+    "refreshJwt": {
+      "success": {
+        "summary": "Успех!",
+        "detail": "Токен обновлен"
+      }
+    }
+  },
   "page": {
     "welcome": {
       "title": {
