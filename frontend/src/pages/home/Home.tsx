@@ -1,3 +1,4 @@
+import "@/pages/home/Home.css";
 import {
   setIsSwitching,
   setOverlayGrowthPosition,
@@ -7,6 +8,7 @@ import { Button } from "primereact/button";
 import type { RootState } from "@/store";
 import { useRef } from "react";
 import { clearAuthToken } from "@/store/slices/authSlice.ts";
+import { Graph } from "@/components/graph/Graph.tsx";
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -26,7 +28,7 @@ const Home = () => {
 
   return (
     <>
-      <div>
+      <div className="header">
         <div ref={buttonRef}>
           <Button
             label="Сменить тему"
@@ -38,6 +40,9 @@ const Home = () => {
             onClick={() => dispatch(clearAuthToken())}
           />
         </div>
+      </div>
+      <div className="main">
+        <Graph />
       </div>
     </>
   );

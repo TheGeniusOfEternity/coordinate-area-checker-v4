@@ -1,0 +1,19 @@
+.graph-container {
+  background-color: var(--highlight-bg);
+  border-radius: var(--border-radius);
+  padding: var(--default-padding);
+}
+
+.graph rect,
+.graph .triangle,
+.graph .arc {
+  fill: var(--cyan-500)
+}
+
+line {
+  stroke: var(--text-color-secondary);
+}
+
+text, polygon {
+  fill: var(--text-color-secondary);
+}

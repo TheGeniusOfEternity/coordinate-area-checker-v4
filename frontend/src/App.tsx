@@ -113,11 +113,11 @@ const App = ()=> {
               <Route
                 path="/"
                 element={
-                  <ProtectedRoute>
+                  // <ProtectedRoute>
                     <PageTransition>
                       <Home />
                     </PageTransition>
-                  </ProtectedRoute>
+                  // </ProtectedRoute>
                 }
               />
               <Route path="*" element={<Navigate to="/" replace />} />
