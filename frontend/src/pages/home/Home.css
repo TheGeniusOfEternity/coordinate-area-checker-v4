@@ -6,9 +6,6 @@
   height: 100%;
 }
 
-.header {
-}
-
 .main {
   display: flex;
   flex-direction: column;

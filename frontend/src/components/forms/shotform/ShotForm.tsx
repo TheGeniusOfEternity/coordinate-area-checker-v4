@@ -93,6 +93,7 @@ export const ShotForm = ({
       <Button
         className="reset btn"
         severity="info"
+        outlined
         label={t("page.home.form.reset")}
       />
       <Button
