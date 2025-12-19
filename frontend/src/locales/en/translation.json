@@ -93,6 +93,14 @@
           "link": "Create one"
         }
       }
+    },
+    "home": {
+      "form": {
+        "title": "Make a new shot",
+        "submit": "Send",
+        "reset": "Reset",
+        "yLabel": "Current value"
+      }
     }
   }
 }

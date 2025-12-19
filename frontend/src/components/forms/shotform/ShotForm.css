@@ -33,9 +33,20 @@
   max-height: 22vh;
 }
 
-.yInput .input {
-  margin-top: var(--form-field-gap);
+.yInput label {
+  display: flex;
 }
+
+.yInput label p:nth-child(2) {
+  margin-left: auto;
+  text-align: right;
+}
+
+.yInput label p:last-child {
+  width: 10%;
+  text-align: right;
+}
+
 
 .shotForm h3,
 .shotForm i {

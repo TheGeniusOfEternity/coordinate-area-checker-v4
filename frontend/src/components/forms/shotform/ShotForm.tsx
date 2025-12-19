@@ -1,9 +1,13 @@
 import "@/components/forms/shotform/ShotForm.css";
 import * as React from "react";
 import { ListBox } from "primereact/listbox";
-import { useState } from "react";
+import {
+  useRef,
+  useState,
+} from "react";
 import { Slider } from "primereact/slider";
 import { Button } from "primereact/button";
+import { useTranslation } from "react-i18next";
 
 export interface ShotFormData {
   x: number;
@@ -19,12 +23,16 @@ interface ShotFormProps {
 export const ShotForm = ({
   onSubmit,
 }: ShotFormProps) => {
+  const { t } = useTranslation();
+
   const xValues = [-2, -1.5, -1, -0.5, 0, 0.5, 1, 1.5, 2];
   const rValues = [0.5, 1, 1.5, 2];
 
   const [x, setX] = useState<number>(0);
   const [y, setY] = useState<number>(0);
   const [r, setR] = useState<number>(1);
+
+  const sliderRef = useRef<Slider>(null);
 
   const [isOpened, setIsOpened] = useState(false);
 
@@ -36,12 +44,12 @@ export const ShotForm = ({
   return (
     <form
       onSubmit={handleSubmit}
-      className={`shotForm ${isOpened ? '' : 'hidden'}`}
+      className={`shotForm ${isOpened ? "" : "hidden"}`}
     >
-      <h3>Добавить точку</h3>
+      <h3>{t("page.home.form.title")}</h3>
       <i
         className="toggle-btn pi pi-angle-down"
-        style={{ fontSize: "1.5rem"}}
+        style={{ fontSize: "1.5rem" }}
         onClick={() => setIsOpened(!isOpened)}
         data-opened={isOpened}
       ></i>
@@ -56,8 +64,13 @@ export const ShotForm = ({
         />
       </div>
       <div className="yInput p-field">
-        <label htmlFor="y-input">Y</label>
+        <label htmlFor="y-input">
+          <p>Y</p>
+          <p>{t("page.home.form.yLabel")}:</p>
+          <p>{y}</p>
+        </label>
         <Slider
+          ref={sliderRef}
           className="input"
           id="y-input"
           value={y}
@@ -80,12 +93,12 @@ export const ShotForm = ({
       <Button
         className="reset btn"
         severity="info"
-        label="Сбросить"
+        label={t("page.home.form.reset")}
       />
       <Button
         className="submit btn"
         type="submit"
-        label="Отправить"
+        label={t("page.home.form.submit")}
       />
     </form>
   );
