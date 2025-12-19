@@ -30,7 +30,7 @@
 .xInput .input,
 .rInput .input {
   overflow-y: auto;
-  max-height: 22vh;
+  max-height: min(22vh, 200px);
 }
 
 .yInput label {

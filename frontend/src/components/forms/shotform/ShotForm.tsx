@@ -65,9 +65,9 @@ export const ShotForm = ({
       </div>
       <div className="yInput p-field">
         <label htmlFor="y-input">
-          <p>Y</p>
-          <p>{t("page.home.form.yLabel")}:</p>
-          <p>{y}</p>
+          <p className="p-component">Y</p>
+          <p className="p-component">{t("page.home.form.yLabel")}:</p>
+          <p className="p-component">{y}</p>
         </label>
         <Slider
           ref={sliderRef}
