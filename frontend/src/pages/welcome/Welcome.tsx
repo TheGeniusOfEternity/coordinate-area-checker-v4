@@ -1,8 +1,8 @@
 import "./Welcome.css";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import LoginForm from "@/components/forms/LoginForm";
-import RegisterForm from "@/components/forms/RegisterForm";
+import LoginForm from "@/components/forms/loginform/LoginForm.tsx";
+import RegisterForm from "@/components/forms/registerform/RegisterForm.tsx";
 import { useAuth } from "@/hooks/useAuth.ts";
 
 const Welcome = () => {

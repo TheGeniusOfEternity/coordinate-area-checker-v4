@@ -7,7 +7,7 @@
 .graph rect,
 .graph .triangle,
 .graph .arc {
-  fill: var(--cyan-500)
+  fill: var(--bg-color-secondary);
 }
 
 line {

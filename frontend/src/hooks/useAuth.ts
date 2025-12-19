@@ -1,8 +1,8 @@
 import { useNavigate } from "react-router-dom";
-import type { LoginFormData } from "@/components/forms/LoginForm.tsx";
+import type { LoginFormData } from "@/components/forms/loginform/LoginForm.tsx";
 import type { AuthResponseDto } from "@/api/dto/auth/auth-response.dto.ts";
 import { AuthResolver } from "@/api/resolvers/auth.resolver.ts";
-import type { RegisterFormData } from "@/components/forms/RegisterForm.tsx";
+import type { RegisterFormData } from "@/components/forms/registerform/RegisterForm.tsx";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { setAuthToken } from "@/store/slices/authSlice.ts";

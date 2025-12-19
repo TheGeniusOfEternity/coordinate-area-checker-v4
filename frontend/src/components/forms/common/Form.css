@@ -10,14 +10,14 @@ form {
 form .p-field {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: var(--form-field-gap);
 }
 
 form .submit-block {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  gap: var(--auth-card-padding);
+  gap: var(--container-padding);
 }
 
 form .auth-switch {
@@ -50,7 +50,7 @@ form .auth-switch button {
   overflow-y: auto;
   gap: 1.2rem;
   height: 100%;
-  padding: var(--auth-card-padding) 0;
+  padding: var(--container-padding) 0;
 }
 
 .fields-wrapper::before,
@@ -59,7 +59,7 @@ form .auth-switch button {
   position: absolute;
   right: 0;
   left: 0;
-  height: var(--auth-card-padding);
+  height: var(--container-padding);
   background: linear-gradient(
       to bottom,
       transparent 0%,

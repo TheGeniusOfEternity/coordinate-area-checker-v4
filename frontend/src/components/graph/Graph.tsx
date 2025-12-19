@@ -34,19 +34,19 @@ export const Graph = () => {
         <line y1="145" y2="155" x1="270" x2="270" />
 
         {/*Axises labels*/}
-        <text x="290" y="140" font-size="16">x</text>
-        <text x="160" y="10" font-size="16">y</text>
+        <text x="290" y="140" fontSize="16">x</text>
+        <text x="160" y="10" fontSize="16">y</text>
 
         {/*R labels on Y*/}
-        <text x="160" y="35" font-size="16">R</text>
-        <text x="160" y="95" font-size="16">R/2</text>
-        <text x="160" y="215" font-size="16">-R/2</text>
-        <text x="160" y="275" font-size="16">-R</text>
+        <text x="160" y="35" fontSize="16">R</text>
+        <text x="160" y="95" fontSize="16">R/2</text>
+        <text x="160" y="215" fontSize="16">-R/2</text>
+        <text x="160" y="275" fontSize="16">-R</text>
 
-        <text y="140" x="20" font-size="16">-R</text>
-        <text y="140" x="75" font-size="16">-R/2</text>
-        <text y="140" x="200" font-size="16">R/2</text>
-        <text y="140" x="265" font-size="16">R</text>
+        <text y="140" x="20" fontSize="16">-R</text>
+        <text y="140" x="75" fontSize="16">-R/2</text>
+        <text y="140" x="200" fontSize="16">R/2</text>
+        <text y="140" x="265" fontSize="16">R</text>
       </svg>
     </div>
   );

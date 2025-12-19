@@ -3,7 +3,7 @@ import { InputText } from "primereact/inputtext";
 import { Password } from "primereact/password";
 import { Button } from "primereact/button";
 import { useTranslation } from "react-i18next";
-import "./Form.css";
+import "../common/Form.css";
 import * as React from "react";
 
 export interface RegisterFormData {

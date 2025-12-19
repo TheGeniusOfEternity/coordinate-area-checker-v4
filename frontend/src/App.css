@@ -12,10 +12,6 @@ body {
 .p-inputtext,
 .p-password,
 .p-field {
-  transition: none !important;
-  transform: none !important;
-  animation: none !important;
-  animation-duration: 0s !important;
 }
 
 body.hydrated .p-button label {
@@ -27,6 +23,7 @@ body.hydrated .p-button label {
   display: flex;
   justify-content: flex-end;
   height: 100vh;
+  overflow: hidden;
   position: relative;
   transition: opacity 0.3s ease-in-out;
 }

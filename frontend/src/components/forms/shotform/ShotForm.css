@@ -1,0 +1,65 @@
+.shotForm {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  padding: var(--form-gap);
+  gap: var(--form-gap);
+  background-color: var(--surface-overlay);
+  border-top-right-radius: var(--border-radius);
+  border-top-left-radius: var(--border-radius);
+  align-items: center;
+  transition: transform 0.5s ease;
+}
+
+.shotForm.hidden {
+  transform: translateY(85%);
+}
+
+.shotForm::before {
+  content: '';
+  display: block;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-top-right-radius: var(--border-radius);
+  border-top-left-radius: var(--border-radius);
+}
+
+.xInput .input,
+.rInput .input {
+  overflow-y: auto;
+  max-height: 22vh;
+}
+
+.yInput .input {
+  margin-top: var(--form-field-gap);
+}
+
+.shotForm h3,
+.shotForm i {
+  margin: 0 0 var(--form-field-gap) 0;
+}
+
+.shotForm .yInput {
+  grid-row: 3 / 4;
+  grid-column: 1 / -1;
+  height: 100%;
+}
+
+.btn {
+  margin-top: var(--form-gap);
+}
+
+
+.toggle-btn {
+  transition: transform 0.3s ease;
+  transform: rotate(0);
+  background-color: transparent;
+  justify-self: flex-end;
+}
+
+.toggle-btn[data-opened="false"] {
+  transform: rotate(180deg);
+}

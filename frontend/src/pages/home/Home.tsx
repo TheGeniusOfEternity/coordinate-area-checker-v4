@@ -6,9 +6,10 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { Button } from "primereact/button";
 import type { RootState } from "@/store";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { clearAuthToken } from "@/store/slices/authSlice.ts";
 import { Graph } from "@/components/graph/Graph.tsx";
+import { ShotForm, type ShotFormData } from "@/components/forms/shotform/ShotForm.tsx";
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -26,23 +27,34 @@ const Home = () => {
     dispatch(setIsSwitching(true));
   };
 
+  const [isOpened, setIsOpened] = useState(false);
+
+  const shotSubmit = async (data: ShotFormData) => {
+
+  };
+
   return (
     <>
-      <div className="header">
-        <div ref={buttonRef}>
-          <Button
-            label="Сменить тему"
-            onClick={changeTheme}
-            disabled={isSwitching}
-          />
-          <Button
-            label="Выйти"
-            onClick={() => dispatch(clearAuthToken())}
+      <div className="container">
+        <div className="header">
+          <div ref={buttonRef}>
+            <Button
+              label="Сменить тему"
+              onClick={changeTheme}
+              disabled={isSwitching}
+            />
+            <Button
+              label="Выйти"
+              onClick={() => dispatch(clearAuthToken())}
+            />
+          </div>
+        </div>
+        <div className="main">
+          <Graph />
+          <ShotForm
+            onSubmit={(data) => shotSubmit(data)}
           />
         </div>
-      </div>
-      <div className="main">
-        <Graph />
       </div>
     </>
   );
