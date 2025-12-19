@@ -92,6 +92,9 @@ export interface Translations {
       };
     };
     home: {
+      header: {
+        profile: string;
+      };
       form: {
         title: string;
         submit: string;

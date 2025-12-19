@@ -8,3 +8,12 @@ nav {
       0
       var(--default-padding);
 }
+
+nav .lang-btn .p-button-label {
+  flex: 1;
+  visibility: visible;
+}
+
+nav .account-btn {
+  flex: 1;
+}

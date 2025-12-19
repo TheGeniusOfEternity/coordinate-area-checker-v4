@@ -5,14 +5,22 @@ import { setIsSwitching, setOverlayGrowthPosition } from "@/store/slices/themeSl
 import { Button } from "primereact/button";
 import { useRef } from "react";
 import { clearAuthToken } from "@/store/slices/authSlice.ts";
+import { useTranslation } from "react-i18next";
 
 export const Header = () => {
+  const { t, i18n } = useTranslation();
+
   const dispatch = useDispatch();
   const buttonRef = useRef<HTMLDivElement>(null);
 
   const isSwitching = useSelector(
     (state: RootState) => state.theme.isSwitching,
   );
+
+  const switchLang = () => {
+    const newLang = i18n.language === "en" ? "ru" : "en";
+    i18n.changeLanguage(newLang);
+  };
 
   const changeTheme = () => {
     if (buttonRef.current === null) {
@@ -39,6 +47,18 @@ export const Header = () => {
           />
         </div>
         <Button
+          className="p-button-icon-only lang-btn"
+          label={i18n.language}
+          severity="info"
+          onClick={switchLang}
+        />
+        <Button
+          className="account-btn"
+          label={t('page.home.header.profile')}
+          outlined
+        />
+        <Button
+          className="sign-out-btn"
           icon="pi pi-sign-out"
           onClick={() => dispatch(clearAuthToken())}
         />

@@ -95,6 +95,9 @@
       }
     },
     "home": {
+      "header": {
+        "profile": "Account info"
+      },
       "form": {
         "title": "Make a new shot",
         "submit": "Send",

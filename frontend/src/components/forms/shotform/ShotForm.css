@@ -14,7 +14,7 @@
 }
 
 .shotForm.hidden {
-  transform: translateY(88%);
+  transform: translateY(87%);
 }
 
 .shotForm::before {

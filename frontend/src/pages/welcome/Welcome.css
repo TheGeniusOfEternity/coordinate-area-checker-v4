@@ -71,7 +71,6 @@
   .wrapper {
     width: 75%;
     height: 75%;
-    background-color: var(--surface-card);
     border-radius: 15px;
     overflow: hidden;
   }
