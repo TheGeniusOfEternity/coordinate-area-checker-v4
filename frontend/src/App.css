@@ -5,7 +5,6 @@
 
 body {
   margin: 0;
-  background-color: var(--surface-ground);
 }
 
 .p-button *,
@@ -44,7 +43,7 @@ body.hydrated .p-button label {
 }
 
 .light {
-  background-color: #eff3f8;
+  background-color: #f5f0ff;
 }
 .dark {
   background-color: #1d1e27;

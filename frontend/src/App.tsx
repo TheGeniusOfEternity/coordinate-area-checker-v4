@@ -11,7 +11,6 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   setAuthToken,
 } from "@/store/slices/authSlice";
-import { ProtectedRoute } from "@/components/routes/ProtectedRoute";
 import { PublicRoute } from "@/components/routes/PublicRoute";
 import { useLocation, useNavigate } from "react-router-dom";
 import { setNavigate } from "@/utils/NavigationUtil.ts";
