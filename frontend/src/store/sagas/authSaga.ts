@@ -1,17 +1,17 @@
-import { call, delay, put, select, take, takeLatest, race } from "redux-saga/effects";
+import { call, delay, put, take, takeLatest, race } from "redux-saga/effects";
 import { clearAuthToken, setAuthToken } from "@/store/slices/authSlice";
 import { AuthResolver } from "@/api/resolvers/auth.resolver";
 import { jwtDecode } from "jwt-decode";
 import { redirectTo } from "@/utils/NavigationUtil.ts";
 import { setToastMessage } from "@/store/slices/toastSlice.ts";
+import { store } from "@/store";
 
 const SAFETY_GAP_MS = 15_000;
-const selectAuth = (state: any) => state.auth;
 
 const scheduleTokenRefresh = function* scheduleTokenRefresh(): Generator<any, void>  {
   while (true) {
     try {
-      const { accessToken } = (yield select(selectAuth)) as { accessToken: string | null };
+      const { accessToken } = store.getState().auth;
       if (!accessToken) { return; }
 
       const decoded: { exp: number } = jwtDecode(accessToken);
