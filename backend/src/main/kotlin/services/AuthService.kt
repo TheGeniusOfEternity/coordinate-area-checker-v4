@@ -24,7 +24,7 @@ class AuthService {
     private lateinit var jwtService: JWTService
 
     fun login(requestDTO: LoginRequestDTO): AuthResponseDTO {
-        val user = userRepository.findByEmail(requestDTO.email)
+        val user = userRepository.getByEmail(requestDTO.email)
             ?: throw UserNotFoundException("email ${requestDTO.email}")
         if (!passwordService.verifyPassword(requestDTO.password, user.passwordHash))
             throw IncorrectPasswordException()
@@ -33,7 +33,7 @@ class AuthService {
     }
 
     fun register(requestDTO: RegisterRequestDTO): AuthResponseDTO {
-        if (userRepository.findByEmail(requestDTO.email) != null)
+        if (userRepository.getByEmail(requestDTO.email) != null)
             throw UserAlreadyExistsException()
         val hash = passwordService.hashPassword(requestDTO.password)
         userRepository.save(requestDTO.toEntity(hash))

@@ -13,13 +13,11 @@ class UserService {
     private lateinit var userRepository: UserRepository
 
     fun getById(id: Long): UserResponseDTO {
-        val user = userRepository.findById(id)
+        val user = userRepository.getById(id)
             ?: throw UserNotFoundException("id $id")
         return user.toDto()
     }
 
-    fun UserEntity.toDto(): UserResponseDTO {
-        val (id, email, name, surname, patronymic, studyGroup) = this
-        return UserResponseDTO(id!!, email, name, surname, patronymic, studyGroup)
-    }
+    fun UserEntity.toDto(): UserResponseDTO =
+        UserResponseDTO(id!!, email, name, surname, patronymic, studyGroup)
 }

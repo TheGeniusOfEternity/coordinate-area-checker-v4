@@ -11,10 +11,10 @@ class UserRepository {
     @PersistenceContext
     private lateinit var em: EntityManager
 
-    fun findById(id: Long): UserEntity? =
+    fun getById(id: Long): UserEntity? =
         em.find(UserEntity::class.java, id)
 
-    fun findByEmail(email: String): UserEntity? =
+    fun getByEmail(email: String): UserEntity? =
         em.createQuery(
             "SELECT u FROM UserEntity u WHERE u.email = :email",
             UserEntity::class.java
@@ -30,7 +30,7 @@ class UserRepository {
     }
 
     fun update(id: Long): UserEntity? {
-        val existing = findById(id) ?: return null
+        val existing = getById(id) ?: return null
         em.merge(existing)
         em.flush()
         return existing

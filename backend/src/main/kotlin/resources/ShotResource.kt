@@ -2,8 +2,12 @@ package resources
 
 import annotations.AuthRequired
 import dto.common.CommonResponseDTO
+import dto.shots.ShotRequestDTO
 import jakarta.inject.Inject
+import jakarta.validation.Valid
+import jakarta.ws.rs.Consumes
 import jakarta.ws.rs.GET
+import jakarta.ws.rs.POST
 import jakarta.ws.rs.Path
 import jakarta.ws.rs.Produces
 import jakarta.ws.rs.core.MediaType
@@ -21,6 +25,17 @@ class ShotResource {
     @Path("/")
     fun getAll(): Response {
         val result = shotsService.getAll()
+        return Response.ok(CommonResponseDTO(
+            200,
+            result
+        )).build()
+    }
+
+    @POST
+    @Path("/")
+    @Consumes(MediaType.APPLICATION_JSON)
+    fun create(@Valid request: ShotRequestDTO): Response {
+        val result = shotsService.create(request)
         return Response.ok(CommonResponseDTO(
             200,
             result

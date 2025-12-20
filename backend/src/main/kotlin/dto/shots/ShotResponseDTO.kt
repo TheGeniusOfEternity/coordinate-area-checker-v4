@@ -11,7 +11,6 @@ data class ShotResponseDTO(
     val r: Float,
     val isHit: Boolean,
 
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'")
-    val hitTime: Instant,
+    val hitTime: String,
     val executionTime: Long,
 )

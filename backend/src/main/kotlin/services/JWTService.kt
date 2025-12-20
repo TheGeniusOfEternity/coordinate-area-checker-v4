@@ -24,7 +24,7 @@ class JWTService {
 
         val user = userService.getById(userId)
         val userData = mapOf(
-            "userId" to user.id,
+            "id" to user.id,
             "email" to user.email,
             "name" to user.name,
             "surname" to user.surname,
