@@ -35,3 +35,9 @@
   border-radius: var(--border-radius);
   margin-top: auto; /* Прижимает к низу */
 }
+
+@media screen and (min-width: 790px) and (max-width: 1250px) {
+  .p-datatable {
+    margin-bottom: 10%;
+  }
+}

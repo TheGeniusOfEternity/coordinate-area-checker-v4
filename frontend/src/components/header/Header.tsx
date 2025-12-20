@@ -1,11 +1,12 @@
 import "@/components/header/Header.css";
 import { useDispatch, useSelector } from "react-redux";
-import { type RootState, store } from "@/store";
+import { type RootState } from "@/store";
 import { setIsSwitching, setOverlayGrowthPosition } from "@/store/slices/themeSlice.ts";
 import { Button } from "primereact/button";
 import { useRef } from "react";
 import { clearAuthToken } from "@/store/slices/authSlice.ts";
 import { useTranslation } from "react-i18next";
+import { Message } from "primereact/message";
 
 export const Header = () => {
   const { i18n } = useTranslation();
@@ -39,11 +40,33 @@ export const Header = () => {
     dispatch(setIsSwitching(true));
   };
 
-  console.log(store.getState().auth)
-
   return (
     <div className="header">
       <nav>
+        <Button
+          className="sign-out-btn"
+          icon="pi pi-sign-out"
+          onClick={() => dispatch(clearAuthToken())}
+        />
+        <Message
+          className="profile-info"
+          content={
+            <>
+              <h4 className="full-name">
+                <span className="surname">{user?.surname}</span>
+                <span className="name">{user?.name}</span>
+                <span className="patronymic">{user?.patronymic}</span>
+              </h4>
+              <h4 className="study-group">{user?.studyGroup}</h4>
+            </>
+          }
+        />
+        <Button
+          className="p-button-icon-only lang-btn"
+          label={i18n.language}
+          severity="info"
+          onClick={switchLang}
+        />
         <div ref={buttonRef}>
           <Button
             icon="pi pi-palette"
@@ -52,25 +75,6 @@ export const Header = () => {
             disabled={isSwitching}
           />
         </div>
-        <Button
-          className="p-button-icon-only lang-btn"
-          label={i18n.language}
-          severity="info"
-          onClick={switchLang}
-        />
-        <div className="profile-info">
-          <p className="full-name">
-            <span className="surname">{user?.surname}</span>
-            <span className="name">{user?.name}</span>
-            <span className="patronymic">{user?.patronymic}</span>
-          </p>
-          <p className="study-group">{ user?.studyGroup }</p>
-        </div>
-        <Button
-          className="sign-out-btn"
-          icon="pi pi-sign-out"
-          onClick={() => dispatch(clearAuthToken())}
-        />
       </nav>
     </div>
   );
