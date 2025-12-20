@@ -30,5 +30,8 @@ data class UserEntity(
 
     @Column(nullable = false)
     val createdAt: Instant = Instant.now(),
+
+    @OneToMany
+    val shots: MutableList<ShotEntity> = mutableListOf(),
 )
 

@@ -5,23 +5,22 @@ import dto.common.CommonResponseDTO
 import jakarta.inject.Inject
 import jakarta.ws.rs.GET
 import jakarta.ws.rs.Path
-import jakarta.ws.rs.PathParam
 import jakarta.ws.rs.Produces
 import jakarta.ws.rs.core.MediaType
 import jakarta.ws.rs.core.Response
-import services.UserService
+import services.ShotService
 
 @AuthRequired
 @Produces(MediaType.APPLICATION_JSON)
-@Path("/users")
-class UserResource {
+@Path("/shots")
+class ShotResource {
     @Inject
-    private lateinit var userService: UserService
+    private lateinit var shotsService: ShotService
 
     @GET
-    @Path("{id}")
-    fun getById(@PathParam("id") id: String): Response {
-        val result = userService.getById(id.toLong())
+    @Path("/")
+    fun getAll(): Response {
+        val result = shotsService.getAll()
         return Response.ok(CommonResponseDTO(
             200,
             result

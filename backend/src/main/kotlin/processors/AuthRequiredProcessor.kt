@@ -15,7 +15,8 @@ class AuthRequiredProcessor : DynamicFeature {
     private lateinit var jwtService: JWTService
 
     override fun configure(resourceInfo: ResourceInfo, context: FeatureContext) {
-        if (resourceInfo.resourceMethod.isAnnotationPresent(AuthRequired::class.java)) {
+        if (resourceInfo.resourceClass.isAnnotationPresent(AuthRequired::class.java) ||
+            resourceInfo.resourceMethod.isAnnotationPresent(AuthRequired::class.java)) {
             context.register(AuthRequiredFilter(jwtService))
         }
     }
