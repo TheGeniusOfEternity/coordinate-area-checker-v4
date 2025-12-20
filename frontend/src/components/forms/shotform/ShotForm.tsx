@@ -17,7 +17,7 @@ export interface ShotFormData {
 
 interface ShotFormProps {
   // eslint-disable-next-line no-unused-vars
-  onSubmit: (data: ShotFormData) => number
+  onSubmit: (data: ShotFormData) => Promise<void>;
 }
 
 export const ShotForm = ({
@@ -39,6 +39,12 @@ export const ShotForm = ({
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     await onSubmit({x, y, r});
+  };
+
+  const resetForm = () => {
+    setX(0);
+    setY(0);
+    setR(1);
   };
 
   return (
@@ -94,12 +100,15 @@ export const ShotForm = ({
         className="reset btn"
         severity="info"
         outlined
+        type="reset"
         label={t("page.home.form.reset")}
+        onClick={resetForm}
       />
       <Button
         className="submit btn"
         type="submit"
         label={t("page.home.form.submit")}
+        onClick={handleSubmit}
       />
     </form>
   );

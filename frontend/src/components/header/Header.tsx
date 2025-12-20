@@ -4,11 +4,17 @@ import { type RootState } from "@/store";
 import { setIsSwitching, setOverlayGrowthPosition } from "@/store/slices/themeSlice.ts";
 import { Button } from "primereact/button";
 import { useRef } from "react";
-import { clearAuthToken } from "@/store/slices/authSlice.ts";
+import { clearAuthToken, type User } from "@/store/slices/authSlice.ts";
 import { useTranslation } from "react-i18next";
 import { Message } from "primereact/message";
 
-export const Header = () => {
+export interface HeaderProps {
+  user: User;
+}
+
+export const Header = ({
+  user
+}: HeaderProps) => {
   const { i18n } = useTranslation();
 
   const dispatch = useDispatch();
@@ -16,10 +22,6 @@ export const Header = () => {
 
   const isSwitching = useSelector(
     (state: RootState) => state.theme.isSwitching,
-  );
-
-  const user = useSelector(
-    (state: RootState) => state.auth.user
   );
 
   const switchLang = () => {
@@ -53,11 +55,11 @@ export const Header = () => {
           content={
             <>
               <h4 className="full-name">
-                <span className="surname">{user?.surname}</span>
-                <span className="name">{user?.name}</span>
-                <span className="patronymic">{user?.patronymic}</span>
+                <span className="surname">{user.surname}</span>
+                <span className="name">{user.name}</span>
+                <span className="patronymic">{user.patronymic}</span>
               </h4>
-              <h4 className="study-group">{user?.studyGroup}</h4>
+              <h4 className="study-group">{user.studyGroup}</h4>
             </>
           }
         />

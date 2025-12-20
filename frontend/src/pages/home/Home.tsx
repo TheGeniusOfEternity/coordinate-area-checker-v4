@@ -1,13 +1,22 @@
 import "@/pages/home/Home.css";
 import { Graph } from "@/components/graph/Graph.tsx";
-import { ShotForm, type ShotFormData } from "@/components/forms/shotform/ShotForm.tsx";
+import { ShotForm } from "@/components/forms/shotform/ShotForm.tsx";
 import { Header } from "@/components/header/Header.tsx";
 import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column";
 import { useTranslation } from "react-i18next";
+import { useSelector } from "react-redux";
+import type { RootState } from "@/store";
+import type { User } from "@/store/slices/authSlice.ts";
+import { useShots } from "@/hooks/useShots.ts";
 
 const Home = () => {
   const { t, i18n } = useTranslation();
+  const { shotSubmit } = useShots();
+
+  const user = useSelector(
+    (state: RootState) => state.auth.user
+  );
 
   const mocks = [
     {
@@ -22,16 +31,10 @@ const Home = () => {
   ];
 
 
-  // @ts-ignore
-  const shotSubmit = (data: ShotFormData) => {
-    const { r } = data;
-    return r;
-  };
-
   return (
     <>
       <div className="container">
-        <Header />
+        {user && <Header user={user as User} />}
         <div className="main">
           <Graph />
 
@@ -69,7 +72,9 @@ const Home = () => {
             />
           </DataTable>
         </div>
-        <ShotForm onSubmit={(data) => shotSubmit(data)} />
+        <ShotForm
+          onSubmit={(data) => shotSubmit(user!.id, data)}
+        />
       </div>
     </>
   );

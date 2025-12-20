@@ -4,7 +4,6 @@
   --default-padding: 0.5rem;
   --form-gap: 1.2rem;
   --form-field-gap: 0.75rem;
-
 }
 
 @media (prefers-color-scheme: light) {
@@ -21,7 +20,7 @@
 
 @media screen and (min-width: 790px) and (max-width: 1250px) {
   #root {
-    --default-padding: 1.5rem;
+    --default-padding: 1.2rem;
     --container-padding: 1.5rem;
     --form-gap: 1.5rem;
   }

@@ -58,7 +58,7 @@ nav h4 {
 }
 
 
-@media screen and (min-width: 790px) and (max-width: 1250px) {
+@media screen and (min-width: 790px) {
   .full-name {
     grid-template-columns: repeat(3, auto);
   }
