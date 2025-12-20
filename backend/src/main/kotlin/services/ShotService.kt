@@ -1,6 +1,6 @@
 package services
 
-import dto.shot.ShotResponseDTO
+import dto.shots.ShotResponseDTO
 import entities.ShotEntity
 import jakarta.enterprise.context.ApplicationScoped
 import jakarta.inject.Inject

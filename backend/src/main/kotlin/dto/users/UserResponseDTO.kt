@@ -1,4 +1,4 @@
-package dto.user
+package dto.users
 
 data class UserResponseDTO(
     val id: Long,

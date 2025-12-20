@@ -1,4 +1,4 @@
-package dto.shot
+package dto.shots
 
 import com.fasterxml.jackson.annotation.JsonFormat
 import java.time.Instant

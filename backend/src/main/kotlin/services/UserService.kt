@@ -1,6 +1,6 @@
 package services
 
-import dto.user.UserResponseDTO
+import dto.users.UserResponseDTO
 import entities.UserEntity
 import exceptions.UserNotFoundException
 import jakarta.enterprise.context.ApplicationScoped
