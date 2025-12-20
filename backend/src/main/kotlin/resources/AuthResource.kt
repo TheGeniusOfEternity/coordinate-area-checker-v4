@@ -1,6 +1,6 @@
 package resources
 
-import annotations.BearerToken
+import annotations.AuthRequired
 import dto.auth.LoginRequestDTO
 import dto.auth.RegisterRequestDTO
 import dto.common.CommonResponseDTO
@@ -18,6 +18,7 @@ import services.AuthService
 @Produces(MediaType.APPLICATION_JSON)
 @Path("/auth")
 class AuthResource {
+
     @Inject
     private lateinit var authService: AuthService
 
@@ -44,12 +45,13 @@ class AuthResource {
     }
 
     @POST
+    @AuthRequired
     @Path("/refresh-jwt")
     fun refreshJWT(
         @HeaderParam("Authorization")
-        @BearerToken
-        token: String
+        authHeader: String
     ): Response {
+        val token = authHeader.removePrefix("Bearer ").trim()
         val result = authService.refreshJWT(token)
         return Response.ok(CommonResponseDTO(
             200,

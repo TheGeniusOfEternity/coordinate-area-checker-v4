@@ -1,5 +1,6 @@
 package resources
 
+import annotations.AuthRequired
 import dto.common.CommonResponseDTO
 import jakarta.inject.Inject
 import jakarta.ws.rs.GET
@@ -18,6 +19,7 @@ class UserResource {
 
     @GET
     @Path("{id}")
+    @AuthRequired
     fun getById(@PathParam("id") id: String): Response {
         val result = userService.getById(id.toLong())
         return Response.ok(CommonResponseDTO(
