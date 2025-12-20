@@ -19,7 +19,7 @@ const scheduleTokenRefresh = function* scheduleTokenRefresh(): Generator<any, vo
       const msUntilExp = (decoded.exp - nowSec) * 1000;
       const delayMs = msUntilExp - SAFETY_GAP_MS;
       if (delayMs <= 0) {
-        yield put(clearAuthToken());
+        // yield put(clearAuthToken());
         return;
       }
 

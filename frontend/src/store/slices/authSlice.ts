@@ -1,12 +1,21 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
-import { JwtUtil, type UserJWTPayload } from "@/utils/JwtUtil.ts";
+import { JwtUtil } from "@/utils/JwtUtil.ts";
 import { toastSlice } from "@/store/slices/toastSlice.ts";
+
+export interface User {
+  id: number;
+  email: string;
+  name: string;
+  surname: string;
+  patronymic: string;
+  studyGroup: string;
+}
 
 export const authSlice = createSlice({
   name: "auth",
   initialState: {
     accessToken: null as string | null,
-    user: null as UserJWTPayload | null,
+    user: null as User | null,
   },
   reducers: {
     setAuthToken: (state, action: PayloadAction<string>) => {

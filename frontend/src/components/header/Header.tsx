@@ -1,6 +1,6 @@
 import "@/components/header/Header.css";
 import { useDispatch, useSelector } from "react-redux";
-import type { RootState } from "@/store";
+import { type RootState, store } from "@/store";
 import { setIsSwitching, setOverlayGrowthPosition } from "@/store/slices/themeSlice.ts";
 import { Button } from "primereact/button";
 import { useRef } from "react";
@@ -8,13 +8,17 @@ import { clearAuthToken } from "@/store/slices/authSlice.ts";
 import { useTranslation } from "react-i18next";
 
 export const Header = () => {
-  const { t, i18n } = useTranslation();
+  const { i18n } = useTranslation();
 
   const dispatch = useDispatch();
   const buttonRef = useRef<HTMLDivElement>(null);
 
   const isSwitching = useSelector(
     (state: RootState) => state.theme.isSwitching,
+  );
+
+  const user = useSelector(
+    (state: RootState) => state.auth.user
   );
 
   const switchLang = () => {
@@ -35,6 +39,8 @@ export const Header = () => {
     dispatch(setIsSwitching(true));
   };
 
+  console.log(store.getState().auth)
+
   return (
     <div className="header">
       <nav>
@@ -52,11 +58,14 @@ export const Header = () => {
           severity="info"
           onClick={switchLang}
         />
-        <Button
-          className="account-btn"
-          label={t('page.home.header.profile')}
-          outlined
-        />
+        <div className="profile-info">
+          <p className="full-name">
+            <span className="surname">{user?.surname}</span>
+            <span className="name">{user?.name}</span>
+            <span className="patronymic">{user?.patronymic}</span>
+          </p>
+          <p className="study-group">{ user?.studyGroup }</p>
+        </div>
         <Button
           className="sign-out-btn"
           icon="pi pi-sign-out"

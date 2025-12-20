@@ -1,21 +1,20 @@
 import { jwtDecode } from "jwt-decode";
+import type { User } from "@/store/slices/authSlice.ts";
 
-export interface UserJWTPayload {
-  id: number;
-  email: string;
-  name: string;
-  surname: string;
-  patronymic: string;
-  studyGroup: string;
+export interface JWTPayload {
+  sub: string;
+  user: User;
+  iat: number;
+  exp: number;
 }
 
 export const JwtUtil = {
   decode: (token: string): {
-    user: UserJWTPayload | null,
+    user: User | null,
     error: string | null
   } => {
     try {
-      const user = jwtDecode<UserJWTPayload>(token);
+      const { user } = jwtDecode<JWTPayload>(token);
       return { user, error: null };
     } catch (e: any) {
       return {
