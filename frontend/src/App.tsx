@@ -96,7 +96,7 @@ const App = ()=> {
             } as React.CSSProperties}
           />
         )}
-        <div className={`App ${isSwitching ? "theme-transition" : ""} ${currentTheme}`}>
+        <div className={`App ${isSwitching ? "theme-transition " : ""}${currentTheme}`}>
           <AnimatePresence mode="wait">
             <Routes location={location} key={location.pathname}>
               <Route

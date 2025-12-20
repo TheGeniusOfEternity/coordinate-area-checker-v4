@@ -95,6 +95,19 @@ export interface Translations {
       header: {
         profile: string;
       };
+      table: {
+        header: {
+          status: string;
+          hitTime: string;
+          executionTime: string;
+        },
+        body: {
+          isHit: {
+            hit: string;
+            miss: string;
+          }
+        }
+      },
       form: {
         title: string;
         submit: string;

@@ -95,6 +95,19 @@
       "header": {
         "profile": "Мой профиль"
       },
+      "table": {
+        "header": {
+          "status": "Статус",
+          "hitTime": "Время попадания",
+          "executionTime": "Время выполнения"
+        },
+        "body": {
+          "isHit": {
+            "hit": "Попадание",
+            "miss": "Промах"
+          }
+        }
+      },
       "form": {
         "title": "Добавить точку",
         "submit": "Отправить",

@@ -98,6 +98,19 @@
       "header": {
         "profile": "Account info"
       },
+      "table": {
+        "header": {
+          "status": "Status",
+          "hitTime": "Hit time",
+          "executionTime": "Execution time"
+        },
+        "body": {
+          "isHit": {
+            "hit": "Hit",
+            "miss": "Miss"
+          }
+        }
+      },
       "form": {
         "title": "Make a new shot",
         "submit": "Send",

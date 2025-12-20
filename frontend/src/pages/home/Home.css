@@ -22,10 +22,13 @@
   justify-content: space-between;
   margin-bottom: 16%;
   gap: var(--default-padding);
+  white-space: nowrap;
 }
 
 .p-datatable-wrapper {
   border-radius: var(--border-radius);
+  background-color: var(--surface-overlay);
+  height: 100%;
 }
 
 .p-paginator-bottom {
