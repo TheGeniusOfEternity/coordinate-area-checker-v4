@@ -19,6 +19,7 @@ import { clearToastMessage } from "@/store/slices/toastSlice.ts";
 import { useTranslation } from "react-i18next";
 import { AnimatePresence } from "framer-motion";
 import { PageTransition } from "@/components/transitions/PageTransition.tsx";
+import { setUser } from "@/store/slices/userSlice.ts";
 
 let previousTheme = "";
 
@@ -78,7 +79,7 @@ const App = ()=> {
     const token = localStorage.getItem('access_token');
     if (token !== null) {
       dispatch(setAuthToken(token));
-    }
+    } else dispatch(setUser())
   }, [dispatch]);
 
   return (
