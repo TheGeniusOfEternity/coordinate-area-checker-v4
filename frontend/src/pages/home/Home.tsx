@@ -21,8 +21,11 @@ const Home = () => {
     },
   ];
 
-  const shotSubmit = async (data: ShotFormData) => {
 
+  // @ts-ignore
+  const shotSubmit = (data: ShotFormData) => {
+    const { r } = data;
+    return r;
   };
 
   return (

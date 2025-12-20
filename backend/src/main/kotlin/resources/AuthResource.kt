@@ -3,6 +3,7 @@ package resources
 import annotations.BearerToken
 import dto.auth.LoginRequestDTO
 import dto.auth.RegisterRequestDTO
+import dto.common.CommonResponseDTO
 import jakarta.inject.Inject
 import jakarta.validation.Valid
 import jakarta.ws.rs.Consumes
@@ -25,7 +26,10 @@ class AuthResource {
     @Path("/login")
     fun login(@Valid request: LoginRequestDTO): Response {
         val result = authService.login(request)
-        return Response.ok(result).build()
+        return Response.ok(CommonResponseDTO(
+            200,
+            result
+        )).build()
     }
 
     @POST
@@ -33,7 +37,10 @@ class AuthResource {
     @Path("/register")
     fun register(@Valid request: RegisterRequestDTO): Response {
         val result = authService.register(request)
-        return Response.ok(result).build()
+        return Response.ok(CommonResponseDTO(
+            200,
+            result
+        )).build()
     }
 
     @POST
@@ -44,6 +51,9 @@ class AuthResource {
         token: String
     ): Response {
         val result = authService.refreshJWT(token)
-        return Response.ok(result).build()
+        return Response.ok(CommonResponseDTO(
+            200,
+            result
+        )).build()
     }
 }

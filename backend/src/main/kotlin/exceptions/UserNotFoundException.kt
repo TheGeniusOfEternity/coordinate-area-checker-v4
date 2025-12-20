@@ -2,7 +2,7 @@ package exceptions
 
 import jakarta.ws.rs.core.Response
 
-class UserNotFoundException(email: String): BaseBusinessException(
+class UserNotFoundException(param: String): BaseBusinessException(
     Response.Status.NOT_FOUND,
-    "User with email $email not found"
+    "User with $param not found"
 )

@@ -17,7 +17,7 @@ export interface ShotFormData {
 
 interface ShotFormProps {
   // eslint-disable-next-line no-unused-vars
-  onSubmit: (data: ShotFormData) => Promise<void>;
+  onSubmit: (data: ShotFormData) => number
 }
 
 export const ShotForm = ({
