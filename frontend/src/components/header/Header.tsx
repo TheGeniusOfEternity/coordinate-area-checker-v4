@@ -7,12 +7,15 @@ import { useRef } from "react";
 import { type User } from "@/store/slices/authSlice.ts";
 import { useTranslation } from "react-i18next";
 import { Message } from "primereact/message";
+import { t } from "i18next";
 
 export interface HeaderProps {
   user: User;
+  isMobile: boolean;
 }
 
 export const Header = ({
+  isMobile,
   user
 }: HeaderProps) => {
   const { i18n } = useTranslation();
@@ -46,6 +49,7 @@ export const Header = ({
     <div className="header">
       <nav>
         <Button
+          label={isMobile ? "" : t('page.home.header.signOut')}
           className="sign-out-btn"
           icon="pi pi-sign-out"
           onClick={() => dispatch(resetStore())}

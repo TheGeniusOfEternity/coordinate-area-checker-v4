@@ -93,7 +93,8 @@
     },
     "home": {
       "header": {
-        "profile": "Мой профиль"
+        "profile": "Мой профиль",
+        "signOut": "Выйти"
       },
       "table": {
         "header": {

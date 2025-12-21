@@ -41,3 +41,22 @@
     margin-bottom: 10%;
   }
 }
+
+@media screen and (min-width: 1251px) {
+  .transition.wrapper {
+    border-radius: 0;
+  }
+
+  .main {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    height: auto;
+    margin-left: 5%;
+    box-sizing: border-box;
+  }
+
+  .p-datatable {
+    overflow: scroll;
+    margin-bottom: 0;
+  }
+}

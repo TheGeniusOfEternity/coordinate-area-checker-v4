@@ -94,6 +94,7 @@ export interface Translations {
     home: {
       header: {
         profile: string;
+        signOut: string;
       };
       table: {
         header: {

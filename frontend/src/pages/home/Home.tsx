@@ -10,10 +10,14 @@ import type { RootState } from "@/store";
 import type { User } from "@/store/slices/authSlice.ts";
 import { useShots } from "@/hooks/useShots.ts";
 import { useState } from "react";
+import { useMatchMedia } from "primereact/hooks";
 
 const Home = () => {
   const { t, i18n } = useTranslation();
   const { shotSubmit } = useShots();
+
+  const isMobile = useMatchMedia("(max-width: 789px)");
+  const isDesktop = useMatchMedia("(min-width: 1251px)");
 
   const [x, setX] = useState<number>(0);
   const [y, setY] = useState<number>(0);
@@ -30,7 +34,10 @@ const Home = () => {
   return (
     <>
       <div className="container">
-        {user && <Header user={user as User} />}
+        {user && <Header
+          user={user as User}
+          isMobile={isMobile}
+        />}
         <div className="main">
           <Graph
             shots={shots}
@@ -40,24 +47,25 @@ const Home = () => {
             }
           />
           <DataTable
-            size="small"
+            size={
+              isMobile
+                ? "small"
+                : isDesktop
+                  ? "large"
+                  : "normal"
+            }
             value={shots}
             paginator
             paginatorPosition="bottom"
-            rows={7}
+            rows={isMobile
+              ? 7
+              : 10
+            }
             key={i18n.language}
           >
             <Column field="id" sortable header="ID" />
-            <Column
-              field="x"
-              sortable
-              header="X"
-            />
-            <Column
-              field="y"
-              sortable
-              header="Y"
-            />
+            <Column field="x" sortable header="X" />
+            <Column field="y" sortable header="Y" />
             <Column field="r" sortable header="R" />
             <Column
               field="isHit"
@@ -78,9 +86,8 @@ const Home = () => {
               field="executionTime"
               sortable
               header={t("page.home.table.header.executionTime")}
-              body={
-                (rowData) =>
-                  `${rowData.executionTime} ${t('page.home.table.body.executionTime')}`
+              body={(rowData) =>
+                `${rowData.executionTime} ${t("page.home.table.body.executionTime")}`
               }
             />
           </DataTable>

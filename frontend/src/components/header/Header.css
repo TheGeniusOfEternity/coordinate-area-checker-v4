@@ -68,3 +68,10 @@ nav h4 {
     margin-right: var(--form-field-gap);
   }
 }
+
+@media screen and (min-width: 1251px) {
+  nav {
+    margin-left: 5%;
+    gap: var(--form-field-gap)
+  }
+}

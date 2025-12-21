@@ -96,7 +96,8 @@
     },
     "home": {
       "header": {
-        "profile": "Account info"
+        "profile": "Account info",
+        "signOut": "Sign out"
       },
       "table": {
         "header": {

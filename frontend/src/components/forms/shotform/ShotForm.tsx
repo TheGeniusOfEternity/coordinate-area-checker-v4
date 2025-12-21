@@ -103,20 +103,22 @@ export const ShotForm = ({
           options={rValues}
         />
       </div>
-      <Button
-        className="reset btn"
-        severity="info"
-        outlined
-        type="reset"
-        label={t("page.home.form.reset")}
-        onClick={resetForm}
-      />
-      <Button
-        className="submit btn"
-        type="submit"
-        label={t("page.home.form.submit")}
-        onClick={handleSubmit}
-      />
+      <div className="buttons">
+        <Button
+          className="reset btn"
+          severity="info"
+          outlined
+          type="reset"
+          label={t("page.home.form.reset")}
+          onClick={resetForm}
+        />
+        <Button
+          className="submit btn"
+          type="submit"
+          label={t("page.home.form.submit")}
+          onClick={handleSubmit}
+        />
+      </div>
     </form>
   );
 };
