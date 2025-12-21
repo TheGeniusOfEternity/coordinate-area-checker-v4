@@ -13,6 +13,7 @@ import jakarta.ws.rs.Produces
 import jakarta.ws.rs.core.MediaType
 import jakarta.ws.rs.core.Response
 import services.ShotService
+import services.ShotWebSocketService
 
 @AuthRequired
 @Produces(MediaType.APPLICATION_JSON)
@@ -20,6 +21,9 @@ import services.ShotService
 class ShotResource {
     @Inject
     private lateinit var shotsService: ShotService
+
+    @Inject
+    private lateinit var shotWebSocketService: ShotWebSocketService
 
     @GET
     @Path("/")
@@ -35,10 +39,11 @@ class ShotResource {
     @Path("/")
     @Consumes(MediaType.APPLICATION_JSON)
     fun create(@Valid request: ShotRequestDTO): Response {
-        val result = shotsService.create(request)
+        val shot = shotsService.create(request)
+        shotWebSocketService.broadcastNewShot(shot)
         return Response.ok(CommonResponseDTO(
             200,
-            result
+            shot
         )).build()
     }
 }

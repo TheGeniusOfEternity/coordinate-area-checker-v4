@@ -23,29 +23,25 @@ const Home = () => {
     (state: RootState) => state.auth.user
   );
 
-  const mocks = [
-    {
-      id: 1020,
-      x: 1,
-      y: 2,
-      r: 3,
-      isHit: true,
-      hitTime: "01.12.2025 15:30",
-      execTime: 1234,
-    },
-  ];
-
+  const shots = useSelector(
+    (state: RootState) => state.shot.shots
+  );
 
   return (
     <>
       <div className="container">
         {user && <Header user={user as User} />}
         <div className="main">
-          <Graph />
-
+          <Graph
+            r={r}
+            onGraphClick={
+              (clickX, clickY) =>
+                shotSubmit(user!.id, { x: clickX, y: clickY, r })
+            }
+          />
           <DataTable
             size="small"
-            value={mocks}
+            value={shots}
             paginator
             paginatorPosition="bottom"
             rows={7}
@@ -71,7 +67,7 @@ const Home = () => {
               header={t("page.home.table.header.hitTime")}
             />
             <Column
-              field="execTime"
+              field="executionTime"
               sortable
               header={t("page.home.table.header.executionTime")}
             />
