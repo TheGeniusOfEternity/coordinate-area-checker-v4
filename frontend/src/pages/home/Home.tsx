@@ -9,10 +9,15 @@ import { useSelector } from "react-redux";
 import type { RootState } from "@/store";
 import type { User } from "@/store/slices/authSlice.ts";
 import { useShots } from "@/hooks/useShots.ts";
+import { useState } from "react";
 
 const Home = () => {
   const { t, i18n } = useTranslation();
   const { shotSubmit } = useShots();
+
+  const [x, setX] = useState<number>(0);
+  const [y, setY] = useState<number>(0);
+  const [r, setR] = useState<number>(1);
 
   const user = useSelector(
     (state: RootState) => state.auth.user
@@ -73,6 +78,10 @@ const Home = () => {
           </DataTable>
         </div>
         <ShotForm
+          data={{ x, y, r}}
+          onXChange={setX}
+          onYChange={setY}
+          onRChange={setR}
           onSubmit={(data) => shotSubmit(user!.id, data)}
         />
       </div>

@@ -16,11 +16,22 @@ export interface ShotFormData {
 }
 
 interface ShotFormProps {
+  data: ShotFormData;
+  // eslint-disable-next-line no-unused-vars
+  onXChange: (x: number) => void;
+  // eslint-disable-next-line no-unused-vars
+  onYChange: (y: number) => void;
+  // eslint-disable-next-line no-unused-vars
+  onRChange: (r: number) => void;
   // eslint-disable-next-line no-unused-vars
   onSubmit: (data: ShotFormData) => Promise<void>;
 }
 
 export const ShotForm = ({
+  data,
+  onXChange,
+  onYChange,
+  onRChange,
   onSubmit,
 }: ShotFormProps) => {
   const { t } = useTranslation();
@@ -28,23 +39,19 @@ export const ShotForm = ({
   const xValues = [-2, -1.5, -1, -0.5, 0, 0.5, 1, 1.5, 2];
   const rValues = [0.5, 1, 1.5, 2];
 
-  const [x, setX] = useState<number>(0);
-  const [y, setY] = useState<number>(0);
-  const [r, setR] = useState<number>(1);
-
   const sliderRef = useRef<Slider>(null);
 
   const [isOpened, setIsOpened] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    await onSubmit({x, y, r});
+    await onSubmit(data);
   };
 
   const resetForm = () => {
-    setX(0);
-    setY(0);
-    setR(1);
+    onXChange(0);
+    onYChange(0);
+    onRChange(1);
   };
 
   return (
@@ -64,8 +71,8 @@ export const ShotForm = ({
         <ListBox
           className="input"
           id="x-input"
-          value={x}
-          onChange={(e) => setX(e.value)}
+          value={data.x}
+          onChange={(e) => onXChange(e.value)}
           options={xValues}
         />
       </div>
@@ -73,17 +80,17 @@ export const ShotForm = ({
         <label htmlFor="y-input">
           <p className="p-component">Y</p>
           <p className="p-component">{t("page.home.form.yLabel")}:</p>
-          <p className="p-component">{y}</p>
+          <p className="p-component">{data.y}</p>
         </label>
         <Slider
           ref={sliderRef}
           className="input"
           id="y-input"
-          value={y}
+          value={data.y}
           min={-3}
           max={5}
           step={0.5}
-          onChange={(e) => setY(e.value as number)}
+          onChange={(e) => onYChange(e.value as number)}
         />
       </div>
       <div className="rInput p-field">
@@ -91,8 +98,8 @@ export const ShotForm = ({
         <ListBox
           className="input"
           id="r-input"
-          value={r}
-          onChange={(e) => setR(e.value)}
+          value={data.r}
+          onChange={(e) => onRChange(e.value)}
           options={rValues}
         />
       </div>
