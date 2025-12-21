@@ -6,13 +6,22 @@ class ShotSocketUtil {
   private reconnectAttempts = 0;
   private maxReconnectAttempts = 5;
   private reconnectDelay = 1000;
+  private closedManually: boolean = false;
+  private token = "";
+
+  setToken(token: string) {
+    this.token = token;
+  }
 
   connect() {
-    const wsUrl = `${apiConf.endpoint}/ws/shots`;
+    this.disconnect();
+
+    const wsUrl = `${apiConf.endpoint}/ws/shots?token=${this.token}`;
 
     this.socket = new WebSocket(wsUrl);
 
     this.socket.onopen = () => {
+      this.closedManually = false;
       this.reconnectAttempts = 0;
     };
 
@@ -26,7 +35,9 @@ class ShotSocketUtil {
     };
 
     this.socket.onclose = () => {
-      this.handleReconnect();
+      if (!this.closedManually) {
+        this.handleReconnect();
+      }
     };
   }
 
@@ -40,8 +51,10 @@ class ShotSocketUtil {
   }
 
   disconnect() {
-    if (this.socket) {
+    if (this.socket && this.socket.readyState === WebSocket.OPEN) {
+      this.closedManually = true;
       this.socket.close();
+      this.socket = null;
     }
   }
 

@@ -1,10 +1,10 @@
 import { call, delay, put, take, takeLatest, race } from "redux-saga/effects";
-import { clearAuthToken, setAuthToken } from "@/store/slices/authSlice";
+import { setAuthToken } from "@/store/slices/authSlice";
 import { AuthResolver } from "@/api/resolvers/auth.resolver";
 import { jwtDecode } from "jwt-decode";
 import { redirectTo } from "@/utils/NavigationUtil.ts";
 import { setToastMessage } from "@/store/slices/toastSlice.ts";
-import { store } from "@/store";
+import { resetStore, store } from "@/store";
 
 const SAFETY_GAP_MS = 15_000;
 
@@ -19,13 +19,13 @@ const scheduleTokenRefresh = function* scheduleTokenRefresh(): Generator<any, vo
       const msUntilExp = (decoded.exp - nowSec) * 1000;
       const delayMs = msUntilExp - SAFETY_GAP_MS;
       if (delayMs <= 0) {
-        // yield put(clearAuthToken());
+        yield put(resetStore());
         return;
       }
 
       const { cancelled } = yield race({
         timeout: delay(delayMs),
-        cancelled: take([clearAuthToken.type, setAuthToken.type])
+        cancelled: take([resetStore.type, setAuthToken.type])
       });
 
       if (cancelled) { return; }
@@ -34,7 +34,7 @@ const scheduleTokenRefresh = function* scheduleTokenRefresh(): Generator<any, vo
       const response = yield call([authResolver, authResolver.refreshJWT]);
 
       if (response.status !== 200) {
-        yield put(clearAuthToken());
+        yield put(resetStore());
         return;
       }
 
@@ -53,7 +53,7 @@ const scheduleTokenRefresh = function* scheduleTokenRefresh(): Generator<any, vo
         summary: "request.common.error.summary",
         detail: e.message
       }));
-      yield put(clearAuthToken());
+      yield put(resetStore());
     }
   }
 };
@@ -65,6 +65,6 @@ const clearToken = function* clearToken() {
 };
 
 export const authSaga = function* authSaga() {
-  yield takeLatest(clearAuthToken.type, clearToken);
+  yield takeLatest(resetStore.type, clearToken);
   yield takeLatest(setAuthToken, scheduleTokenRefresh);
 };

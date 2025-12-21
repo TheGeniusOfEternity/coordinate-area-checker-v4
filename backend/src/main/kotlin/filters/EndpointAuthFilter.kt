@@ -6,7 +6,7 @@ import jakarta.ws.rs.container.ContainerRequestContext
 import jakarta.ws.rs.container.ContainerRequestFilter
 import services.JWTService
 
-class AuthRequiredFilter(
+class EndpointAuthFilter(
     private val jwtService: JWTService
 ) : ContainerRequestFilter {
 

@@ -1,7 +1,7 @@
 package processors
 
 import annotations.AuthRequired
-import filters.AuthRequiredFilter
+import filters.EndpointAuthFilter
 import jakarta.inject.Inject
 import jakarta.ws.rs.container.DynamicFeature
 import jakarta.ws.rs.container.ResourceInfo
@@ -17,7 +17,7 @@ class AuthRequiredProcessor : DynamicFeature {
     override fun configure(resourceInfo: ResourceInfo, context: FeatureContext) {
         if (resourceInfo.resourceClass.isAnnotationPresent(AuthRequired::class.java) ||
             resourceInfo.resourceMethod.isAnnotationPresent(AuthRequired::class.java)) {
-            context.register(AuthRequiredFilter(jwtService))
+            context.register(EndpointAuthFilter(jwtService))
         }
     }
 }

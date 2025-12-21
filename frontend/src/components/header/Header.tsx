@@ -1,10 +1,10 @@
 import "@/components/header/Header.css";
 import { useDispatch, useSelector } from "react-redux";
-import { type RootState } from "@/store";
+import { resetStore, type RootState } from "@/store";
 import { setIsSwitching, setOverlayGrowthPosition } from "@/store/slices/themeSlice.ts";
 import { Button } from "primereact/button";
 import { useRef } from "react";
-import { clearAuthToken, type User } from "@/store/slices/authSlice.ts";
+import { type User } from "@/store/slices/authSlice.ts";
 import { useTranslation } from "react-i18next";
 import { Message } from "primereact/message";
 
@@ -48,7 +48,7 @@ export const Header = ({
         <Button
           className="sign-out-btn"
           icon="pi pi-sign-out"
-          onClick={() => dispatch(clearAuthToken())}
+          onClick={() => dispatch(resetStore())}
         />
         <Message
           className="profile-info"
