@@ -43,4 +43,18 @@ class ShotWebSocketService {
             }
         }
     }
+
+    fun broadcastAllShots() {
+        val allShots = shotService.getAll()
+        val message = mapOf(
+            "type" to "shots:sync",
+            "shots" to allShots
+        ).toJson()
+
+        sessions.values.forEach { session ->
+            if (session.isOpen) {
+                session.basicRemote.sendText(message)
+            }
+        }
+    }
 }

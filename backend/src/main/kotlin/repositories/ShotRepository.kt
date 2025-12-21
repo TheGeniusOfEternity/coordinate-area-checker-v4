@@ -25,10 +25,15 @@ class ShotRepository {
         return shot
     }
 
-    fun delete(id: Long): ShotEntity? {
+    fun deleteById(id: Long): ShotEntity? {
         val existing = getById(id) ?: return null
         em.remove(existing)
         em.flush()
         return existing
+    }
+
+    fun deleteAll(): Int {
+        val query = em.createQuery("DELETE FROM ShotEntity")
+        return query.executeUpdate()
     }
 }

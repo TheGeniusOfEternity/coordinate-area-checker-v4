@@ -39,6 +39,10 @@ class ShotService {
         return shot.toDto()
     }
 
+    fun removeAll(): Int {
+        return shotRepository.deleteAll()
+    }
+
     private fun ShotEntity.toDto(): ShotResponseDTO =
         ShotResponseDTO(id!!, user.id!!, x, y, r, isHit,
             hitTime

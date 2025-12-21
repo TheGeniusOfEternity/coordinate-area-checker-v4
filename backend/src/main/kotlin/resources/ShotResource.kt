@@ -6,6 +6,7 @@ import dto.shots.ShotRequestDTO
 import jakarta.inject.Inject
 import jakarta.validation.Valid
 import jakarta.ws.rs.Consumes
+import jakarta.ws.rs.DELETE
 import jakarta.ws.rs.GET
 import jakarta.ws.rs.POST
 import jakarta.ws.rs.Path
@@ -44,6 +45,17 @@ class ShotResource {
         return Response.ok(CommonResponseDTO(
             200,
             shot
+        )).build()
+    }
+
+    @DELETE
+    @Path("/")
+    fun deleteAll(): Response {
+        val deletedCount = shotsService.removeAll()
+        shotWebSocketService.broadcastAllShots()
+        return Response.ok(CommonResponseDTO(
+            status = 204,
+            data = deletedCount
         )).build()
     }
 }
