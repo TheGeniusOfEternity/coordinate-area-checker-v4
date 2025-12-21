@@ -105,7 +105,8 @@
           "isHit": {
             "hit": "Попадание",
             "miss": "Промах"
-          }
+          },
+          "executionTime": "мс"
         }
       },
       "form": {

@@ -33,10 +33,10 @@ const Home = () => {
         {user && <Header user={user as User} />}
         <div className="main">
           <Graph
+            shots={shots}
             r={r}
-            onGraphClick={
-              (clickX, clickY) =>
-                shotSubmit(user!.id, { x: clickX, y: clickY, r })
+            onGraphClick={(clickX, clickY) =>
+              shotSubmit(user!.id, { x: clickX, y: clickY, r })
             }
           />
           <DataTable
@@ -48,8 +48,16 @@ const Home = () => {
             key={i18n.language}
           >
             <Column field="id" sortable header="ID" />
-            <Column field="x" sortable header="X" />
-            <Column field="y" sortable header="Y" />
+            <Column
+              field="x"
+              sortable
+              header="X"
+            />
+            <Column
+              field="y"
+              sortable
+              header="Y"
+            />
             <Column field="r" sortable header="R" />
             <Column
               field="isHit"
@@ -70,11 +78,15 @@ const Home = () => {
               field="executionTime"
               sortable
               header={t("page.home.table.header.executionTime")}
+              body={
+                (rowData) =>
+                  `${rowData.executionTime} ${t('page.home.table.body.executionTime')}`
+              }
             />
           </DataTable>
         </div>
         <ShotForm
-          data={{ x, y, r}}
+          data={{ x, y, r }}
           onXChange={setX}
           onYChange={setY}
           onRChange={setR}

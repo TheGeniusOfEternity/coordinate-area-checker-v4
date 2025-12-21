@@ -1,38 +1,38 @@
 import "@/components/graph/Graph.css";
 import * as React from "react";
+import type { ShotResponseDto } from "@/api/dto/shots/shot-response.dto.ts";
 
 export interface GraphProps {
   r: number;
+  shots: ShotResponseDto[];
   // eslint-disable-next-line no-unused-vars
   onGraphClick: (x: number, y: number) => void;
 }
 
 export const Graph = ({
   r,
+  shots,
   onGraphClick
 }: GraphProps) => {
+
+  const scaleToSvg = (coordinate: number): number =>
+    (coordinate / r) * 120 + 150;
 
   const handleClick = (e: React.MouseEvent<SVGSVGElement>) => {
     const svg = e.currentTarget;
     const rect = svg.getBoundingClientRect();
 
-    // Получить клик координаты в SVG координатной системе
-    const svgX = (e.clientX - rect.left) * (300 / rect.width);
-    const svgY = (e.clientY - rect.top) * (300 / rect.height);
+    const clickX = (e.clientX - rect.left) * (300 / rect.width);
+    const clickY = (e.clientY - rect.top) * (300 / rect.height);
 
-    const scale = 60 / r;
-    const x = (svgX - 150) / scale;
-    const y = (150 - svgY) / scale;
+    const x = ((clickX - 150) * r / 120).toFixed(2);
+    const y = ((150 - clickY) * r / 120).toFixed(2);
 
-    onGraphClick(x, y);
+    onGraphClick(parseFloat(x), parseFloat(y));
   };
   return (
     <div className="graph-container">
-      <svg
-        viewBox="0 0 300 300"
-        className="graph"
-        onClick={handleClick}
-      >
+      <svg viewBox="0 0 300 300" className="graph" onClick={handleClick}>
         {/*I: Rectangle*/}
         <rect x="150" y="30" width="60" height="120" />
 
@@ -96,6 +96,24 @@ export const Graph = ({
         <text y="140" x="265" fontSize="16">
           R
         </text>
+
+        {
+          shots.map(shot => {
+            const svgX = scaleToSvg(shot.x);
+            const svgY = scaleToSvg(-shot.y);
+
+            return (
+              <circle
+                key={shot.id}
+                cx={svgX}
+                cy={svgY}
+                r="4"
+                className={`shot ${shot.isHit ? "hit" : "miss"}`}
+                strokeWidth="2"
+              />
+            );
+          })
+        }
       </svg>
     </div>
   );

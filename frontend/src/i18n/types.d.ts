@@ -105,7 +105,8 @@ export interface Translations {
           isHit: {
             hit: string;
             miss: string;
-          }
+          },
+          executionTime: string;
         }
       },
       form: {

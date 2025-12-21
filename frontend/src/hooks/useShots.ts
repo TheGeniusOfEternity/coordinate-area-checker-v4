@@ -22,16 +22,8 @@ export const useShots = () => {
       dispatch(
         setToastMessage({
           severity: "error",
-          summary: `request.shotSubmit.error.summary`,
-          detail: `request.shotSubmit.error.detail`,
-        }),
-      );
-    } else {
-      dispatch(
-        setToastMessage({
-          severity: "success",
-          summary: `request.shotSubmit.success.summary`,
-          detail: `request.shotSubmit.success.detail`,
+          summary: `request.common.error.summary`,
+          detail: response.data,
         }),
       );
     }

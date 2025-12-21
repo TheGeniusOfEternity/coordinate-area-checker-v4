@@ -108,7 +108,8 @@
           "isHit": {
             "hit": "Hit",
             "miss": "Miss"
-          }
+          },
+          "executionTime": "ms"
         }
       },
       "form": {

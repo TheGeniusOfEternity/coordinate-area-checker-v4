@@ -1,15 +1,6 @@
 import { apiConf } from "@/api/api.conf.ts";
 import type { ShotResponseDto } from "@/api/dto/shots/shot-response.dto.ts";
 
-export interface Shot {
-  id: string;
-  x: number;
-  y: number;
-  r: number;
-  userId: string;
-  timestamp: number;
-}
-
 class ShotSocketUtil {
   private socket: WebSocket | null = null;
   private reconnectAttempts = 0;
@@ -22,7 +13,6 @@ class ShotSocketUtil {
     this.socket = new WebSocket(wsUrl);
 
     this.socket.onopen = () => {
-      console.log("WebSocket connected");
       this.reconnectAttempts = 0;
     };
 
@@ -36,12 +26,7 @@ class ShotSocketUtil {
     };
 
     this.socket.onclose = () => {
-      console.log("WebSocket disconnected");
       this.handleReconnect();
-    };
-
-    this.socket.onerror = (error) => {
-      console.error("WebSocket error:", error);
     };
   }
 
@@ -49,9 +34,6 @@ class ShotSocketUtil {
     if (this.reconnectAttempts < this.maxReconnectAttempts) {
       this.reconnectAttempts += 1;
       setTimeout(() => {
-        console.log(
-          `Reconnecting... (${this.reconnectAttempts}/${this.maxReconnectAttempts})`,
-        );
         this.connect();
       }, this.reconnectDelay * this.reconnectAttempts);
     }
@@ -63,7 +45,6 @@ class ShotSocketUtil {
     }
   }
 
-  // Callbacks для событий
   // eslint-disable-next-line no-unused-vars
   onShotAdded?: ((shot: ShotResponseDto) => void) | null;
   // eslint-disable-next-line no-unused-vars
