@@ -25,7 +25,14 @@
     }
   },
   "page": {
+    "common": {
+      "pageTitle": "Неизвестная страница"
+    },
     "welcome": {
+      "pageTitle": {
+        "login": "Войдите в систему",
+        "register": "Зарегистрируйтесь"
+      },
       "title": {
         "register": "Создать аккаунт",
         "login": "Войти"
@@ -92,6 +99,7 @@
       }
     },
     "home": {
+      "pageTitle": "Домашняя страница",
       "header": {
         "profile": "Мой профиль",
         "signOut": "Выйти"

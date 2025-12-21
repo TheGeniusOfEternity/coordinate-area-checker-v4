@@ -28,7 +28,14 @@
     }
   },
   "page": {
+    "common": {
+      "pageTitle": "Unknown page"
+    },
     "welcome": {
+      "pageTitle": {
+        "login": "Sign in",
+        "register": "Sign up"
+      },
       "title": {
         "register": "Create an account",
         "login": "Sign In"
@@ -95,6 +102,7 @@
       }
     },
     "home": {
+      "pageTitle": "Home Page",
       "header": {
         "profile": "Account info",
         "signOut": "Sign out"

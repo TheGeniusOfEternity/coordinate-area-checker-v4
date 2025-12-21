@@ -11,6 +11,7 @@ import type { User } from "@/store/slices/authSlice.ts";
 import { useShots } from "@/hooks/useShots.ts";
 import { useState } from "react";
 import { useMatchMedia } from "primereact/hooks";
+import { useTitle } from "@/hooks/useTitle.ts";
 
 const Home = () => {
   const { t, i18n } = useTranslation();
@@ -23,6 +24,9 @@ const Home = () => {
   const [y, setY] = useState<number>(0);
   const [r, setR] = useState<number>(1);
 
+  const formatTimestamp = (iso: string): string =>
+    iso.replace('T', ' ').substring(0, 19);
+
   const user = useSelector(
     (state: RootState) => state.auth.user
   );
@@ -30,6 +34,8 @@ const Home = () => {
   const shots = useSelector(
     (state: RootState) => state.shot.shots
   );
+
+  useTitle("page.home.pageTitle");
 
   return (
     <>
@@ -81,6 +87,7 @@ const Home = () => {
               field="hitTime"
               sortable
               header={t("page.home.table.header.hitTime")}
+              body={(rowData) => formatTimestamp(rowData.hitTime)}
             />
             <Column
               field="executionTime"

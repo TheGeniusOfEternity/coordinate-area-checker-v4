@@ -25,7 +25,14 @@ export interface Translations {
     };
   };
   page: {
+    common: {
+      pageTitle: string;
+    };
     welcome: {
+      pageTitle: {
+        login: string;
+        register: string;
+      }
       title: {
         register: string;
         login: string;
@@ -92,6 +99,7 @@ export interface Translations {
       };
     };
     home: {
+      pageTitle: string;
       header: {
         profile: string;
         signOut: string;
