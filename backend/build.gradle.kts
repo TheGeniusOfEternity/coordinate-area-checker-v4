@@ -30,7 +30,7 @@ dependencies {
 
     //JSON
     implementation("org.jboss.resteasy:resteasy-jackson2-provider:6.2.10.Final")
-    implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.16.0")
+    implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.17.2")
 
     //Encryption
     implementation("org.mindrot:jbcrypt:0.4")

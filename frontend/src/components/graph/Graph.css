@@ -1,0 +1,40 @@
+.graph-container {
+  background-color: var(--highlight-bg);
+  border-radius: var(--border-radius);
+  padding: var(--default-padding);
+  aspect-ratio: 1;
+  height: 100%;
+}
+
+.graph {
+  height: 100%;
+}
+
+.graph rect,
+.graph .triangle,
+.graph .arc {
+  fill: var(--bg-color-secondary);
+}
+
+line {
+  stroke: var(--text-color-secondary);
+}
+
+text, polygon {
+  fill: var(--text-color-secondary);
+}
+
+.shot {
+  fill: #666;
+  stroke: #333;
+}
+
+.shot.hit {
+  fill: #4CAF50;
+  stroke: #45a049;
+}
+
+.shot.miss {
+  fill: #f44336;
+  stroke: #da190b;
+}

@@ -28,7 +28,14 @@
     }
   },
   "page": {
+    "common": {
+      "pageTitle": "Unknown page"
+    },
     "welcome": {
+      "pageTitle": {
+        "login": "Sign in",
+        "register": "Sign up"
+      },
       "title": {
         "register": "Create an account",
         "login": "Sign In"
@@ -92,6 +99,33 @@
           "text": "Don't have an account?",
           "link": "Create one"
         }
+      }
+    },
+    "home": {
+      "pageTitle": "Home Page",
+      "header": {
+        "profile": "Account info",
+        "signOut": "Sign out"
+      },
+      "table": {
+        "header": {
+          "status": "Status",
+          "hitTime": "Hit time",
+          "executionTime": "Execution time"
+        },
+        "body": {
+          "isHit": {
+            "hit": "Hit",
+            "miss": "Miss"
+          },
+          "executionTime": "ms"
+        }
+      },
+      "form": {
+        "title": "Make a new shot",
+        "submit": "Send",
+        "reset": "Reset",
+        "yLabel": "Current value"
       }
     }
   }

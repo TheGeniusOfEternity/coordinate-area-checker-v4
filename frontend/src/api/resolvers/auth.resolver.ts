@@ -7,6 +7,7 @@ import type { RegisterRequestDto } from "@/api/dto/auth/register-request.dto.ts"
 
 export class AuthResolver {
   private apiResolver = new ApiResolverUtil("auth");
+
   public async login(data: LoginRequestDto) {
     return await this.apiResolver.request<
       LoginRequestDto,

@@ -1,5 +1,6 @@
 import axios, { type AxiosRequestConfig, type AxiosResponse, isAxiosError } from "axios";
 import { apiConf } from "../api/api.conf.ts";
+import { store } from "@/store";
 
 interface RequestConfig<T> extends AxiosRequestConfig {
   data?: T;
@@ -19,7 +20,7 @@ class ApiResolverUtil {
     responseType?: AxiosResponse["request"]["responseType"],
   ): Promise<S> {
     const fullUrl = `${apiConf.endpoint}/${this.endpoint}/${url}`;
-    const jwt = localStorage.getItem("access_token");
+    const jwt = store.getState().auth.accessToken;
 
     const config: RequestConfig<U> = {
       url: fullUrl,

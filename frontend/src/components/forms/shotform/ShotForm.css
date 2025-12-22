@@ -1,0 +1,127 @@
+.shotForm {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  padding: var(--form-gap);
+  gap: var(--form-gap);
+  background-color: var(--surface-overlay);
+  border-top-right-radius: var(--border-radius);
+  border-top-left-radius: var(--border-radius);
+  align-items: center;
+  transition: transform 0.5s ease;
+}
+
+.shotForm.hidden {
+  transform: translateY(87%);
+}
+
+.shotForm::before {
+  content: '';
+  display: block;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-top-right-radius: var(--border-radius);
+  border-top-left-radius: var(--border-radius);
+}
+
+.xInput .input,
+.rInput .input {
+  overflow-y: auto;
+  max-height: min(22vh, 200px);
+}
+
+.yInput label {
+  display: flex;
+}
+
+.yInput label p:nth-child(2) {
+  margin-left: auto;
+  text-align: right;
+}
+
+.yInput label p:last-child {
+  width: 10%;
+  text-align: right;
+}
+
+.shotForm h3 {
+  margin: 0;
+}
+
+.shotForm .yInput {
+  grid-row: 3 / 4;
+  grid-column: 1 / -1;
+  height: 100%;
+}
+
+.buttons {
+  display: flex;
+  grid-column: 1 / -1;
+  gap: var(--form-gap);
+  margin: var(--form-gap) 0;
+}
+
+.btn {
+  flex: 1;
+}
+
+.toggle-btn {
+  transition: transform 0.3s ease;
+  transform: rotate(0);
+  background-color: transparent;
+  justify-self: flex-end;
+  z-index: 100;
+}
+
+.toggle-btn[data-opened="false"] {
+  transform: rotate(180deg);
+}
+
+@media screen and (min-width: 790px) and (max-width: 1250px) {
+  .yInput label p:last-child {
+    width: 4%;
+  }
+}
+
+@media screen and (min-width: 1251px) {
+  .shotForm {
+    height: 100%;
+    grid-template-columns: 1fr 1fr 3rem;
+    column-gap: 0;
+    width: 30%;
+    padding: var(--default-padding);
+    border-top-left-radius: 0;
+  }
+
+  .shotForm::before {
+    border-top-left-radius: 0;
+  }
+
+  .shotForm.hidden {
+    transform: translate(-84%, 0);
+  }
+
+  .shotForm i {
+    grid-column: 3 / -1;
+  }
+
+  .shotForm .p-field,
+  .shotForm .buttons {
+    grid-column: 1 / 3;
+  }
+
+  .buttons {
+    flex-direction: column;
+  }
+
+  .toggle-btn {
+    transform: rotate(90deg);
+  }
+
+  .toggle-btn[data-opened="false"] {
+    transform: rotate(-90deg);
+  }
+}

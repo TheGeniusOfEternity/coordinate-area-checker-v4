@@ -1,8 +1,9 @@
 package resources
 
-import annotations.BearerToken
+import annotations.AuthRequired
 import dto.auth.LoginRequestDTO
 import dto.auth.RegisterRequestDTO
+import dto.common.CommonResponseDTO
 import jakarta.inject.Inject
 import jakarta.validation.Valid
 import jakarta.ws.rs.Consumes
@@ -17,6 +18,7 @@ import services.AuthService
 @Produces(MediaType.APPLICATION_JSON)
 @Path("/auth")
 class AuthResource {
+
     @Inject
     private lateinit var authService: AuthService
 
@@ -25,7 +27,10 @@ class AuthResource {
     @Path("/login")
     fun login(@Valid request: LoginRequestDTO): Response {
         val result = authService.login(request)
-        return Response.ok(result).build()
+        return Response.ok(CommonResponseDTO(
+            200,
+            result
+        )).build()
     }
 
     @POST
@@ -33,17 +38,24 @@ class AuthResource {
     @Path("/register")
     fun register(@Valid request: RegisterRequestDTO): Response {
         val result = authService.register(request)
-        return Response.ok(result).build()
+        return Response.ok(CommonResponseDTO(
+            200,
+            result
+        )).build()
     }
 
     @POST
+    @AuthRequired
     @Path("/refresh-jwt")
     fun refreshJWT(
         @HeaderParam("Authorization")
-        @BearerToken
-        token: String
+        authHeader: String
     ): Response {
+        val token = authHeader.removePrefix("Bearer ").trim()
         val result = authService.refreshJWT(token)
-        return Response.ok(result).build()
+        return Response.ok(CommonResponseDTO(
+            200,
+            result
+        )).build()
     }
 }

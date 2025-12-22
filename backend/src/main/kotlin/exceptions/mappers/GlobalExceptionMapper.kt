@@ -10,6 +10,7 @@ import jakarta.ws.rs.ext.Provider
 class GlobalExceptionMapper: ExceptionMapper<Throwable> {
     override fun toResponse(exception: Throwable): Response {
         println("Exception caught in Global: ${exception.javaClass.name}")
+        println(exception.message)
         return when (exception) {
             is BaseBusinessException -> Response.status(exception.status)
                 .entity(CommonResponseDTO(

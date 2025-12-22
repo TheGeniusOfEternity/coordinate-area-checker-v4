@@ -22,13 +22,16 @@ data class UserEntity(
     @Column(nullable = false)
     val patronymic: String,
 
-    @Column(nullable = false)
+    @Column(name = "study_group", nullable = false)
     val studyGroup: String,
 
-    @Column(nullable = false)
+    @Column(name = "password_hash", nullable = false)
     val passwordHash: String,
 
-    @Column(nullable = false)
+    @Column(name = "created_at", nullable = false)
     val createdAt: Instant = Instant.now(),
+
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = [CascadeType.ALL])
+    val shots: MutableList<ShotEntity> = mutableListOf(),
 )
 

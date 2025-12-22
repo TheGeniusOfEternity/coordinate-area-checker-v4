@@ -3,29 +3,36 @@ export interface Translations {
     common: {
       error: {
         summary: string;
-      }
-    }
+      };
+    };
     login: {
       success: {
         summary: string;
         detail: string;
-      },
-    },
+      };
+    };
     register: {
       success: {
         summary: string;
         detail: string;
-      },
-    }
+      };
+    };
     refreshJwt: {
       success: {
         summary: string;
         detail: string;
-      },
-    }
-  },
+      };
+    };
+  };
   page: {
+    common: {
+      pageTitle: string;
+    };
     welcome: {
+      pageTitle: {
+        login: string;
+        register: string;
+      }
       title: {
         register: string;
         login: string;
@@ -89,6 +96,33 @@ export interface Translations {
           text: string;
           link: string;
         };
+      };
+    };
+    home: {
+      pageTitle: string;
+      header: {
+        profile: string;
+        signOut: string;
+      };
+      table: {
+        header: {
+          status: string;
+          hitTime: string;
+          executionTime: string;
+        },
+        body: {
+          isHit: {
+            hit: string;
+            miss: string;
+          },
+          executionTime: string;
+        }
+      },
+      form: {
+        title: string;
+        submit: string;
+        reset: string;
+        yLabel: string;
       };
     };
   };

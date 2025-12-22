@@ -19,6 +19,7 @@ export const PageTransition = ({ children }: PropsWithChildren) => (
       width: "100%",
       height: "100%",
     }}
+    className="wrapper transition"
   >
     {children}
   </motion.div>

@@ -1,0 +1,77 @@
+
+nav {
+  display: flex;
+  gap: var(--default-padding);
+  padding:
+      var(--default-padding)
+      var(--default-padding)
+      0
+      var(--default-padding);
+}
+
+nav .lang-btn .p-button-label {
+  flex: 1;
+  visibility: visible;
+}
+
+nav .account-btn {
+  flex: 1;
+}
+
+nav h4 {
+  margin: 0;
+  display: flex;
+  align-items: center;
+}
+
+.profile-info {
+  display: flex;
+  justify-content: space-evenly;
+  flex: 1;
+}
+
+.full-name {
+  margin: 0;
+  font-family: monospace, sans-serif;
+  display: grid;
+  grid-template-columns: 1fr 2ch 2ch;
+  align-items: center;
+}
+
+.surname {
+  margin-right: var(--form-field-gap);
+}
+
+.name, .patronymic {
+  overflow: hidden;
+  display: flex;
+  letter-spacing: 1ch;
+  position: relative;
+}
+
+.name::after, .patronymic::after {
+  content: ".";
+  display: block;
+  position: absolute;
+  left: 1ch;
+  z-index: 100;
+}
+
+
+@media screen and (min-width: 790px) {
+  .full-name {
+    grid-template-columns: repeat(3, auto);
+  }
+
+  .name, .patronymic {
+    letter-spacing: normal;
+    margin-right: var(--form-field-gap);
+  }
+}
+
+@media screen and (min-width: 1251px) {
+  nav {
+    margin-left: 5%;
+    gap: var(--form-field-gap)
+  }
+}

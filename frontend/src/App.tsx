@@ -11,7 +11,6 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   setAuthToken,
 } from "@/store/slices/authSlice";
-import { ProtectedRoute } from "@/components/routes/ProtectedRoute";
 import { PublicRoute } from "@/components/routes/PublicRoute";
 import { useLocation, useNavigate } from "react-router-dom";
 import { setNavigate } from "@/utils/NavigationUtil.ts";
@@ -97,7 +96,7 @@ const App = ()=> {
             } as React.CSSProperties}
           />
         )}
-        <div className={`App ${isSwitching ? "theme-transition" : ""} ${currentTheme}`}>
+        <div className={`App ${isSwitching ? "theme-transition " : ""}${currentTheme}`}>
           <AnimatePresence mode="wait">
             <Routes location={location} key={location.pathname}>
               <Route
@@ -113,11 +112,11 @@ const App = ()=> {
               <Route
                 path="/"
                 element={
-                  <ProtectedRoute>
+                  // <ProtectedRoute>
                     <PageTransition>
                       <Home />
                     </PageTransition>
-                  </ProtectedRoute>
+                  // </ProtectedRoute>
                 }
               />
               <Route path="*" element={<Navigate to="/" replace />} />
