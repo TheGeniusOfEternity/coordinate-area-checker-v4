@@ -18,41 +18,48 @@ export const useAuth = () => {
 
   const authorize = async (
     data: LoginFormData | RegisterFormData,
-    mode: "login" | "register"
+    mode: "login" | "register",
   ) => {
     setLoading(true);
-    const response = mode === "login"
-      ? await authResolver.login(data as LoginFormData)
-      : await authResolver.register(data as RegisterFormData);
-    switch(response.status) {
+    const response =
+      mode === "login"
+        ? await authResolver.login(data as LoginFormData)
+        : await authResolver.register(data as RegisterFormData);
+    switch (response.status) {
       case 200: {
         const token = (response.data as AuthResponseDto).jwtToken;
         localStorage.setItem("access_token", token);
         dispatch(setAuthToken(token));
         navigate("/");
-        dispatch(setToastMessage({
-          severity: "success",
-          summary: `request.${mode}.success.summary`,
-          detail: `request.${mode}.success.detail`
-        }));
+        dispatch(
+          setToastMessage({
+            severity: "success",
+            summary: `request.${mode}.success.summary`,
+            detail: `request.${mode}.success.detail`,
+          }),
+        );
         break;
       }
       case 400: {
-        (response.data as ValidationErrorResponseDto[]).forEach(error => {
-          dispatch(setToastMessage({
-            severity: "error",
-            summary: "request.common.error.summary",
-            detail: error.message
-          }));
+        (response.data as ValidationErrorResponseDto[]).forEach((error) => {
+          dispatch(
+            setToastMessage({
+              severity: "error",
+              summary: "request.common.error.summary",
+              detail: error.message,
+            }),
+          );
         });
         break;
       }
       default: {
-        dispatch(setToastMessage({
-          severity: "error",
-          summary: "request.common.error.summary",
-          detail: response.data as string
-        }));
+        dispatch(
+          setToastMessage({
+            severity: "error",
+            summary: "request.common.error.summary",
+            detail: response.data as string,
+          }),
+        );
         break;
       }
     }
@@ -61,6 +68,6 @@ export const useAuth = () => {
 
   return {
     authorize,
-    loading
+    loading,
   };
 };

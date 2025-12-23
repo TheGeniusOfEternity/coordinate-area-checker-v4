@@ -24,10 +24,10 @@ class ShotService {
         return shots.map { it.toDto() }
     }
 
-    fun create(shotDTO: ShotRequestDTO): ShotResponseDTO {
+    fun create(shotDTO: ShotRequestDTO, userId: Long): ShotResponseDTO {
         val execStart = TimeSource.Monotonic.markNow()
-        val user = userRepository.getById(shotDTO.userId)
-            ?: throw UserNotFoundException(shotDTO.userId.toString())
+        val user = userRepository.getById(userId)
+            ?: throw UserNotFoundException(userId.toString())
         val shot = shotRepository.create(ShotEntity(
             user = user,
             x = shotDTO.x,

@@ -1,10 +1,7 @@
 import "@/components/forms/shotform/ShotForm.css";
 import * as React from "react";
 import { ListBox } from "primereact/listbox";
-import {
-  useRef,
-  useState,
-} from "react";
+import { useRef, useState } from "react";
 import { Slider } from "primereact/slider";
 import { Button } from "primereact/button";
 import { useTranslation } from "react-i18next";
@@ -24,7 +21,7 @@ interface ShotFormProps {
   // eslint-disable-next-line no-unused-vars
   onRChange: (r: number) => void;
   // eslint-disable-next-line no-unused-vars
-  onSubmit: (data: ShotFormData) => Promise<void>;
+  onSubmit: (data: ShotFormData) => void;
 }
 
 export const ShotForm = ({
@@ -43,9 +40,9 @@ export const ShotForm = ({
 
   const [isOpened, setIsOpened] = useState(false);
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    await onSubmit(data);
+    onSubmit(data);
   };
 
   const resetForm = () => {

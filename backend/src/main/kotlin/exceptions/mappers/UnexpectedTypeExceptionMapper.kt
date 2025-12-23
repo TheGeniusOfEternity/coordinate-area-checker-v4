@@ -7,13 +7,15 @@ import jakarta.ws.rs.ext.ExceptionMapper
 import jakarta.ws.rs.ext.Provider
 
 @Provider
-class UnexpectedTypeExceptionMapper: ExceptionMapper<UnexpectedTypeException> {
+class UnexpectedTypeExceptionMapper : ExceptionMapper<UnexpectedTypeException> {
     override fun toResponse(exception: UnexpectedTypeException): Response {
         return Response.status(Response.Status.BAD_REQUEST)
-            .entity(CommonResponseDTO(
-                Response.Status.BAD_REQUEST.statusCode,
-                "Validation error: ${exception.message}",
-            ))
+            .entity(
+                CommonResponseDTO(
+                    Response.Status.BAD_REQUEST.statusCode,
+                    "Validation error: ${exception.message}",
+                )
+            )
             .build()
     }
 }

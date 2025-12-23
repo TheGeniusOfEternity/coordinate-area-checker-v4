@@ -1,5 +1,6 @@
 import { apiConf } from "@/api/api.conf.ts";
 import type { ShotResponseDto } from "@/api/dto/shots/shot-response.dto.ts";
+import type { ShotRequestDto } from "@/api/dto/shots/shot-request.dto.ts";
 
 class ShotSocketUtil {
   private socket: WebSocket | null = null;
@@ -39,6 +40,19 @@ class ShotSocketUtil {
         this.handleReconnect();
       }
     };
+  }
+
+  sendShot(shot: ShotRequestDto) {
+    if (this.socket && this.socket.readyState === WebSocket.OPEN) {
+      this.socket.send(
+        JSON.stringify({
+          type: "shot:create",
+          shot,
+        }),
+      );
+      return true;
+    }
+    return false;
   }
 
   private handleReconnect() {
