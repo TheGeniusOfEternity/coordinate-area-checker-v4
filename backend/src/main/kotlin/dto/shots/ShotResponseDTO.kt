@@ -1,8 +1,5 @@
 package dto.shots
 
-import com.fasterxml.jackson.annotation.JsonFormat
-import java.time.Instant
-
 data class ShotResponseDTO(
     val id: Long,
     val userId: Long,

@@ -28,11 +28,4 @@ class UserRepository {
         em.flush()
         return user
     }
-
-    fun update(id: Long): UserEntity? {
-        val existing = getById(id) ?: return null
-        em.merge(existing)
-        em.flush()
-        return existing
-    }
 }
