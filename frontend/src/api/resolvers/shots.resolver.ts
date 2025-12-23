@@ -6,17 +6,6 @@ import type { ShotRequestDto } from "@/api/dto/shots/shot-request.dto.ts";
 export class ShotsResolver {
   private apiResolver = new ApiResolverUtil("shots");
 
-  public async getAll() {
-    return await this.apiResolver.request<
-      null,
-      CommonResponseDto<ShotResponseDto[] | string>
-    >(
-      "",
-      "GET",
-      null,
-    );
-  }
-
   public async create(data: ShotRequestDto) {
     return await this.apiResolver.request<
       ShotRequestDto,
