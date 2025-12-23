@@ -108,6 +108,10 @@
     grid-column: 3 / -1;
   }
 
+  .shotForm i:hover {
+    cursor: pointer;
+  }
+
   .shotForm .p-field,
   .shotForm .buttons {
     grid-column: 1 / 3;

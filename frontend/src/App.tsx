@@ -19,6 +19,7 @@ import { clearToastMessage } from "@/store/slices/toastSlice.ts";
 import { useTranslation } from "react-i18next";
 import { AnimatePresence } from "framer-motion";
 import { PageTransition } from "@/components/transitions/PageTransition.tsx";
+import { ProtectedRoute } from "@/components/routes/ProtectedRoute.tsx";
 
 let previousTheme = "";
 
@@ -112,11 +113,11 @@ const App = ()=> {
               <Route
                 path="/"
                 element={
-                  // <ProtectedRoute>
+                  <ProtectedRoute>
                     <PageTransition>
                       <Home />
                     </PageTransition>
-                  // </ProtectedRoute>
+                  </ProtectedRoute>
                 }
               />
               <Route path="*" element={<Navigate to="/" replace />} />
