@@ -1,5 +1,4 @@
 import type { ShotFormData } from "@/components/forms/shotform/ShotForm.tsx";
-import { ShotsResolver } from "@/api/resolvers/shots.resolver.ts";
 import { setToastMessage } from "@/store/slices/toastSlice.ts";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
@@ -11,21 +10,14 @@ export const useShots = () => {
   const dispatch = useDispatch();
   const token = useSelector((state: RootState) => state.auth.accessToken);
 
-  const shotSubmit = async (
-    userId: number,
-    data: ShotFormData
-  ) => {
-    const shotsResolver = new ShotsResolver();
-    const response = await shotsResolver.create({
-      userId,
-      ...data,
-    });
-    if (!response.data || typeof response.data === "string") {
+  const shotSubmit = (data: ShotFormData) => {
+    const response = shotSocketUtil.sendShot(data);
+    if (!response) {
       dispatch(
         setToastMessage({
           severity: "error",
           summary: `request.common.error.summary`,
-          detail: response.data,
+          detail: "",
         }),
       );
     }

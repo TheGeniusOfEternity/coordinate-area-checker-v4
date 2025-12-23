@@ -25,48 +25,32 @@ const Home = () => {
   const [r, setR] = useState<number>(1);
 
   const formatTimestamp = (iso: string): string =>
-    iso.replace('T', ' ').substring(0, 19);
+    iso.replace("T", " ").substring(0, 19);
 
-  const user = useSelector(
-    (state: RootState) => state.auth.user
-  );
+  const user = useSelector((state: RootState) => state.auth.user);
 
-  const shots = useSelector(
-    (state: RootState) => state.shot.shots
-  );
+  const shots = useSelector((state: RootState) => state.shot.shots);
 
   useTitle("page.home.pageTitle");
 
   return (
     <>
       <div className="container">
-        {user && <Header
-          user={user as User}
-          isMobile={isMobile}
-        />}
+        {user && <Header user={user as User} isMobile={isMobile} />}
         <div className="main">
           <Graph
             shots={shots}
             r={r}
             onGraphClick={(clickX, clickY) =>
-              shotSubmit(user!.id, { x: clickX, y: clickY, r })
+              shotSubmit({ x: clickX, y: clickY, r })
             }
           />
           <DataTable
-            size={
-              isMobile
-                ? "small"
-                : isDesktop
-                  ? "large"
-                  : "normal"
-            }
+            size={isMobile ? "small" : isDesktop ? "large" : "normal"}
             value={shots}
             paginator
             paginatorPosition="bottom"
-            rows={isMobile
-              ? 7
-              : 10
-            }
+            rows={isMobile ? 7 : 10}
             key={i18n.language}
           >
             <Column field="id" sortable header="ID" />
@@ -104,7 +88,7 @@ const Home = () => {
           onXChange={setX}
           onYChange={setY}
           onRChange={setR}
-          onSubmit={(data) => shotSubmit(user!.id, data)}
+          onSubmit={shotSubmit}
         />
       </div>
     </>

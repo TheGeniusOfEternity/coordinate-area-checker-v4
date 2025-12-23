@@ -35,7 +35,7 @@ class JWTService {
         return JWT.create()
             .withSubject(userId.toString())
             .withClaim("user", userData)
-            .withIssuedAt(Date.from(now ))
+            .withIssuedAt(Date.from(now))
             .withExpiresAt(Date.from(expiresAt))
             .sign(algorithm)
     }
