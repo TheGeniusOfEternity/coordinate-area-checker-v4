@@ -34,8 +34,10 @@ class ShotWebSocketEndpoint {
             }
             ?: return sendError(session, "No token provided", 4001)
 
-        val userId = jwtService.verifyToken(token)
+        val jwtData = jwtService.verifyToken(token)
             ?: return sendError(session, "Invalid token", 4002)
+
+        val userId = jwtData.subject.toLong()
 
         session.userProperties["id"] = userId
 
