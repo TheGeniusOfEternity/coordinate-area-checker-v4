@@ -1,12 +1,10 @@
 import "./Welcome.css";
-import { createContext, useState } from "react";
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import LoginForm from "@/components/forms/loginform/LoginForm.tsx";
 import RegisterForm from "@/components/forms/registerform/RegisterForm.tsx";
 import { useAuth } from "@/hooks/useAuth.ts";
 import { useTitle } from "@/hooks/useTitle.ts";
-
-export const WelcomePage = createContext<any>(null);
 
 const Welcome = () => {
   const { t } = useTranslation();
@@ -29,30 +27,26 @@ const Welcome = () => {
   );
 
   return (
-    <WelcomePage.Provider value={{
-      goida: true
-    }}>
-      <div className="auth-container">
-        <div className={`wrapper ${mode}`}>
-          <div className={`auth-card ${mode === "login" ? "" : "hidden"}`}>
-            <h3>{t(`page.welcome.title.login`)}</h3>
-            <LoginForm
-              onSubmit={(data) => authorize(data, mode)}
-              onSwitchToRegister={switchToRegister}
-              loading={loading}
-            />
-          </div>
-          <div className={`auth-card ${mode === "register" ? "" : "hidden"}`}>
-            <h3>{t(`page.welcome.title.register`)}</h3>
-            <RegisterForm
-              onSubmit={(data) => authorize(data, mode)}
-              onLoginSwitch={switchToLogin}
-              loading={loading}
-            />
-          </div>
+    <div className="auth-container">
+      <div className={`wrapper ${mode}`}>
+        <div className={`auth-card ${mode === "login" ? "" : "hidden"}`}>
+          <h3>{t(`page.welcome.title.login`)}</h3>
+          <LoginForm
+            onSubmit={(data) => authorize(data, mode)}
+            onSwitchToRegister={switchToRegister}
+            loading={loading}
+          />
+        </div>
+        <div className={`auth-card ${mode === "register" ? "" : "hidden"}`}>
+          <h3>{t(`page.welcome.title.register`)}</h3>
+          <RegisterForm
+            onSubmit={(data) => authorize(data, mode)}
+            onLoginSwitch={switchToLogin}
+            loading={loading}
+          />
         </div>
       </div>
-    </WelcomePage.Provider>
+    </div>
   );
 };
 
