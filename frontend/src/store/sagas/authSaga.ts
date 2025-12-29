@@ -1,8 +1,7 @@
-import { call, put, takeEvery, takeLatest } from "redux-saga/effects";
+import { call, put, takeLatest } from "redux-saga/effects";
 import { redirectTo } from "@/utils/NavigationUtil.ts";
 import { resetStore } from "@/store";
 import {
-  clearAuthToken,
   setAuthToken,
   setRefreshRequested,
 } from "@/store/slices/authSlice.ts";
@@ -13,20 +12,20 @@ import { setToastMessage } from "@/store/slices/toastSlice.ts";
 
 const clearToken = function* clearToken() {
   localStorage.removeItem("access_token");
-  yield put(resetStore());
   redirectTo("/auth");
+  yield;
 };
 
 const refreshTokens = function* refreshTokens(
   action: ReturnType<typeof setRefreshRequested>,
 ) {
   if (action.payload) {
-    yield put(clearAuthToken());
-
     const authResolver = new AuthResolver();
+
     const response: CommonResponseDto<AuthResponseDto | string> = yield call(
-      authResolver.refreshTokens,
+      [authResolver, authResolver.refreshTokens]
     );
+
     if (response.status === 200) {
       const token = (response.data as AuthResponseDto).jwtToken;
       localStorage.setItem("access_token", token);
@@ -35,19 +34,19 @@ const refreshTokens = function* refreshTokens(
       yield put(
         setToastMessage({
           severity: "success",
-          summary: `request.refreshJWT.success.summary`,
-          detail: `request.refreshJWT.success.detail`,
+          summary: `request.refreshJwt.success.summary`,
+          detail: `request.refreshJwt.success.detail`,
         }),
       );
       yield put(setRefreshRequested(false));
     }
     else {
-      clearToken();
+      yield* clearToken();
     }
   }
 };
 
 export const authSaga = function* authSaga() {
   yield takeLatest(resetStore.type, clearToken);
-  yield takeEvery(setRefreshRequested, refreshTokens);
+  yield takeLatest(setRefreshRequested.type, refreshTokens);
 };

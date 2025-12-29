@@ -1,6 +1,9 @@
 import { apiConf } from "@/api/api.conf.ts";
 import type { ShotResponseDto } from "@/api/dto/shots/shot-response.dto.ts";
 import type { ShotRequestDto } from "@/api/dto/shots/shot-request.dto.ts";
+import { store } from "@/store";
+import { setRefreshRequested } from "@/store/slices/authSlice.ts";
+import { setIsConnected } from "@/store/slices/shotSlice.ts";
 
 class ShotSocketUtil {
   private socket: WebSocket | null = null;
@@ -11,7 +14,9 @@ class ShotSocketUtil {
   private token = "";
 
   setToken(token: string) {
-    this.token = token;
+    if (this.token !== token) {
+      this.token = token;
+    }
   }
 
   connect() {
@@ -24,10 +29,18 @@ class ShotSocketUtil {
     this.socket.onopen = () => {
       this.closedManually = false;
       this.reconnectAttempts = 0;
+      store.dispatch(setIsConnected(true));
     };
 
     this.socket.onmessage = (event) => {
       const data = JSON.parse(event.data);
+
+      if (data.status === 401) {
+        this.disconnect();
+        store.dispatch(setRefreshRequested(true));
+        return;
+      }
+
       if (data.type === "shots:sync") {
         this.onShotsSync?.(data.shots);
       } else if (data.type === "shot:added") {
@@ -39,6 +52,7 @@ class ShotSocketUtil {
       if (!this.closedManually) {
         this.handleReconnect();
       }
+      store.dispatch(setIsConnected(false));
     };
   }
 

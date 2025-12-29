@@ -9,6 +9,7 @@ import type { RootState } from "@/store";
 export const useShots = () => {
   const dispatch = useDispatch();
   const token = useSelector((state: RootState) => state.auth.accessToken);
+  const isConnected = useSelector((state: RootState) => state.shot.isConnected);
 
   const shotSubmit = (data: ShotFormData) => {
     const response = shotSocketUtil.sendShot(data);
@@ -24,7 +25,7 @@ export const useShots = () => {
   };
 
   useEffect(() => {
-    if (token) {
+    if (token && !isConnected) {
       shotSocketUtil.setToken(token);
       shotSocketUtil.connect();
 
@@ -42,7 +43,8 @@ export const useShots = () => {
       shotSocketUtil.onShotAdded = null;
       shotSocketUtil.onShotsSync = null;
     };
-  }, [dispatch, token]);
+    //eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [token]);
 
   return {
     shotSubmit

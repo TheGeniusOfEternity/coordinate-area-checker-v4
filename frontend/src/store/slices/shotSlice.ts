@@ -3,23 +3,20 @@ import type { ShotResponseDto } from "@/api/dto/shots/shot-response.dto.ts";
 
 interface ShotsState {
   shots: ShotResponseDto[];
-  connected: boolean;
-  error: string | null;
+  isConnected: boolean;
 }
 
 const initialState: ShotsState = {
   shots: [],
-  connected: false,
-  error: null,
+  isConnected: false,
 };
 
 export const shotSlice = createSlice({
   name: "shots",
   initialState,
   reducers: {
-    connected: (state) => {
-      state.connected = true;
-      state.error = null;
+    setIsConnected: (state, action: PayloadAction<boolean>) => {
+      state.isConnected = action.payload;
     },
     shotAdded: (state, action: PayloadAction<ShotResponseDto>) => {
       state.shots.push(action.payload);
@@ -31,7 +28,7 @@ export const shotSlice = createSlice({
 });
 
 export const {
-  connected,
+  setIsConnected,
   shotAdded,
   shotsSynced,
 } = shotSlice.actions;

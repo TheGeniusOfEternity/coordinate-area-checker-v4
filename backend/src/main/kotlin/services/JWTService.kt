@@ -19,7 +19,7 @@ class JWTService {
     private lateinit var refreshTokenRepository: RefreshTokenRepository
 
     private val secret = "GOIDA_SECRET"
-    private val accessTokenDuration = Duration.ofSeconds(30)
+    private val accessTokenDuration = Duration.ofSeconds(10)
     private val refreshTokenDuration = Duration.ofDays(7)
 
     private val algorithm = Algorithm.HMAC256(secret)

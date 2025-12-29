@@ -5,7 +5,7 @@ import { Navigate, Route, Routes } from "react-router";
 import { useContext, useEffect, useRef } from "react";
 import Home from "./pages/home/Home.tsx";
 import { PrimeReactContext } from "primereact/api";
-import type { RootState } from "./store";
+import { type RootState, store } from "./store";
 import Welcome from "./pages/welcome/Welcome.tsx";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -76,11 +76,12 @@ const App = ()=> {
   }, [navigate]);
 
   useEffect(() => {
-    const token = localStorage.getItem('access_token');
-    if (token !== null) {
+    const token = localStorage.getItem("access_token");
+    if (token !== null && !store.getState().auth.accessToken) {
       dispatch(setAuthToken(token));
     }
-  }, [dispatch]);
+    //eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
       <>

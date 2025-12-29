@@ -1,6 +1,5 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 import { JwtUtil } from "@/utils/JwtUtil.ts";
-import { toastSlice } from "@/store/slices/toastSlice.ts";
 
 export interface User {
   id: number;
@@ -24,13 +23,6 @@ export const authSlice = createSlice({
       const decoded = JwtUtil.decode(action.payload);
       if (decoded.error === null) {
         state.user = decoded.user;
-      }
-      else {
-        toastSlice.actions.setToastMessage({
-          severity: "error",
-          summary: "Decode error",
-          detail: decoded.error,
-        });
       }
     },
     clearAuthToken: (state) => {
