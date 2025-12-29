@@ -30,7 +30,7 @@ export class AuthResolver {
     );
   }
 
-  public async refreshJWT() {
+  public async refreshTokens() {
     return await this.apiResolver.request<
       null,
       CommonResponseDto<AuthResponseDto>
