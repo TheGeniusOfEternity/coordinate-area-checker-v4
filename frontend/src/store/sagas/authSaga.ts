@@ -41,7 +41,7 @@ const refreshTokens = function* refreshTokens(
       yield put(setRefreshRequested(false));
     }
     else {
-      yield* clearToken();
+      yield put(resetStore());
     }
   }
 };
