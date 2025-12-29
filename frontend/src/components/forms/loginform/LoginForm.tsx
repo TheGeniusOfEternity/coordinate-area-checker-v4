@@ -3,9 +3,8 @@ import { InputText } from "primereact/inputtext";
 import { Password } from "primereact/password";
 import { Button } from "primereact/button";
 import { useTranslation } from "react-i18next";
-import { useContext, useState } from "react";
+import { useState } from "react";
 import * as React from "react";
-import { WelcomePage } from "@/pages/welcome/Welcome.tsx";
 
 export interface LoginFormData {
   email: string;
@@ -30,9 +29,6 @@ const LoginForm = ({
     email: '',
     password: ''
   });
-
-  const { goida } = useContext(WelcomePage);
-  console.log(goida);
 
   const handleFormChange = (field: keyof LoginFormData, value: string) => {
     setForm((prev) => ({ ...prev, [field]: value }));

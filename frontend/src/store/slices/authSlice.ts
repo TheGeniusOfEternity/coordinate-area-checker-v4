@@ -1,6 +1,5 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 import { JwtUtil } from "@/utils/JwtUtil.ts";
-import { toastSlice } from "@/store/slices/toastSlice.ts";
 
 export interface User {
   id: number;
@@ -15,7 +14,8 @@ export const authSlice = createSlice({
   name: "auth",
   initialState: {
     accessToken: null as string | null,
-    user: null as User | null,
+    refreshRequested: false,
+    user: null as User | null
   },
   reducers: {
     setAuthToken: (state, action: PayloadAction<string>) => {
@@ -24,20 +24,16 @@ export const authSlice = createSlice({
       if (decoded.error === null) {
         state.user = decoded.user;
       }
-      else {
-        toastSlice.actions.setToastMessage({
-          severity: "error",
-          summary: "Decode error",
-          detail: decoded.error,
-        });
-      }
     },
     clearAuthToken: (state) => {
       state.accessToken = null;
       state.user = null;
     },
+    setRefreshRequested: (state, action: PayloadAction<boolean>) => {
+      state.refreshRequested = action.payload;
+    },
   },
 });
 
-export const { setAuthToken, clearAuthToken } = authSlice.actions;
+export const { setAuthToken, clearAuthToken, setRefreshRequested } = authSlice.actions;
 export default authSlice.reducer;

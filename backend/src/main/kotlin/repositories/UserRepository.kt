@@ -23,7 +23,7 @@ class UserRepository {
             .resultList
             .firstOrNull()
 
-    fun save(user: UserEntity): UserEntity {
+    fun create(user: UserEntity): UserEntity {
         em.persist(user)
         em.flush()
         return user
