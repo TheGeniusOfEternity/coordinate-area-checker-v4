@@ -1,7 +1,11 @@
 import { call, put, takeEvery, takeLatest } from "redux-saga/effects";
 import { redirectTo } from "@/utils/NavigationUtil.ts";
 import { resetStore } from "@/store";
-import { setAuthToken, setRefreshRequested } from "@/store/slices/authSlice.ts";
+import {
+  clearAuthToken,
+  setAuthToken,
+  setRefreshRequested,
+} from "@/store/slices/authSlice.ts";
 import { AuthResolver } from "@/api/resolvers/auth.resolver.ts";
 import type { CommonResponseDto } from "@/api/dto/common/common-response.dto.ts";
 import type { AuthResponseDto } from "@/api/dto/auth/auth-response.dto.ts";
@@ -17,6 +21,8 @@ const refreshTokens = function* refreshTokens(
   action: ReturnType<typeof setRefreshRequested>,
 ) {
   if (action.payload) {
+    yield put(clearAuthToken());
+
     const authResolver = new AuthResolver();
     const response: CommonResponseDto<AuthResponseDto | string> = yield call(
       authResolver.refreshTokens,
